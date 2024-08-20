@@ -1,7 +1,15 @@
 NAME = cub3D
 NAME_BNS = cub3D_bonus
 CC = clang
+RM = rm -f
+
 FLAGS = -g -Wall -Werror -Wextra -Iinclude #-fsanitize=address
+MLX_FLAGS = -ldl -lglfw -pthread -lm
+
+LIBFT_PATH = ./libft
+LIBFT = $(LIBFT_PATH)/libft.a
+MLX_PATH = ./MLX42/build
+MLX = $(MLX_PATH)/libmlx42.a
 
 FILES =	main \
 
@@ -29,8 +37,8 @@ $(BNS_OBJ_DIR)%.o: $(BNS_SRC_DIR)%.c
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(OBJS_DIR)/charge_flag_makefile/charge.flag
-	@$(CC) $(OBJS) $(FLAGS) -lpthread -o $(NAME)
+$(NAME): $(MLX) $(LIBFT) $(OBJS) $(OBJS_DIR)/charge_flag_makefile/charge.flag
+	@$(CC) $(OBJS) $(MLX) $(LIBFT) $(FLAGS) $(MLX_FLAGS) -o $(NAME)
 	@echo
 	@echo "$(MAGENTA)Cub3D compiled!$(RESET)"
 	@echo
@@ -38,21 +46,27 @@ $(NAME): $(OBJS) $(OBJS_DIR)/charge_flag_makefile/charge.flag
 bonus: $(NAME_BNS)
 
 $(NAME_BNS): $(BNS_OBJS) $(OBJS_DIR)/charge_flag_makefile/bonus.flag
-	@$(CC) $(BNS_OBJS) $(FLAGS) -lpthread -o $(NAME_BNS)
+	@$(CC) $(BNS_OBJS) $(MLX) $(FLAGS) -lpthread -o $(NAME_BNS)
 	@echo
 	@echo "$(BLUE)Cub3D bonus compiled!$(RESET)"
 	@echo
 
+$(LIBFT):
+	@make -C $(LIBFT_PATH) all
+
+$(MLX):
+	@make -C $(MLX_PATH) all
+
 clean: 
-	@rm -f $(OBJS) $(BNS_OBJS) $(OBJS_DIR)/charge_flag_makefile/charge.flag
-	@rm -f $(OBJS_DIR)/charge_flag_makefile/bonus.flag:
+	@$(RM) $(OBJS) $(BNS_OBJS) $(OBJS_DIR)/charge_flag_makefile/charge.flag
+	@$(RM) $(OBJS_DIR)/charge_flag_makefile/bonus.flag:
 	@echo
 	@echo "$(RED)Cleaning Cub3D objects. $(RESET)"
 	$(shell rm -rf ./src/obj)
 	$(shell rm -rf ./bonus/src_bonus/obj)
 
 fclean: clean
-	@rm -f $(NAME) $(NAME_BNS)
+	@$(RM) $(NAME) $(NAME_BNS)
 	@echo "$(RED)Cleaning Cub3D executables.$(RESET)"
 	@echo
 

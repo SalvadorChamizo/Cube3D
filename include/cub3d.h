@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:26:26 by schamizo          #+#    #+#             */
-/*   Updated: 2024/08/19 18:30:59 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/08/19 18:49:43 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,6 @@
 # include <stdlib.h>
 # include <string.h>
 # include <math.h>
+# include "../MLX42/include/MLX42/MLX42.h"
 
 #endif
