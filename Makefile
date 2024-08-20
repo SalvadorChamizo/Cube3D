@@ -1,3 +1,5 @@
+MAKEFLAGS += --no-print-directory
+
 NAME = cub3D
 NAME_BNS = cub3D_bonus
 CC = clang
@@ -8,7 +10,7 @@ MLX_FLAGS = -ldl -lglfw -pthread -lm
 
 LIBFT_PATH = ./libft
 LIBFT = $(LIBFT_PATH)/libft.a
-MLX_PATH = ./MLX42/build
+MLX_PATH = ./MLX42
 MLX = $(MLX_PATH)/libmlx42.a
 
 FILES =	main \
@@ -59,6 +61,8 @@ $(MLX):
 
 clean: 
 	@$(RM) $(OBJS) $(BNS_OBJS) $(OBJS_DIR)/charge_flag_makefile/charge.flag
+	@make -C $(LIBFT_PATH) clean
+	@make -C $(MLX_PATH) clean
 	@$(RM) $(OBJS_DIR)/charge_flag_makefile/bonus.flag:
 	@echo
 	@echo "$(RED)Cleaning Cub3D objects. $(RESET)"
@@ -66,7 +70,8 @@ clean:
 	$(shell rm -rf ./bonus/src_bonus/obj)
 
 fclean: clean
-	@$(RM) $(NAME) $(NAME_BNS)
+	@$(RM) $(NAME) $(NAME_BNS) $(MLX)
+	@make -C $(LIBFT_PATH) fclean
 	@echo "$(RED)Cleaning Cub3D executables.$(RESET)"
 	@echo
 
