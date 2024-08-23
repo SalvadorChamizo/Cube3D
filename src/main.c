@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
+/*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:25:53 by schamizo          #+#    #+#             */
-/*   Updated: 2024/08/19 19:00:18 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/08/22 12:37:30 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,27 @@
 
 #include <stdbool.h>
 
-#define WIDTH 512
-#define HEIGHT 512
 
-static mlx_image_t* image;
+
+
+
+
+int	main(int argc, char **argv)
+{
+	t_data	data;
+
+	if (argc != 2)
+	{
+		print_error("Incorrect number of arguments\n");
+		return (1);
+	}
+	if (parse_map(argv[1], &data))
+		return (1);
+}
+
+/********************************************************************************* */
+
+/*static mlx_image_t* image;
 
 // -----------------------------------------------------------------------------
 
@@ -52,13 +69,13 @@ void ft_hook(void* param)
 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(mlx);
 	if (mlx_is_key_down(mlx, MLX_KEY_UP))
-		image->instances[0].y -= 5;
+		image->instances[0].y -= 10;
 	if (mlx_is_key_down(mlx, MLX_KEY_DOWN))
-		image->instances[0].y += 5;
+		image->instances[0].y += 10;
 	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
-		image->instances[0].x -= 5;
+		image->instances[0].x -= 10;
 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
-		image->instances[0].x += 5;
+		image->instances[0].x += 10;
 }
 
 // -----------------------------------------------------------------------------
@@ -68,7 +85,7 @@ int32_t main(void)
 	mlx_t* mlx;
 
 	// Gotta error check this stuff
-	if (!(mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true)))
+	if (!(mlx = mlx_init(WIDTH, HEIGHT, "cube3d", true)))
 	{
 		puts(mlx_strerror(mlx_errno));
 		return(EXIT_FAILURE);
@@ -92,4 +109,4 @@ int32_t main(void)
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
 	return (EXIT_SUCCESS);
-}
+}*/

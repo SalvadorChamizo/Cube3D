@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
+/*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 15:48:56 by schamizo          #+#    #+#             */
-/*   Updated: 2024/04/08 12:03:35 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/08/22 12:17:34 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ char	**ft_split(const char *s, char c)
 	char	**str;
 
 	str = (char **) malloc(sizeof(char *) * (count_words(s, c) + 1));
-	if (str == NULL)
+	if (str == NULL || s == NULL)
 		return (NULL);
 	str = fill_split(str, s, c);
 	return (str);
