@@ -14,6 +14,9 @@ MLX_PATH = ./MLX42
 MLX = $(MLX_PATH)/libmlx42.a
 
 FILES =	main \
+		check_utils \
+		parser \
+		errors \
 
 BNS_FILES = main_bonus \
 

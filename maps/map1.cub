@@ -1,0 +1,15 @@
+NO ./textures/concrete_no.png
+SO ./textures/concrete_so.png
+WE ./textures/metal_we.png
+EA ./textures/metal_ea.png
+
+C 0,51,102
+F 123,63,0
+
+111111111111
+100000000001
+100010011101
+10010001 101
+1010000N1101
+100000000001
+111111111111

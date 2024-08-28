@@ -28,11 +28,13 @@ FILES = ft_memset \
         ft_toupper \
         ft_tolower \
         ft_calloc \
+		ft_realloc \
         ft_strdup \
         ft_substr \
         ft_strjoin \
         ft_strtrim \
         ft_split \
+		ft_free_split \
         ft_itoa \
         ft_strmapi \
         ft_striteri \
@@ -70,26 +72,33 @@ FILES = ft_memset \
 		get_next_line \
 		get_next_line_utils \
 
+
+$(shell mkdir -p ./src/obj)
+
 SRCS_DIR = ./src/
 SRCS = $(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES)))
 
-OBJS_DIR = ./src/
+OBJS_DIR = ./src/obj/
 OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
 
-%.o: %.c $(SRCS)
+$(OBJS_DIR)%.o: $(SRCS_DIR)%.c
 	@$(CC) $(CFLAGS) -c -o $@ $<
 
 $(NAME): $(OBJS)
 	@$(AR) $@ $^
 
-all: $(NAME)
+all: setup $(NAME)
 
 clean:
 	@$(RM) $(OBJS)
+	$(shell rm -rf ./src/obj)
 
 fclean: clean
 	@$(RM) $(NAME)
 
+setup:
+	$(shell mkdir -p ./src/obj)
+
 re: clean all
 
-.PHONY: all clean fclean re
+.PHONY: clean fclean re all setup
