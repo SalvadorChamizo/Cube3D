@@ -14,9 +14,14 @@ MLX_PATH = ./MLX42
 MLX = $(MLX_PATH)/libmlx42.a
 
 FILES =	main \
+		check_textures \
 		check_utils \
-		parser \
 		errors \
+		get_map_utils \
+		get_map \
+		get_texture \
+		parser \
+		textures \
 
 BNS_FILES = main_bonus \
 

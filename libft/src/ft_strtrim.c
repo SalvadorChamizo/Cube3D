@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:57:53 by schamizo          #+#    #+#             */
-/*   Updated: 2024/02/21 19:45:24 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/08/28 12:13:58 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static int	check_char(char const *s1, char ch)
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
+	char	*new;
 	size_t	len1;
 	size_t	i;
 
@@ -40,7 +41,8 @@ char	*ft_strtrim(char const *s1, char const *set)
 		i++;
 	while (check_char(set, s1[len1]))
 		len1--;
-	return (ft_substr(s1, i, len1 - (i - 1)));
+	new = ft_substr(s1, i, len1 - (i - 1));
+	return (new);
 }
 
 /*int main(void)

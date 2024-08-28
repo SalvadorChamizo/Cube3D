@@ -3,7 +3,7 @@ SO ./textures/concrete_so.png
 WE ./textures/metal_we.png
 EA ./textures/metal_ea.png
 
-C 0,51,102
+C 0,51,10
 F 123,63,0
 
 111111111111
