@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:45:13 by schamizo          #+#    #+#             */
-/*   Updated: 2024/08/22 16:53:22 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/08/28 19:22:23 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,16 @@ char	*ft_remove_nl(char *str)
 	if (!new)
 		return (NULL);
 	return (new);
+}
+
+int	ft_split_size(char **str)
+{
+	int	i;
+
+	i = 0;
+	if (!str)
+		return (0);
+	while (str[i])
+		i++;
+	return (i);
 }

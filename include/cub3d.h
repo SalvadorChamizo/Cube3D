@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:26:26 by schamizo          #+#    #+#             */
-/*   Updated: 2024/08/23 18:39:16 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/08/28 19:23:05 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,25 +43,40 @@
 # define HEIGHT 1280
 # define FOV 60
 
-typedef struct	s_texture
+typedef struct s_texture
 {
-	mlx_texture_t	no_texture;
-	mlx_texture_t	so_texture;
-	mlx_texture_t	we_texture;
-	mlx_texture_t	ea_texture;
-	mlx_texture_t	c_texture;
-	mlx_texture_t	f_texture;
+	mlx_texture_t	*no_texture;
+	mlx_texture_t	*so_texture;
+	mlx_texture_t	*we_texture;
+	mlx_texture_t	*ea_texture;
+	mlx_texture_t	*c_texture;
+	mlx_texture_t	*f_texture;
 	char			*no_path;
 	char			*so_path;
 	char			*we_path;
 	char			*ea_path;
 	char			*c_color;
 	char			*f_color;
+	int				no_flag;
+	int				so_flag;
+	int				we_flag;
+	int				ea_flag;
+	int				c_flag;
+	int				f_flag;
 }	t_texture;
 
-typedef struct	s_data
+typedef struct s_map
+{
+	char	**map;
+	int		map_line;
+	int		player_x;
+	int		player_y;
+}	t_map;
+
+typedef struct s_data
 {
 	mlx_t		*mlx;
+	t_map		map;
 	t_texture	textures;
 }	t_data;
 
@@ -69,9 +84,46 @@ typedef struct	s_data
 
 int		parse_map(char *file, t_data *data);
 
+//get_map
+
+int		get_map(t_data *data, int fd);
+char	*get_map_loop(char *line, int fd);
+int		get_map_error_and_split(t_data *data, char *map);
+int		check_extra_line(char *map);
+int		check_invalid_character(char *map);
+
+//get_map_utils
+
+char	*ft_strjoin_safe(char *s1, char *s2);
+char	*ft_strtrim_safe(char *s1, char *s2);
+
+//get_texture
+
+int		get_texture_data(t_data *data, int *error_flag, int fd);
+int		get_wall_textures(t_data *data, int fd, int *error_flag);
+int		get_line_and_split(char ***split_line, int fd);
+int		check_texture(t_data *data, char **path, int *cont, int line);
+void	check_missing_identifier(t_data *data);
+
 //check_utils
 
 char	*ft_remove_nl(char *str);
+int		ft_split_size(char **str);
+
+//check_textures
+
+int		check_texture_error(char **path, int line);
+int		check_identifier_error(char **path, int line);
+int		check_missing_path(char **path, int line);
+int		check_extra_argument(char **path, int line);
+int		check_texture_permission(char *name, char *texture, int line);
+
+//textures
+
+void	add_path_to_texture(t_data *data, char **path);
+void	add_path_to_texture_2(t_data *data, char **path);
+void	ft_load_textures(t_data *data);
+void	free_textures_memory(t_data *data);
 
 //errors
 

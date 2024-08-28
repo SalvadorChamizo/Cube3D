@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:25:53 by schamizo          #+#    #+#             */
-/*   Updated: 2024/08/22 12:37:30 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/08/28 13:01:57 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,20 @@
 
 
 
-
+int	init_data_variables(t_data *data)
+{
+	data->textures.no_flag = 0;
+	data->textures.so_flag = 0;
+	data->textures.we_flag = 0;
+	data->textures.ea_flag = 0;
+	data->textures.c_flag = 0;
+	data->textures.f_flag = 0;
+	data->map.map = NULL;
+	data->map.map_line = 0;
+	data->map.player_x = 0;
+	data->map.player_y = 0;
+	return (0);
+}
 
 int	main(int argc, char **argv)
 {
@@ -29,8 +42,13 @@ int	main(int argc, char **argv)
 		print_error("Incorrect number of arguments\n");
 		return (1);
 	}
+	init_data_variables(&data);
 	if (parse_map(argv[1], &data))
+	{
+		free_textures_memory(&data);
 		return (1);
+	}
+	free_textures_memory(&data);
 }
 
 /********************************************************************************* */
