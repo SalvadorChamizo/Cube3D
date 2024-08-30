@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 16:30:17 by schamizo          #+#    #+#             */
-/*   Updated: 2024/08/29 17:52:11 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/08/30 17:48:55 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,20 @@ void	error_invalid_char(char **map, int line, int pos)
 	ft_putstr_fd(":", 2);
 	ft_putnbr_fd(pos + 1, 2);
 	ft_putstr_fd(".\n", 2);
+}
+
+void	print_border_error(int line, int flag)
+{
+	if (flag == 1)
+	{
+		print_error("The left side of the map is not close at line ");
+		ft_putnbr_fd(line + 1, 2);
+		ft_putstr_fd(".\n", 2);
+	}
+	if (flag == 2)
+	{
+		print_error("The right side of the map is not close at line ");
+		ft_putnbr_fd(line + 1, 2);
+		ft_putstr_fd(".\n", 2);
+	}
 }

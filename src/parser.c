@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 17:38:05 by schamizo          #+#    #+#             */
-/*   Updated: 2024/08/30 17:37:31 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/08/30 17:53:29 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,44 +27,6 @@ int	check_map_extension(char *file, int *error_flag)
 		*error_flag = 1;
 	}
 	return (*error_flag);
-}
-
-int	check_first_line(char **map)
-{
-	int	i;
-
-	i = 0;
-	while (map[0][i])
-	{
-		if (map[0][i] != ' ' && map[0][i] != '1')
-		{
-			print_error("Invalid character \"");
-			ft_putchar_fd(map[0][i], 2);
-			ft_putstr_fd("\" in map's first line.\n", 2);
-			return (FAILURE);
-		}
-		i++;
-	}
-	return (SUCCESS);
-}
-
-int	check_last_line(char **map, int last_line)
-{
-	int	i;
-
-	i = 0;
-	while (map[last_line - 1][i])
-	{
-		if (map[last_line - 1][i] != ' ' && map[last_line - 1][i] != '1')
-		{
-			print_error("Invalid character \"");
-			ft_putchar_fd(map[last_line - 1][i], 2);
-			ft_putstr_fd("\" in map's last line.\n", 2);
-			return (FAILURE);
-		}
-		i++;
-	}
-	return (SUCCESS);
 }
 
 int	check_first_last_line(t_data *data, char **map)
@@ -118,61 +80,6 @@ int	check_middle_lines(char **map)
 				flag = 1;
 			}
 			j++;
-		}
-		i++;
-	}
-	if (flag == 1)
-		return (FAILURE);
-	return (SUCCESS);
-}
-
-int	check_left_wall(char *line)
-{
-	int	i;
-
-	i = 0;
-	while (line[i] == ' ')
-		i++;
-	if (line[i] != '1')
-		return (FAILURE);
-	return (SUCCESS);
-}
-
-int	check_right_wall(char *line)
-{
-	int	i;
-
-	i = ft_strlen(line);
-	i--;
-	while (line[i] == ' ')
-		i--;
-	if (line[i] != '1')
-		return (FAILURE);
-	return (SUCCESS);
-}
-
-int	check_side_walls(char **map)
-{
-	int	i;
-	int	flag;
-
-	i = 0;
-	flag = 0;
-	while (map[i])
-	{
-		if (check_left_wall(map[i]))
-		{
-			print_error("The left side of the map is not close at line ");
-			ft_putnbr_fd(i + 1, 2);
-			ft_putstr_fd(".\n", 2);
-			flag = 1;
-		}
-		if (check_right_wall(map[i]))
-		{
-			print_error("The right side of the map is not close at line ");
-			ft_putnbr_fd(i + 1, 2);
-			ft_putstr_fd(".\n", 2);
-			flag = 1;
 		}
 		i++;
 	}

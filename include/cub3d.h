@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:26:26 by schamizo          #+#    #+#             */
-/*   Updated: 2024/08/29 17:52:30 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/08/30 17:54:26 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,20 @@ int		get_line_and_split(char ***split_line, int fd);
 int		check_texture(t_data *data, char **path, int *cont, int line);
 void	check_missing_identifier(t_data *data);
 
+//check_map_borders
+
+int		check_side_walls(char **map);
+int		check_left_wall(char *line);
+int		check_right_wall(char *line);
+int		check_first_line(char **map);
+int		check_last_line(char **map, int last_line);
+
+int		check_map_is_valid(t_data *data);
+int		check_map_is_closed(t_data *data);
+int		check_middle_lines(char **map);
+int		check_invalid_character(char c);
+int		check_first_last_line(t_data *data, char **map);
+
 //check_utils
 
 char	*ft_remove_nl(char *str);
@@ -129,5 +143,6 @@ void	free_textures_memory(t_data *data);
 
 void	print_error(char *str);
 void	error_invalid_char(char **map, int line, int pos);
+void	print_border_error(int line, int flag);
 
 #endif
