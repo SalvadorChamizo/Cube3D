@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:26:26 by schamizo          #+#    #+#             */
-/*   Updated: 2024/08/28 19:23:05 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/08/29 17:52:30 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int		get_map(t_data *data, int fd);
 char	*get_map_loop(char *line, int fd);
 int		get_map_error_and_split(t_data *data, char *map);
 int		check_extra_line(char *map);
-int		check_invalid_character(char *map);
+int		check_invalid_character(char c);
 
 //get_map_utils
 
@@ -128,5 +128,6 @@ void	free_textures_memory(t_data *data);
 //errors
 
 void	print_error(char *str);
+void	error_invalid_char(char **map, int line, int pos);
 
 #endif

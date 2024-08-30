@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:25:53 by schamizo          #+#    #+#             */
-/*   Updated: 2024/08/28 13:01:57 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/08/29 11:42:44 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,14 @@ int	main(int argc, char **argv)
 		free_textures_memory(&data);
 		return (1);
 	}
+	data.mlx = mlx_init(WIDTH, HEIGHT, "cub3d", true);
+	if (!data.mlx)
+	{
+		print_error("Failed to initialiaze mlx.\n");
+		exit(1);
+	}
+	mlx_loop(data.mlx);
+	mlx_terminate(data.mlx);
 	free_textures_memory(&data);
 }
 
