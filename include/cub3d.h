@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:26:26 by schamizo          #+#    #+#             */
-/*   Updated: 2024/08/31 18:40:26 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/08/31 18:46:27 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ typedef struct s_player
 {
 	double	pos_x;
 	double	pos_y;
+	int		map_x;
+	int		map_y;
 	double	fov;
 }	t_player;
 

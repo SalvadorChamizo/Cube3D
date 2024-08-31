@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 17:38:05 by schamizo          #+#    #+#             */
-/*   Updated: 2024/08/31 18:41:25 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/08/31 18:47:08 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,6 +159,8 @@ void	find_player_position(t_data *data, char **map)
 			{
 				data->player.pos_x = j * 0.5;
 				data->player.pos_y = i * 0.5;
+				data->player.map_x = j;
+				data->player.map_y = i;
 			}
 			j++;
 		}
