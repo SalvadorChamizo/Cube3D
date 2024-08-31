@@ -22,6 +22,7 @@ FILES =	main \
 		get_texture \
 		parser \
 		textures \
+		game \
 
 BNS_FILES = main_bonus \
 
@@ -30,7 +31,9 @@ $(shell mkdir -p ./src/obj/charge_flag_makefile)
 $(shell mkdir -p ./bonus/src_bonus/obj)
 
 SRCS_DIR = ./src/
+
 OBJS_DIR = ./src/obj/
+
 SRCS = $(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES)))
 OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
 

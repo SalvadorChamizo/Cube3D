@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:26:26 by schamizo          #+#    #+#             */
-/*   Updated: 2024/08/28 19:23:05 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/08/31 18:31:46 by saroca-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,18 +65,32 @@ typedef struct s_texture
 	int				f_flag;
 }	t_texture;
 
+
 typedef struct s_map
 {
 	char	**map;
+	int		map_size_x;
+	int		map_size_y;
 	int		map_line;
 	int		player_x;
 	int		player_y;
 }	t_map;
 
+typedef struct s_minimap
+{
+	mlx_texture_t	*wall_texture;
+	mlx_texture_t	*floor_texture;
+	mlx_texture_t	*minipoint_texture;
+	mlx_image_t		*wall;
+	mlx_image_t		*floor;
+	mlx_image_t		*minipoint;
+}	t_minimap;
+
 typedef struct s_data
 {
 	mlx_t		*mlx;
 	t_map		map;
+	t_minimap	mini;
 	t_texture	textures;
 }	t_data;
 
@@ -128,5 +142,9 @@ void	free_textures_memory(t_data *data);
 //errors
 
 void	print_error(char *str);
+
+//game
+
+void	ft_game(t_data *data);
 
 #endif
