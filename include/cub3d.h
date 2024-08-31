@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:26:26 by schamizo          #+#    #+#             */
-/*   Updated: 2024/08/30 17:54:26 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/08/31 18:40:26 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,17 @@ typedef struct s_texture
 	int				f_flag;
 }	t_texture;
 
+typedef struct s_player
+{
+	double	pos_x;
+	double	pos_y;
+	double	fov;
+}	t_player;
+
 typedef struct s_map
 {
 	char	**map;
 	int		map_line;
-	int		player_x;
-	int		player_y;
 }	t_map;
 
 typedef struct s_data
@@ -78,6 +83,7 @@ typedef struct s_data
 	mlx_t		*mlx;
 	t_map		map;
 	t_texture	textures;
+	t_player	player;
 }	t_data;
 
 //parser

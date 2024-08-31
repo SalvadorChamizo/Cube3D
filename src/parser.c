@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 17:38:05 by schamizo          #+#    #+#             */
-/*   Updated: 2024/08/30 17:53:29 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/08/31 18:41:25 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,72 @@ int	check_map_is_closed(t_data *data)
 	return (SUCCESS);
 }
 
+int	count_players_in_map(char **map)
+{
+	int	i;
+	int	j;
+	int	cont;
+
+	i = 0;
+	cont = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] == 'N' || map[i][j] == 'S'
+				|| map[i][j] == 'W' || map[i][j] == 'E')
+				cont++;
+			j++;
+		}
+		i++;
+	}
+	return (cont);
+}
+
+int	check_players_in_map(char **map)
+{
+	int	player_num;
+
+	player_num = count_players_in_map(map);
+	if (player_num == 0)
+	{
+		print_error("Missing player in map.\n");
+		return (FAILURE);
+	}
+	if (player_num > 1)
+	{
+		print_error("Too many players in map. Players detected: ");
+		ft_putnbr_fd(player_num, 2);
+		ft_putstr_fd("\n", 2);
+		return (FAILURE);
+	}
+	return (SUCCESS);
+}
+
+void	find_player_position(t_data *data, char **map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] == 'N' || map[i][j] == 'S'
+				|| map[i][j] == 'W' || map[i][j] == 'E')
+			{
+				data->player.pos_x = j * 0.5;
+				data->player.pos_y = i * 0.5;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
 int	check_map_is_valid(t_data *data)
 {
 	int	flag;
@@ -110,6 +176,8 @@ int	check_map_is_valid(t_data *data)
 	if (check_middle_lines(data->map.map))
 		flag = 1;
 	if (check_map_is_closed(data))
+		flag = 1;
+	if (check_players_in_map(data->map.map))
 		flag = 1;
 	if (flag == 1)
 		return (FAILURE);
