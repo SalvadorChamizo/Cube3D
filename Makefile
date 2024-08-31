@@ -14,6 +14,7 @@ MLX_PATH = ./MLX42
 MLX = $(MLX_PATH)/libmlx42.a
 
 FILES =	main \
+		check_map_borders \
 		check_textures \
 		check_utils \
 		errors \

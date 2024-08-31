@@ -6,9 +6,10 @@
 /*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:26:26 by schamizo          #+#    #+#             */
-/*   Updated: 2024/08/31 18:31:46 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/08/31 18:55:31 by saroca-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef CUB3D_H
 # define CUB3D_H
@@ -65,6 +66,15 @@ typedef struct s_texture
 	int				f_flag;
 }	t_texture;
 
+typedef struct s_player
+{
+	double	pos_x;
+	double	pos_y;
+	int		map_x;
+	int		map_y;
+	double	fov;
+}	t_player;
+
 
 typedef struct s_map
 {
@@ -72,8 +82,6 @@ typedef struct s_map
 	int		map_size_x;
 	int		map_size_y;
 	int		map_line;
-	int		player_x;
-	int		player_y;
 }	t_map;
 
 typedef struct s_minimap
@@ -92,6 +100,7 @@ typedef struct s_data
 	t_map		map;
 	t_minimap	mini;
 	t_texture	textures;
+	t_player	player;
 }	t_data;
 
 //parser
@@ -104,7 +113,7 @@ int		get_map(t_data *data, int fd);
 char	*get_map_loop(char *line, int fd);
 int		get_map_error_and_split(t_data *data, char *map);
 int		check_extra_line(char *map);
-int		check_invalid_character(char *map);
+int		check_invalid_character(char c);
 
 //get_map_utils
 
@@ -118,6 +127,20 @@ int		get_wall_textures(t_data *data, int fd, int *error_flag);
 int		get_line_and_split(char ***split_line, int fd);
 int		check_texture(t_data *data, char **path, int *cont, int line);
 void	check_missing_identifier(t_data *data);
+
+//check_map_borders
+
+int		check_side_walls(char **map);
+int		check_left_wall(char *line);
+int		check_right_wall(char *line);
+int		check_first_line(char **map);
+int		check_last_line(char **map, int last_line);
+
+int		check_map_is_valid(t_data *data);
+int		check_map_is_closed(t_data *data);
+int		check_middle_lines(char **map);
+int		check_invalid_character(char c);
+int		check_first_last_line(t_data *data, char **map);
 
 //check_utils
 
@@ -146,5 +169,7 @@ void	print_error(char *str);
 //game
 
 void	ft_game(t_data *data);
+void	error_invalid_char(char **map, int line, int pos);
+void	print_border_error(int line, int flag);
 
 #endif

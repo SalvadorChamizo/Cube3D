@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 17:38:05 by schamizo          #+#    #+#             */
-/*   Updated: 2024/08/28 19:28:53 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/08/31 18:47:08 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,44 +29,6 @@ int	check_map_extension(char *file, int *error_flag)
 	return (*error_flag);
 }
 
-int	check_first_line(char **map)
-{
-	int	i;
-
-	i = 0;
-	while (map[0][i])
-	{
-		if (map[0][i] != ' ' && map[0][i] != '1')
-		{
-			print_error("Invalid character \"");
-			ft_putchar_fd(map[0][i], 2);
-			ft_putstr_fd("\" in map's first line.\n", 2);
-			return (FAILURE);
-		}
-		i++;
-	}
-	return (SUCCESS);
-}
-
-int	check_last_line(char **map, int last_line)
-{
-	int	i;
-
-	i = 0;
-	while (map[last_line - 1][i])
-	{
-		if (map[last_line - 1][i] != ' ' && map[last_line - 1][i] != '1')
-		{
-			print_error("Invalid character \"");
-			ft_putchar_fd(map[last_line - 1][i], 2);
-			ft_putstr_fd("\" in map's last line.\n", 2);
-			return (FAILURE);
-		}
-		i++;
-	}
-	return (SUCCESS);
-}
-
 int	check_first_last_line(t_data *data, char **map)
 {
 	int	i;
@@ -83,12 +45,141 @@ int	check_first_last_line(t_data *data, char **map)
 	return (SUCCESS);
 }
 
+int	check_invalid_character(char c)
+{
+	int	i;
+	int	flag;
+
+	i = 0;
+	flag = 0;
+	if (c != 'N' && c != 'S' && c != 'W'
+		&& c != 'E' && c != ' ' && c != '1'
+		&& c != '0' && c != '\n')
+	{
+		return (1);
+	}
+	return (0);
+}
+
+int	check_middle_lines(char **map)
+{
+	int	i;
+	int	j;
+	int flag;
+
+	i = 0;
+	flag = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (check_invalid_character(map[i][j]))
+			{
+				error_invalid_char(map, i, j);
+				flag = 1;
+			}
+			j++;
+		}
+		i++;
+	}
+	if (flag == 1)
+		return (FAILURE);
+	return (SUCCESS);
+}
+
+int	check_map_is_closed(t_data *data)
+{
+	int	flag;
+
+	flag = 0;
+	if (check_side_walls(data->map.map))
+		flag = 1;
+	if (flag == 1)
+		return (FAILURE);
+	return (SUCCESS);
+}
+
+int	count_players_in_map(char **map)
+{
+	int	i;
+	int	j;
+	int	cont;
+
+	i = 0;
+	cont = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] == 'N' || map[i][j] == 'S'
+				|| map[i][j] == 'W' || map[i][j] == 'E')
+				cont++;
+			j++;
+		}
+		i++;
+	}
+	return (cont);
+}
+
+int	check_players_in_map(char **map)
+{
+	int	player_num;
+
+	player_num = count_players_in_map(map);
+	if (player_num == 0)
+	{
+		print_error("Missing player in map.\n");
+		return (FAILURE);
+	}
+	if (player_num > 1)
+	{
+		print_error("Too many players in map. Players detected: ");
+		ft_putnbr_fd(player_num, 2);
+		ft_putstr_fd("\n", 2);
+		return (FAILURE);
+	}
+	return (SUCCESS);
+}
+
+void	find_player_position(t_data *data, char **map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] == 'N' || map[i][j] == 'S'
+				|| map[i][j] == 'W' || map[i][j] == 'E')
+			{
+				data->player.pos_x = j * 0.5;
+				data->player.pos_y = i * 0.5;
+				data->player.map_x = j;
+				data->player.map_y = i;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
 int	check_map_is_valid(t_data *data)
 {
 	int	flag;
 
 	flag = 0;
 	if (check_first_last_line(data, data->map.map))
+		flag = 1;
+	if (check_middle_lines(data->map.map))
+		flag = 1;
+	if (check_map_is_closed(data))
+		flag = 1;
+	if (check_players_in_map(data->map.map))
 		flag = 1;
 	if (flag == 1)
 		return (FAILURE);

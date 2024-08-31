@@ -6,9 +6,10 @@
 /*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:25:53 by schamizo          #+#    #+#             */
-/*   Updated: 2024/08/28 19:40:25 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/08/31 18:54:41 by saroca-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../include/cub3d.h"
 #include "../MLX42/include/MLX42/MLX42.h"
