@@ -6,10 +6,9 @@
 /*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:26:26 by schamizo          #+#    #+#             */
-/*   Updated: 2024/08/31 18:55:31 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/02 14:35:50 by saroca-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef CUB3D_H
 # define CUB3D_H
@@ -66,13 +65,37 @@ typedef struct s_texture
 	int				f_flag;
 }	t_texture;
 
+typedef struct s_ray
+{
+	double 		angle;
+	int			mapX;
+	int			mapY;
+	double 		posX;
+	double 		posY;
+	double		rayDirX;
+	double		rayDirY;
+	double		DeltaDistX;
+	double		DeltaDistY;
+	double		stepX;
+	double		stepY;
+	double		sideDistX;
+	double		sideDistY;
+	double		perpWallDist;
+	double 		pixel_impactX;
+	double 		pixel_impactY;
+	int			flag;
+	double 		hit;
+	double		distance;
+}	t_ray;
+
 typedef struct s_player
 {
 	double	pos_x;
 	double	pos_y;
 	int		map_x;
 	int		map_y;
-	double	fov;
+	double	angle;
+	t_ray	ray[WIDTH];
 }	t_player;
 
 
@@ -97,6 +120,7 @@ typedef struct s_minimap
 typedef struct s_data
 {
 	mlx_t		*mlx;
+	mlx_image_t	*board;
 	t_map		map;
 	t_minimap	mini;
 	t_texture	textures;
@@ -165,11 +189,18 @@ void	free_textures_memory(t_data *data);
 //errors
 
 void	print_error(char *str);
+void	error_invalid_char(char **map, int line, int pos);
+void	print_border_error(int line, int flag);
 
 //game
 
+bool	check_cell_move(mlx_image_t *image, t_data *data, int move_x, int move_y);
 void	ft_game(t_data *data);
-void	error_invalid_char(char **map, int line, int pos);
-void	print_border_error(int line, int flag);
+void	print_ray(t_data *data, t_player *player);
+
+//game_utils
+
+void	find_player_position(t_data *data, char **map);
+void	ray_init(t_data *data); //poner en mejor lugar
 
 #endif

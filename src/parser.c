@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 17:38:05 by schamizo          #+#    #+#             */
-/*   Updated: 2024/08/31 18:47:08 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/01 18:58:34 by saroca-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,10 +143,41 @@ int	check_players_in_map(char **map)
 	return (SUCCESS);
 }
 
+void	angle_select(t_data *data, char c)
+{
+	if (c == 'N')
+		data->player.angle = 270;
+	if (c == 'S')
+		data->player.angle = 90;
+	if (c == 'W')
+		data->player.angle = 180;
+	if (c == 'E')
+		data->player.angle = 0;
+}
+
+void	ray_init(t_data *data)
+{
+	double	fov_rad;
+	double	angle_rad;
+	int 	i;
+
+	fov_rad = FOV * M_PI / 180;
+	angle_rad = data->player.angle * M_PI / 180;
+	i = 0;
+	while (i < WIDTH)
+	{
+		data->player.ray[i].angle = angle_rad - (fov_rad / 2) + ((fov_rad / WIDTH) * i);
+		if (data->player.ray[i].angle < 0)
+			data->player.ray[i].angle += 2 * M_PI;
+		i++;
+	}
+}
+
 void	find_player_position(t_data *data, char **map)
 {
 	int	i;
 	int	j;
+	char c;
 
 	i = 0;
 	while (map[i])
@@ -157,8 +188,9 @@ void	find_player_position(t_data *data, char **map)
 			if (map[i][j] == 'N' || map[i][j] == 'S'
 				|| map[i][j] == 'W' || map[i][j] == 'E')
 			{
-				data->player.pos_x = j * 0.5;
-				data->player.pos_y = i * 0.5;
+				c = map[i][j];
+				data->player.pos_x = j + 0.5;
+				data->player.pos_y = i + 0.5;
 				data->player.map_x = j;
 				data->player.map_y = i;
 			}
@@ -166,6 +198,8 @@ void	find_player_position(t_data *data, char **map)
 		}
 		i++;
 	}
+	angle_select(data, c);
+	ray_init(data);
 }
 
 int	check_map_is_valid(t_data *data)

@@ -23,7 +23,9 @@ FILES =	main \
 		get_texture \
 		parser \
 		textures \
+		angles_maker \
 		game \
+		game_check_move \
 
 BNS_FILES = main_bonus \
 
