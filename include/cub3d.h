@@ -6,7 +6,7 @@
 /*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:26:26 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/02 14:35:50 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/03 18:24:12 by saroca-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,10 @@ typedef struct s_ray
 	int			flag;
 	double 		hit;
 	double		distance;
+	int			difx;
+	int			dify;
+	double xincrement;
+	double yincrement;
 }	t_ray;
 
 typedef struct s_player
@@ -202,5 +206,6 @@ void	print_ray(t_data *data, t_player *player);
 
 void	find_player_position(t_data *data, char **map);
 void	ray_init(t_data *data); //poner en mejor lugar
+void	print_one_ray(t_data *data, t_ray *ray, uint32_t color);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 20:00:47 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/02 18:05:28 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/03 18:25:04 by saroca-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,22 +142,51 @@ void	cell_impact(t_data *data, t_ray *ray)
 		ray->distance = sqrt(pow((ray->posX - ray->hit), 2) + pow((ray->posY - ray->mapY), 2));
 }
 
+void	print_one_ray(t_data *data, t_ray *ray, uint32_t color)
+{
+	double x;
+	double y;
+	int steps;
+	int i;
+
+ 	x = data->player.pos_x * 64;
+	y = data->player.pos_y * 64;
+	ray->difx = fabs(ray->pixel_impactX - x);
+	ray->dify = fabs(ray->pixel_impactY - y);
+	if (ray->difx > ray->dify)
+		steps = ray->difx;
+	else
+		steps = ray->dify;
+	ray->xincrement = ray->difx / (double)steps;
+	ray->yincrement = ray->dify / (double)steps;
+	i = 0;
+	while (i < steps)
+	{
+		if (ray->pixel_impactX > x)
+			x += ray->xincrement;
+		else
+			x -= ray->xincrement;
+		if (ray->pixel_impactY > y)
+			y += ray->yincrement;
+		else
+			y -= ray->yincrement;
+		i++;
+		mlx_put_pixel(data->board, round(x), round(y), color);
+		//mlx_put_pixel(data->board, round(x), round(y), 0xffaa0000); //borrar
+	}
+}
+
 void print_ray(t_data *data, t_player *player)
 {
 	int i;
 
 	ray_init(data);
 	i = 0;
+	cell_impact(data, &player->ray[i]);
 	while (i < WIDTH)
 	{
-		mlx_put_pixel(data->board, player->ray[i].pixel_impactX, player->ray[i].pixel_impactY, 0xffaa0000);
 		cell_impact(data, &player->ray[i]);
-		if (i == 960)
-		{
-			printf ("raydirX: %f\traydirY: %f\n", player->ray[i].rayDirX, player->ray[i].rayDirY);
-			printf("HIT: %f\t mapX: %d\tIMPACTO X: %f\tIMPACTO Y: %f\n", player->ray[i].hit, player->ray[i].mapX, player->ray[i].pixel_impactX, player->ray[i].pixel_impactY);
-		}
-		mlx_put_pixel(data->board, player->ray[i].pixel_impactX, player->ray[i].pixel_impactY, 0xff0000AA);
+		print_one_ray(data, &player->ray[i], 0xff0000AA);
 		i++;
 	}
 }
