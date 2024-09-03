@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:25:53 by schamizo          #+#    #+#             */
-/*   Updated: 2024/08/29 11:42:44 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/08/31 18:54:35 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ int	init_data_variables(t_data *data)
 	data->textures.f_flag = 0;
 	data->map.map = NULL;
 	data->map.map_line = 0;
-	data->map.player_x = 0;
-	data->map.player_y = 0;
 	return (0);
 }
 

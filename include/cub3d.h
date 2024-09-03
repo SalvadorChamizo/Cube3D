@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:26:26 by schamizo          #+#    #+#             */
-/*   Updated: 2024/08/31 18:46:27 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/02 18:17:10 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,12 @@ typedef struct s_texture
 	int				f_flag;
 }	t_texture;
 
+typedef struct s_point
+{
+	int	x;
+	int	y;
+}	t_point ;
+
 typedef struct s_player
 {
 	double	pos_x;
@@ -121,6 +127,12 @@ int		check_right_wall(char *line);
 int		check_first_line(char **map);
 int		check_last_line(char **map, int last_line);
 
+//check_map_spaces
+
+int		check_if_valid_spaces(char **map);
+int		check_up_down_space(char **map, int i, int j, int flag);
+int		check_left_right_space(char **map, int i, int j, int flag);
+
 int		check_map_is_valid(t_data *data);
 int		check_map_is_closed(t_data *data);
 int		check_middle_lines(char **map);
@@ -152,5 +164,6 @@ void	free_textures_memory(t_data *data);
 void	print_error(char *str);
 void	error_invalid_char(char **map, int line, int pos);
 void	print_border_error(int line, int flag);
+void	print_invalid_space_error(int line, int pos);
 
 #endif

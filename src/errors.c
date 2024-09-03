@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 16:30:17 by schamizo          #+#    #+#             */
-/*   Updated: 2024/08/30 17:48:55 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/02 18:17:34 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,13 @@ void	print_border_error(int line, int flag)
 		ft_putnbr_fd(line + 1, 2);
 		ft_putstr_fd(".\n", 2);
 	}
+}
+
+void	print_invalid_space_error(int line, int pos)
+{
+	print_error("Detected invalid space in line ");
+	ft_putnbr_fd(line + 1, 2);
+	ft_putstr_fd(":", 2);
+	ft_putnbr_fd(pos + 1, 2);
+	ft_putstr_fd(".\n", 2);
 }

@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 17:38:05 by schamizo          #+#    #+#             */
-/*   Updated: 2024/08/31 18:47:08 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/02 18:18:40 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,6 +181,8 @@ int	check_map_is_valid(t_data *data)
 		flag = 1;
 	if (check_players_in_map(data->map.map))
 		flag = 1;
+	if (check_if_valid_spaces(data->map.map))
+		flag = 1;
 	if (flag == 1)
 		return (FAILURE);
 	return (SUCCESS);
@@ -195,11 +197,11 @@ int	parse_map(char *file, t_data *data)
 	check_map_extension(file, &error_flag);
 	fd = open(file, O_RDONLY);
 	if (get_texture_data(data, &error_flag, fd))
-		return (FAILURE);
+		error_flag = 1;
 	if (get_map(data, fd))
-		return (FAILURE);
+		error_flag = 1;
 	if (check_map_is_valid(data))
-		return (FAILURE);
+		error_flag = 1;
 	close(fd);
 	return (error_flag);
 }
