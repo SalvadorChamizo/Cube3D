@@ -6,7 +6,7 @@
 /*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 19:41:06 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/01 19:56:33 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/03 18:49:46 by saroca-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ void ft_hook(void* param)
 	t_data		*data = param;
 	mlx_image_t	*image = data->mini.minipoint;
 
+	if(data->player.ray[0].DeltaDistX)
+		mlx_delete_image(data->mlx, data->board);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(data->mlx);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_UP))
@@ -99,7 +101,7 @@ void ft_hook(void* param)
 			data->player.pos_x += 0.0625;
 		}
 	}
-		if (mlx_is_key_down(data->mlx, MLX_KEY_Q))
+	if (mlx_is_key_down(data->mlx, MLX_KEY_Q))
 	{
 		data->player.angle -= 3;
 		if (data->player.angle < 0)
@@ -111,6 +113,8 @@ void ft_hook(void* param)
 		if (data->player.angle > 359)
 			data->player.angle = 0;
 	}
+	data->board = mlx_new_image(data->mlx, data->map.map_size_x * 64, data->map.map_size_y * 64);
+	mlx_image_to_window(data->mlx, data->board, 0, 0);
 	print_ray(data, &data->player);
 }
 
