@@ -15,7 +15,10 @@ MLX = $(MLX_PATH)/libmlx42.a
 
 FILES =	main \
 		check_map_borders \
+		check_map_player \
 		check_map_spaces \
+		check_map \
+		check_textures_rgb \
 		check_textures \
 		check_utils \
 		errors \

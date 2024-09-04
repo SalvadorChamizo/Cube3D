@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:45:26 by schamizo          #+#    #+#             */
-/*   Updated: 2024/08/29 17:13:55 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/04 15:50:15 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,6 @@ int	get_map_error_and_split(t_data *data, char *map)
 	flag = 0;
 	if (check_extra_line(map))
 		flag = 1;
-	//if (check_invalid_character(map))
-	//	flag = 1;
 	if (flag == 1)
 	{
 		free(map);
@@ -115,26 +113,3 @@ int	check_extra_line(char *map)
 	}
 	return (SUCCESS);
 }
-
-/* int	check_invalid_character(char *map)
-{
-	int	i;
-	int	flag;
-
-	i = 0;
-	flag = 0;
-	while (map[i])
-	{
-		if (map[i] != 'N' && map[i] != 'S' && map[i] != 'W'
-			&& map[i] != 'E' && map[i] != ' ' && map[i] != '1'
-			&& map[i] != '0' && map[i] != '\n')
-		{
-			print_error("Invalid character \"");
-			ft_putchar_fd(map[i], 2);
-			ft_putstr_fd("\" in map.\n", 2);
-			flag = 1;
-		}
-		i++;
-	}
-	return (SUCCESS);
-} */

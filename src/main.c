@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:25:53 by schamizo          #+#    #+#             */
-/*   Updated: 2024/08/31 18:54:35 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/04 16:19:34 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ int	main(int argc, char **argv)
 	init_data_variables(&data);
 	if (parse_map(argv[1], &data))
 	{
+		if (data.map.map)
+			ft_free_split(data.map.map);
 		free_textures_memory(&data);
 		return (1);
 	}
@@ -54,6 +56,7 @@ int	main(int argc, char **argv)
 	}
 	mlx_loop(data.mlx);
 	mlx_terminate(data.mlx);
+	ft_free_split(data.map.map);
 	free_textures_memory(&data);
 }
 

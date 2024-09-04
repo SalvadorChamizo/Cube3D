@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 12:34:44 by schamizo          #+#    #+#             */
-/*   Updated: 2024/08/26 17:48:09 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/04 15:51:51 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ void	add_path_to_texture_2(t_data *data, char **path)
 {
 	if (path[0] && path[1] && !ft_strcmp(path[0], "C"))
 	{
-		data->textures.c_color = ft_strdup(path[1]);
+		data->textures.c_color = get_color_rgb(path);
 		data->textures.c_flag = 1;
 	}
 	else if (path[0] && path[1] && !ft_strcmp(path[0], "F"))
 	{
-		data->textures.f_color = ft_strdup(path[1]);
+		data->textures.f_color = get_color_rgb(path);
 		data->textures.f_flag = 1;
 	}
 }
@@ -92,8 +92,4 @@ void	free_textures_memory(t_data *data)
 		free(t.we_path);
 	if (t.ea_flag)
 		free(t.ea_path);
-	if (t.c_flag)
-		free(t.c_color);
-	if (t.f_flag)
-		free(t.f_color);
 }

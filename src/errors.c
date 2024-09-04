@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 16:30:17 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/02 18:17:34 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/04 15:50:31 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,13 @@ void	print_invalid_space_error(int line, int pos)
 	ft_putstr_fd(":", 2);
 	ft_putnbr_fd(pos + 1, 2);
 	ft_putstr_fd(".\n", 2);
+}
+
+void	rgb_error_not_number(char **color, int i, int j, int line)
+{
+	print_error("Invalid character \"");
+	ft_putchar_fd(color[i][j], 2);
+	ft_putstr_fd("\" in line ", 2);
+	ft_putnbr_fd(line, 2);
+	ft_putstr_fd(". \n", 2);
 }

@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 18:01:21 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/02 18:15:49 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/04 15:49:24 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	check_if_valid_spaces(char **map)
 		j = 0;
 		while (map[i][j])
 		{
-			if (map[i][j] == '0' || map[i][j] == 'N' || map[i][j] == 'S' 
+			if (map[i][j] == '0' || map[i][j] == 'N' || map[i][j] == 'S'
 				|| map[i][j] == 'W' || map[i][j] == 'E')
 			{
 				flag = check_left_right_space(map, i, j, flag);
@@ -40,7 +40,7 @@ int	check_if_valid_spaces(char **map)
 	return (SUCCESS);
 }
 
-int check_up_down_space(char **map, int i, int j, int flag)
+int	check_up_down_space(char **map, int i, int j, int flag)
 {
 	if (j != 0)
 	{
@@ -61,10 +61,10 @@ int check_up_down_space(char **map, int i, int j, int flag)
 	return (flag);
 }
 
-int check_left_right_space(char **map, int i, int j, int flag)
+int	check_left_right_space(char **map, int i, int j, int flag)
 {
 	if (i != 0)
-	{	
+	{
 		if (map[i - 1][j] == ' ')
 		{
 			print_invalid_space_error(i - 1, j);
@@ -81,5 +81,3 @@ int check_left_right_space(char **map, int i, int j, int flag)
 	}
 	return (flag);
 }
-
-

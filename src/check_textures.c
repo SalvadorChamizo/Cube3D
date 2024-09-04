@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 12:50:11 by schamizo          #+#    #+#             */
-/*   Updated: 2024/08/26 17:07:46 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/04 16:11:37 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ int	check_texture_error(char **path, int line)
 	if (check_extra_argument(path, line))
 		flag = 1;
 	if (check_texture_permission(path[0], path[1], line))
+		flag = 1;
+	if (check_colors_format(path, line))
+		flag = 1;
+	if (check_rgb_are_numbers(path, line))
 		flag = 1;
 	return (flag);
 }
@@ -58,7 +62,8 @@ int	check_missing_path(char **path, int line)
 
 int	check_extra_argument(char **path, int line)
 {
-	if (path && path[2])
+	if (path && path[2] && ft_strcmp(path[0], "C")
+		&& ft_strcmp(path[0], "F"))
 	{
 		print_error("Extra argument in line ");
 		ft_putnbr_fd(line, 2);
