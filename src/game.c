@@ -6,7 +6,7 @@
 /*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 19:41:06 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/03 18:49:46 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/04 16:49:20 by saroca-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,8 +113,6 @@ void ft_hook(void* param)
 		if (data->player.angle > 359)
 			data->player.angle = 0;
 	}
-	data->board = mlx_new_image(data->mlx, data->map.map_size_x * 64, data->map.map_size_y * 64);
-	mlx_image_to_window(data->mlx, data->board, 0, 0);
 	print_ray(data, &data->player);
 }
 
@@ -127,12 +125,7 @@ void	ft_game(t_data *data)
 	print_mini_map(data);
 	data->board = mlx_new_image(data->mlx, data->map.map_size_x * 64, data->map.map_size_y * 64);
 	mlx_image_to_window(data->mlx, data->board, 0, 0);
-	if (mlx_image_to_window(data->mlx, data->mini.minipoint, (data->player.pos_x * 64) - 16, (data->player.pos_y * 64) - 16) == -1)
-	{
-		mlx_close_window(data->mlx);
-		puts(mlx_strerror(mlx_errno));
-		//return(EXIT_FAILURE);
-	}
-	mlx_loop_hook(data->mlx, ft_hook, data);
+	mlx_image_to_window(data->mlx, data->mini.minipoint, (data->player.pos_x * 64) - 16, (data->player.pos_y * 64) - 16);
+	mlx_loop_hook(data->mlx, ft_hook, data); //+importante
 	mlx_loop(data->mlx);
 }
