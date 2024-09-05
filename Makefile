@@ -14,23 +14,26 @@ MLX_PATH = ./MLX42
 MLX = $(MLX_PATH)/libmlx42.a
 
 FILES =	main \
-		check_map_borders \
-		check_map_player \
-		check_map_spaces \
-		check_map \
-		check_textures_rgb \
-		check_textures \
-		check_utils \
-		errors \
-		get_map_utils \
-		get_map \
-		get_texture \
-		parser \
+		parser/check_map_borders \
+		parser/check_map_player \
+		parser/check_map_spaces \
+		parser/check_map \
+		parser/check_textures_rgb \
+		parser/check_textures \
+		parser/check_utils \
+		parser/parser_errors \
+		parser/get_map_utils \
+		parser/get_map \
+		parser/get_texture \
+		parser/parser \
 		textures \
 
 BNS_FILES = main_bonus \
 
 $(shell mkdir -p ./src/obj)
+$(shell mkdir -p ./src/obj/parser)
+$(shell mkdir -p ./src/obj/raycasting)
+$(shell mkdir -p ./src/obj/game)
 $(shell mkdir -p ./src/obj/charge_flag_makefile)
 $(shell mkdir -p ./bonus/src_bonus/obj)
 
