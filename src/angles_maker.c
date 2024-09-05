@@ -6,7 +6,7 @@
 /*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 20:00:47 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/03 18:25:04 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/04 20:47:03 by saroca-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ void	cell_impact(t_data *data, t_ray *ray)
 
 	ray->rayDirX = cos(ray->angle);
 	ray->rayDirY = sin(ray->angle);
-
 
 	ray->DeltaDistX = 1 / fabs(ray->rayDirX);
 	ray->DeltaDistY = 1 / fabs(ray->rayDirY);
@@ -144,13 +143,13 @@ void	cell_impact(t_data *data, t_ray *ray)
 
 void	print_one_ray(t_data *data, t_ray *ray, uint32_t color)
 {
-	double x;
-	double y;
+	float x;
+	float y;
 	int steps;
 	int i;
 
- 	x = data->player.pos_x * 64;
-	y = data->player.pos_y * 64;
+ 	x = (data->player.pos_x * 64);
+	y = (data->player.pos_y * 64);
 	ray->difx = fabs(ray->pixel_impactX - x);
 	ray->dify = fabs(ray->pixel_impactY - y);
 	if (ray->difx > ray->dify)
@@ -160,18 +159,35 @@ void	print_one_ray(t_data *data, t_ray *ray, uint32_t color)
 	ray->xincrement = ray->difx / (double)steps;
 	ray->yincrement = ray->dify / (double)steps;
 	i = 0;
-	while (i < steps)
+	while (i < steps && x > 0 && y > 0)
 	{
-		if (ray->pixel_impactX > x)
-			x += ray->xincrement;
-		else
-			x -= ray->xincrement;
-		if (ray->pixel_impactY > y)
-			y += ray->yincrement;
-		else
-			y -= ray->yincrement;
+		if(fabs(ray->xincrement) < (data->map.map_size_x * 64))
+		{
+			if (ray->pixel_impactX > x)
+				x += ray->xincrement;
+			else
+				x -= ray->xincrement;
+		}
+		if (fabs(ray->yincrement) < (data->map.map_size_y * 64))
+		{
+			if (ray->pixel_impactY > y)
+				y += ray->yincrement;
+			else
+				y -= ray->yincrement;
+		}
 		i++;
-		mlx_put_pixel(data->board, round(x), round(y), color);
+		if (round(x) >= 64 * data->map.map_size_x || round(y) >= 64 * data->map.map_size_y || round(x) <= 0 || round(y) <= 0)
+		{
+			printf("x:      %f  y:      %f\n", x, y);
+			printf("pixelx: %f  pixely: %f\n", ray->pixel_impactX, ray->pixel_impactY);
+			printf("rayDirX:%f  RayDirY:%f\n", ray->rayDirX, ray->rayDirY);
+			printf("Deltax: %f  Deltay: %f\n", ray->DeltaDistX, ray->DeltaDistY);
+			printf("mapX:   %d  mapY:   %d\n", ray->mapX, ray->mapY);
+			printf("posx:   %f  posy:   %f\n", ray->posX, ray->posY);
+		}
+		if (!data->board)
+			printf("board is null\n");
+		mlx_put_pixel(data->board, x, y, color);
 		//mlx_put_pixel(data->board, round(x), round(y), 0xffaa0000); //borrar
 	}
 }
@@ -180,9 +196,10 @@ void print_ray(t_data *data, t_player *player)
 {
 	int i;
 
+	data->board = mlx_new_image(data->mlx, data->map.map_size_x * 64, data->map.map_size_y * 64);
+	mlx_image_to_window(data->mlx, data->board, 0, 0);
 	ray_init(data);
 	i = 0;
-	cell_impact(data, &player->ray[i]);
 	while (i < WIDTH)
 	{
 		cell_impact(data, &player->ray[i]);

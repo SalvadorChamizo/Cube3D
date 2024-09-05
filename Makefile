@@ -5,7 +5,7 @@ NAME_BNS = cub3D_bonus
 CC = clang
 RM = rm -f
 
-FLAGS = -g -Wall -Werror -Wextra -Iinclude #-fsanitize=address
+FLAGS = -g -Wall -Werror -Wextra -Iinclude -fsanitize=address
 MLX_FLAGS = -ldl -lglfw -pthread -lm
 
 LIBFT_PATH = ./libft
