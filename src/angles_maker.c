@@ -6,7 +6,7 @@
 /*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 20:00:47 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/05 15:41:26 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/05 16:10:08 by saroca-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,19 +176,7 @@ void	print_one_ray(t_data *data, t_ray *ray, uint32_t color)
 				y -= ray->yincrement;
 		}
 		i++;
-		if (round(x) >= 64 * data->map.map_size_x || round(y) >= 64 * data->map.map_size_y || round(x) <= 0 || round(y) <= 0)
-		{
-			printf("x:      %f  y:      %f\n", x, y);
-			printf("pixelx: %f  pixely: %f\n", ray->pixel_impactX, ray->pixel_impactY);
-			printf("rayDirX:%f  RayDirY:%f\n", ray->rayDirX, ray->rayDirY);
-			printf("Deltax: %f  Deltay: %f\n", ray->DeltaDistX, ray->DeltaDistY);
-			printf("mapX:   %d  mapY:   %d\n", ray->mapX, ray->mapY);
-			printf("posx:   %f  posy:   %f\n", ray->posX, ray->posY);
-		}
-		if (!data->board)
-			printf("board is null\n");
-		mlx_put_pixel(data->board, x, y, color);
-		//mlx_put_pixel(data->board, round(x), round(y), 0xffaa0000); //borrar
+		mlx_put_pixel(data->board, round(x), round(y), color); //borrar
 	}
 }
 
