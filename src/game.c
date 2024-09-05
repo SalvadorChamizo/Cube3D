@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
+/*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 19:41:06 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/05 15:34:04 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/05 16:38:13 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,13 +99,13 @@ void ft_hook(void* param)
 		angle_move(data, data->player.angle - 90);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_D))
 		angle_move(data, data->player.angle + 90);
-	if (mlx_is_key_down(data->mlx, MLX_KEY_Q))
+	if (mlx_is_key_down(data->mlx, MLX_KEY_LEFT))
 	{
 		data->player.angle -= 3;
 		if (data->player.angle < 0)
 			data->player.angle = 359;
 	}
-	if (mlx_is_key_down(data->mlx, MLX_KEY_E))
+	if (mlx_is_key_down(data->mlx, MLX_KEY_RIGHT))
 	{
 		data->player.angle += 3;
 		if (data->player.angle > 359)
