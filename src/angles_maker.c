@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 20:00:47 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/05 12:35:35 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/05 16:38:56 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,24 @@
 void	ver_pixel_impact(t_ray *ray)
 {
 	if (ray->rayDirX > 0 && ray->rayDirY >= 0)
+	if (ray->rayDirX > 0 && ray->rayDirY >= 0)
 	{
 		ray->pixel_impactX = (ray->mapX) * 64;
 		ray->pixel_impactY = ((ray->mapY) * 64) + ((ray->hit - ray->mapY) * 64);
 	}
+	else if (ray->rayDirX <= 0 && ray->rayDirY > 0)
 	else if (ray->rayDirX <= 0 && ray->rayDirY > 0)
 	{
 		ray->pixel_impactX = (ray->mapX + 1) * 64;
 		ray->pixel_impactY = ((ray->mapY) * 64) + ((ray->hit - ray->mapY) * 64);
 	}
 	else if (ray->rayDirX >= 0 && ray->rayDirY < 0)
+	else if (ray->rayDirX >= 0 && ray->rayDirY < 0)
 	{
 		ray->pixel_impactX = (ray->mapX) * 64;
 		ray->pixel_impactY = ((ray->mapY) * 64) + ((ray->hit - ray->mapY) * 64);
 	}
+	else if (ray->rayDirX < 0 && ray->rayDirY <= 0)
 	else if (ray->rayDirX < 0 && ray->rayDirY <= 0)
 	{
 		ray->pixel_impactX = (ray->mapX + 1) * 64.0;

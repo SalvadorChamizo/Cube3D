@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 19:41:06 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/05 12:32:25 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/05 16:38:13 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,16 +67,19 @@ void	angle_move(t_data *data, double angle)
 	static double ret_x;
 	static double ret_y;
 
-	move_x = cos(angle * M_PI / 180) * 4;
-	move_y = sin(angle * M_PI / 180) * 4;
-	if (check_cell_move(data->mini.minipoint, data, move_x, move_y))
+	move_x = (cos(angle * M_PI / 180) * 4);
+	move_y = (sin(angle * M_PI / 180) * 4);
+	if (check_cell_move(data->mini.minipoint, data, 0, move_y))
+	{
+		ret_y += move_y - (int)move_y;
+		data->player.pos_y += move_y / 64;
+		data->mini.minipoint->instances[0].y = (data->player.pos_y * 64) - 16;
+	}
+	if(check_cell_move(data->mini.minipoint, data, move_x, 0))
 	{
 		ret_x += move_x - (int)move_x;
-		ret_y += move_y - (int)move_y;
 		data->player.pos_x += move_x / 64;
-		data->player.pos_y += move_y / 64;
 		data->mini.minipoint->instances[0].x = (data->player.pos_x * 64) - 16;
-		data->mini.minipoint->instances[0].y = (data->player.pos_y * 64) - 16;
 	}
 }
 
