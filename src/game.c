@@ -6,7 +6,7 @@
 /*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 19:41:06 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/04 16:49:20 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/05 10:32:56 by saroca-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,47 +60,42 @@ void	print_mini_map(t_data *data)
 	}
 }
 
+void	angle_move(t_data *data, double angle)
+{
+	double move_x;
+	double move_y;
+	static double ret_x;
+	static double ret_y;
+
+	move_x = cos(angle * M_PI / 180) * 4;
+	move_y = sin(angle * M_PI / 180) * 4;
+	if (check_cell_move(data->mini.minipoint, data, move_x, move_y))
+	{
+		ret_x += move_x - (int)move_x;
+		ret_y += move_y - (int)move_y;
+		data->player.pos_x += move_x / 64;
+		data->player.pos_y += move_y / 64;
+		data->mini.minipoint->instances[0].x = (data->player.pos_x * 64) - 16;
+		data->mini.minipoint->instances[0].y = (data->player.pos_y * 64) - 16;
+	}
+}
+
 void ft_hook(void* param)
 {
 	t_data		*data = param;
-	mlx_image_t	*image = data->mini.minipoint;
 
 	if(data->player.ray[0].DeltaDistX)
 		mlx_delete_image(data->mlx, data->board);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(data->mlx);
-	if (mlx_is_key_down(data->mlx, MLX_KEY_UP))
-	{
-		if (check_cell_move(image, data, 0, -4))
-		{
-			image->instances[0].y -= 4;
-			data->player.pos_y -= 0.0625;
-		}
-	}
-	if (mlx_is_key_down(data->mlx, MLX_KEY_DOWN))
-	{
-		if (check_cell_move(image, data, 0, 4))
-		{
-			image->instances[0].y += 4;
-			data->player.pos_y += 0.0625;
-		}
-	}
-	if (mlx_is_key_down(data->mlx, MLX_KEY_LEFT))
-	{
-		if (check_cell_move(image, data, -4, 0))
-		{
-			image->instances[0].x -= 4;
-			data->player.pos_x -= 0.0625;
-		}
-	}
-	if (mlx_is_key_down(data->mlx, MLX_KEY_RIGHT))
-	{
-		if (check_cell_move(image, data, 4, 0))
-		{
-			image->instances[0].x += 4;
-			data->player.pos_x += 0.0625;
-		}
-	}
+	if (mlx_is_key_down(data->mlx, MLX_KEY_W))
+		angle_move(data, data->player.angle);
+	if (mlx_is_key_down(data->mlx, MLX_KEY_S))
+		angle_move(data, data->player.angle + 180);
+	if (mlx_is_key_down(data->mlx, MLX_KEY_A))
+		angle_move(data, data->player.angle - 90);
+	if (mlx_is_key_down(data->mlx, MLX_KEY_D))
+		angle_move(data, data->player.angle + 90);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_Q))
 	{
 		data->player.angle -= 3;
