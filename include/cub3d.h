@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:26:26 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/05 17:41:13 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/06 12:18:15 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,6 +178,7 @@ int			check_rgb_are_numbers(char **color, int line);
 //paint
 
 int			paint_floor_ceiling(t_data *data);
+int			painting_everything(t_data *data);
 
 //textures
 

@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 17:35:37 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/06 11:33:05 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/06 12:59:17 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,20 +33,48 @@ int paint_floor_ceiling(t_data *data)
     return (SUCCESS);
 }
 
-uint32_t	paint_wall(t_data *data)
+uint32_t	get_wall_color(t_data *data, double wall_pos_x, double wall_pos_y)
 {
 	//North wall
-	if (pfv.wall_y > data->player.pos_y)
-		return (get_colour_from_texture(1 - pfv.wall_x + (int)pfv.wall_x, calc_h, data->textures.no_texture));
+	if (wall_pos_y > data->player.pos_y)
+		return (772233);
 	//South Wall
-	else if (pfv.wall_y < data->player.pos_y)
-		return (get_colour_from_texture(pfv.wall_x - (int)pfv.wall_x, calc_h, data->textures.so_texture));
+	else if (wall_pos_y < data->player.pos_y)
+		return (461713);
 	//East Wall
-	else if (pfv.wall_x > data->player.pos_x)
-		return (get_colour_from_texture(pfv.wall_y - (int)pfv.wall_y, calc_h, data->textures.ea_texture));
+	else if (wall_pos_x > data->player.pos_x)
+		return (114356);
 	//West Wall
-	else if (pfv.wall_x < data->player.pos_x)
-		return (get_colour_from_texture(1 - pfv.wall_y + (int)pfv.wall_y, calc_h, data->textures.we_texture));
+	else if (wall_pos_x < data->player.pos_x)
+		return (119999);
 	else
 		return (0x33333388);
+}
+
+void	paint_column(t_data *data, int j)
+{
+	uint32_t	wall_color;
+	int	i;
+
+	i = 0;
+	while (i < HEIGHT)
+	{
+		wall_color = get_wall_color(data, i, j);
+		if (i < HEIGHT)
+			mlx_put_pixel(data->screen, i, j, wall_color);
+		i++;
+	}
+}
+
+int	painting_everything(t_data *data)
+{
+	int	i;
+
+	i = 300;
+	while (i < WIDTH / 2)
+	{
+		paint_column(data, i);
+		i++;
+	}
+	return (SUCCESS);
 }

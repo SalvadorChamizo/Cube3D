@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:25:53 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/05 17:41:43 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/06 14:45:41 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,9 @@ int	main(int argc, char **argv)
 		print_error("Failed in mlx_image_to_window() for floor-ceiling image\n");
 		exit(FAILURE);
 	}
-	paint_floor_ceiling(&data);
+	//find_player_position(&data, data.map.map);
+	//paint_floor_ceiling(&data);
+	//painting_everything(&data);
 	mlx_loop(data.mlx);
 	mlx_terminate(data.mlx);
 	ft_free_split(data.map.map);
