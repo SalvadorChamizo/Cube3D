@@ -6,7 +6,7 @@
 /*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 20:00:47 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/06 10:21:47 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/06 10:56:21 by saroca-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,23 +60,18 @@ void	hor_pixel_impact(t_ray *ray)
 	}
 }
 
-void	cell_impact(t_data *data, t_ray *ray)
+void ray_var_init(t_data *data, t_ray *ray)
 {
 	ray->mapX = data->player.map_x;
 	ray->mapY = data->player.map_y;
-
-
 	ray->rayDirX = cos(ray->angle);
 	ray->rayDirY = sin(ray->angle);
-
 	ray->DeltaDistX = 1 / fabs(ray->rayDirX);
 	ray->DeltaDistY = 1 / fabs(ray->rayDirY);
-
-
 	ray->posX = data->player.pos_x;
 	ray->posY = data->player.pos_y;
-
-
+	ray->stepX = 0;
+	ray->stepY = 0;
 	if(ray->rayDirX < 0)
 		ray->stepX = -1;
 	else
@@ -85,8 +80,11 @@ void	cell_impact(t_data *data, t_ray *ray)
 		ray->stepY = -1;
 	else
 		ray->stepY = 1;
+	ray->flag = 0;
+}
 
-
+void	sideDist(t_data *data, t_ray *ray)
+{
 	if (ray->rayDirX > 0)
 		ray->sideDistX = (data->player.map_x + ray->stepX - data->player.pos_x) * ray->DeltaDistX;
 	else
@@ -95,9 +93,10 @@ void	cell_impact(t_data *data, t_ray *ray)
 		ray->sideDistY = (data->player.map_y + ray->stepY - data->player.pos_y) * ray->DeltaDistY;
 	else
 		ray->sideDistY = (data->player.pos_y - data->player.map_y) * ray->DeltaDistY;
+}
 
-
-	ray->flag = 0;
+void	DDA_bucle(t_data *data, t_ray *ray)
+{
 	while(data->map.map[ray->mapY][ray->mapX] != '1')
 	{
 		if (ray->sideDistX < ray->sideDistY)
@@ -113,40 +112,36 @@ void	cell_impact(t_data *data, t_ray *ray)
 			ray->flag = 1;
 		}
 	}
-
-
 	if (ray->flag == 0)
 		ray->perpWallDist = (ray->mapX - ray->posX + (1 - ray->stepX) / 2) / ray->rayDirX;
 	else
 		ray->perpWallDist = (ray->mapY - ray->posY + (1 - ray->stepY) / 2) / ray->rayDirY;
-	
+}
 
-	//octavo paso
+void	cell_impact(t_data *data, t_ray *ray)
+{
+	double	screen_desplace;
+	int		screen_distance;
+
+	ray_var_init(data, ray);
+	sideDist(data, ray);
+	DDA_bucle(data, ray);
+	screen_desplace = 0.5;
 	if (ray->flag == 0)
 		ray->hit = ray->posY + ray->perpWallDist * ray->rayDirY;
 	else
 		ray->hit = ray->posX + ray->perpWallDist * ray->rayDirX;
-
-	//noveno paso
-	
 	if (ray->flag == 0)
 		ver_pixel_impact(ray);
 	else
 		hor_pixel_impact(ray);
-
-	//decimo paso
 	if (ray->flag == 0)
 		ray->distance = sqrt(pow((ray->posX - ray->mapX), 2) + pow((ray->posY - ray->hit), 2));
 	else
 		ray->distance = sqrt(pow((ray->posX - ray->hit), 2) + pow((ray->posY - ray->mapY), 2));
-
-	//undecimo paso
-	double	screen_desplace = 0.5;
-	int		screen_distance;
-
 	screen_distance = screen_desplace / (cos(ray->angle - data->player.angle));
 	ray->distance = ray->distance - screen_distance;
-	ray->pixel_distance = (64 / ray->distance) * 64;
+	ray->pixel_distance = ray->distance * 64;
 }
 
 void	print_one_ray(t_data *data, t_ray *ray, uint32_t color)
