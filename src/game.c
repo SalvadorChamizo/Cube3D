@@ -91,8 +91,7 @@ void	ft_game(t_data *data)
 {
 	map_size(&data->map);
 	find_player_position(data, data->map.map);
-	data->mlx = mlx_init(data->map.map_size_x * 64, data->map.map_size_y \
-		* 64, "so_long", true);
+	data->mlx = mlx_init(WIDTH, HEIGHT, "Cube3d", true);
 	mini_imagen_init(&data->mini, data);
 	print_mini_map(data);
 	data->board = mlx_new_image(data->mlx, data->map.map_size_x * 64, \
