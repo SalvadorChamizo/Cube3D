@@ -27,6 +27,7 @@ FILES =	main \
 		parser/get_texture \
 		parser/parser \
 		textures \
+		paint \
 
 BNS_FILES = main_bonus \
 

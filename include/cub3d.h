@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:26:26 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/04 16:12:15 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/05 17:41:13 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ typedef struct s_map
 typedef struct s_data
 {
 	mlx_t		*mlx;
+	mlx_image_t	*screen;
 	t_map		map;
 	t_texture	textures;
 	t_player	player;
@@ -173,6 +174,10 @@ uint32_t	get_color_rgb_two_args(char **path);
 uint32_t	get_color_rgb_four_args(char **path);
 void		error_rgb_value(char **path, int r, int g, int b);
 int			check_rgb_are_numbers(char **color, int line);
+
+//paint
+
+int			paint_floor_ceiling(t_data *data);
 
 //textures
 

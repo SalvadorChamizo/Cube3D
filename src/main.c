@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:25:53 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/04 16:19:34 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/05 17:41:43 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,14 @@ int	init_data_variables(t_data *data)
 int	main(int argc, char **argv)
 {
 	t_data	data;
+	int		h;
 
 	if (argc != 2)
 	{
 		print_error("Incorrect number of arguments\n");
 		return (1);
 	}
+	h = 0;
 	init_data_variables(&data);
 	if (parse_map(argv[1], &data))
 	{
@@ -54,6 +56,18 @@ int	main(int argc, char **argv)
 		print_error("Failed to initialiaze mlx.\n");
 		exit(1);
 	}
+	data.screen = mlx_new_image(data.mlx, WIDTH, HEIGHT);
+	if (!data.screen)
+	{
+		print_error("Failed creating floor-ceiling image\n");
+		exit(FAILURE);
+	}
+	if (mlx_image_to_window(data.mlx, data.screen, 0, 0) == -1)
+	{
+		print_error("Failed in mlx_image_to_window() for floor-ceiling image\n");
+		exit(FAILURE);
+	}
+	paint_floor_ceiling(&data);
 	mlx_loop(data.mlx);
 	mlx_terminate(data.mlx);
 	ft_free_split(data.map.map);
