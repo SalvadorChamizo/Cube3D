@@ -26,10 +26,11 @@ FILES =	main \
 		parser/get_map \
 		parser/get_texture \
 		parser/parser \
+		raycasting/angles_maker \
+		raycasting/angles_maker_utils \
+		raycasting/ray \
 		textures \
 		paint \
-		angles_maker \
-		angles_maker_utils \
 		game \
 		game_move \
 		game_check_move \
@@ -105,6 +106,9 @@ re: fclean setup $(NAME)
 setup:
 	$(shell mkdir -p ./src/obj)
 	$(shell mkdir -p ./src/obj/charge_flag_makefile)
+	$(shell mkdir -p ./src/obj/parser)
+	$(shell mkdir -p ./src/obj/raycasting)
+	$(shell mkdir -p ./src/obj/game)
 	$(shell mkdir -p ./bonus/src_bonus/obj)
 
 .PHONY: clean fclean re all bonus setup
