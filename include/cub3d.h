@@ -6,7 +6,7 @@
 /*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:26:26 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/05 16:25:47 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/06 10:21:32 by saroca-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,11 @@ typedef struct s_ray
 	int			flag;
 	double 		hit;
 	double		distance;
+	int			pixel_distance;
 	int			difx;
 	int			dify;
-	double xincrement;
-	double yincrement;
+	double		xincrement;
+	double		yincrement;
 }	t_ray;
 
 typedef struct s_player

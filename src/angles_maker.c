@@ -6,7 +6,7 @@
 /*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 20:00:47 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/05 16:55:53 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/06 10:21:47 by saroca-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,14 @@ void	cell_impact(t_data *data, t_ray *ray)
 		ray->distance = sqrt(pow((ray->posX - ray->mapX), 2) + pow((ray->posY - ray->hit), 2));
 	else
 		ray->distance = sqrt(pow((ray->posX - ray->hit), 2) + pow((ray->posY - ray->mapY), 2));
+
+	//undecimo paso
+	double	screen_desplace = 0.5;
+	int		screen_distance;
+
+	screen_distance = screen_desplace / (cos(ray->angle - data->player.angle));
+	ray->distance = ray->distance - screen_distance;
+	ray->pixel_distance = (64 / ray->distance) * 64;
 }
 
 void	print_one_ray(t_data *data, t_ray *ray, uint32_t color)
