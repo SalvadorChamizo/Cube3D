@@ -5,7 +5,7 @@ NAME_BNS = cub3D_bonus
 CC = clang
 RM = rm -f
 
-FLAGS = -g -Wall -Werror -Wextra -Iinclude #-fsanitize=address
+FLAGS = -g -Wall -Werror -Wextra -Iinclude -fsanitize=address
 MLX_FLAGS = -ldl -lglfw -pthread -lm
 
 LIBFT_PATH = ./libft
@@ -28,6 +28,12 @@ FILES =	main \
 		parser/parser \
 		textures \
 		paint \
+		angles_maker \
+		angles_maker_utils \
+		game \
+		game_move \
+		game_check_move \
+		print_ray \
 
 BNS_FILES = main_bonus \
 
@@ -39,7 +45,9 @@ $(shell mkdir -p ./src/obj/charge_flag_makefile)
 $(shell mkdir -p ./bonus/src_bonus/obj)
 
 SRCS_DIR = ./src/
+
 OBJS_DIR = ./src/obj/
+
 SRCS = $(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES)))
 OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
 

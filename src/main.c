@@ -6,17 +6,15 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:25:53 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/06 14:45:41 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/06 14:50:45 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../include/cub3d.h"
 #include "../MLX42/include/MLX42/MLX42.h"
 
 #include <stdbool.h>
-
-
-
 
 int	init_data_variables(t_data *data)
 {

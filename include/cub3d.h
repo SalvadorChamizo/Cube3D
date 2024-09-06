@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:26:26 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/06 12:18:15 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/06 14:52:19 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,26 +69,70 @@ typedef struct s_point
 	int	y;
 }	t_point;
 
+typedef struct s_ray
+{
+	double 		angle;
+	int			mapX;
+	int			mapY;
+	double 		posX;
+	double 		posY;
+	double		rayDirX;
+	double		rayDirY;
+	double		DeltaDistX;
+	double		DeltaDistY;
+	double		stepX;
+	double		stepY;
+	double		sideDistX;
+	double		sideDistY;
+	double		perpWallDist;
+	double 		pixel_impactX;
+	double 		pixel_impactY;
+	int			flag;
+	double 		hit;
+	double		distance;
+	int			pixel_distance;
+	int			difx;
+	int			dify;
+	double		xincrement;
+	double		yincrement;
+}	t_ray;
+
 typedef struct s_player
 {
 	double	pos_x;
 	double	pos_y;
 	int		map_x;
 	int		map_y;
-	double	fov;
+	double	angle;
+	t_ray	ray[WIDTH];
 }	t_player;
+
 
 typedef struct s_map
 {
 	char	**map;
+	int		map_size_x;
+	int		map_size_y;
 	int		map_line;
 }	t_map;
+
+typedef struct s_minimap
+{
+	mlx_texture_t	*wall_texture;
+	mlx_texture_t	*floor_texture;
+	mlx_texture_t	*minipoint_texture;
+	mlx_image_t		*wall;
+	mlx_image_t		*floor;
+	mlx_image_t		*minipoint;
+}	t_minimap;
 
 typedef struct s_data
 {
 	mlx_t		*mlx;
 	mlx_image_t	*screen;
+	mlx_image_t	*board;
 	t_map		map;
+	t_minimap	mini;
 	t_texture	textures;
 	t_player	player;
 }	t_data;
@@ -194,5 +238,21 @@ void		error_invalid_char(char **map, int line, int pos);
 void		print_border_error(int line, int flag);
 void		print_invalid_space_error(int line, int pos);
 void		rgb_error_not_number(char **color, int i, int j, int line);
+
+//game
+
+bool	check_cell_move(mlx_image_t *image, t_data *data, double move_x, double move_y);
+void	ft_game(t_data *data);
+void	print_ray(t_data *data, t_player *player);
+
+//game_utils
+
+void	find_player_position(t_data *data, char **map);
+void	ray_init(t_data *data);
+void	ver_pixel_impact(t_ray *ray);
+void	hor_pixel_impact(t_ray *ray);
+void	print_one_ray(t_data *data, t_ray *ray);
+void	angle_move(t_data *data, double angle);
+void	angle_act(double *angle, double var);
 
 #endif
