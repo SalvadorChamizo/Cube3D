@@ -24,8 +24,11 @@ FILES =	main \
 		parser \
 		textures \
 		angles_maker \
+		angles_maker_utils \
 		game \
+		game_move \
 		game_check_move \
+		print_ray \
 
 BNS_FILES = main_bonus \
 

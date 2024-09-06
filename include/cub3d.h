@@ -6,7 +6,7 @@
 /*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:26:26 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/06 10:21:32 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/06 13:02:05 by saroca-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,7 +206,11 @@ void	print_ray(t_data *data, t_player *player);
 //game_utils
 
 void	find_player_position(t_data *data, char **map);
-void	ray_init(t_data *data); //poner en mejor lugar
-void	print_one_ray(t_data *data, t_ray *ray, uint32_t color);
+void	ray_init(t_data *data);
+void	ver_pixel_impact(t_ray *ray);
+void	hor_pixel_impact(t_ray *ray);
+void	print_one_ray(t_data *data, t_ray *ray);
+void	angle_move(t_data *data, double angle);
+void	angle_act(double *angle, double var);
 
 #endif
