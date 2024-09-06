@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:26:26 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/06 14:52:19 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/06 17:39:56 by saroca-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -254,5 +254,7 @@ void	hor_pixel_impact(t_ray *ray);
 void	print_one_ray(t_data *data, t_ray *ray);
 void	angle_move(t_data *data, double angle);
 void	angle_act(double *angle, double var);
+void	angle_select(t_data *data, char c);
+void	ray_init(t_data *data);
 
 #endif
