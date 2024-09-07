@@ -6,7 +6,7 @@
 /*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 19:41:06 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/06 13:01:13 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/07 09:06:39 by saroca-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,9 @@ void	ft_hook(void *param)
 	t_data		*data;
 
 	data = param;
-	if (data->player.ray[0].DeltaDistX)
-		mlx_delete_image(data->mlx, data->board);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(data->mlx);
-	if (mlx_is_key_down(data->mlx, MLX_KEY_W))
+	/*if (mlx_is_key_down(data->mlx, MLX_KEY_W))
 		angle_move(data, data->player.angle);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_S))
 		angle_move(data, data->player.angle + 180);
@@ -83,11 +81,45 @@ void	ft_hook(void *param)
 	if (mlx_is_key_down(data->mlx, MLX_KEY_LEFT))
 		angle_act(&data->player.angle, -3);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_RIGHT))
-		angle_act(&data->player.angle, 3);
+		angle_act(&data->player.angle, 3);*/
 	print_ray(data, &data->player);
 }
 
+void	game_init(t_data *data)
+{
+	data->mlx = mlx_init(WIDTH, HEIGHT, "cub3d", true);
+	if (!data->mlx)
+	{
+		print_error("Failed to initialiaze mlx.\n");
+		exit(1);
+	}
+	data->screen = mlx_new_image(data->mlx, WIDTH, HEIGHT);
+	if (!data->screen)
+	{
+		print_error("Failed creating floor-ceiling image\n");
+		exit(FAILURE);
+	}
+	if (mlx_image_to_window(data->mlx, data->screen, 0, 0) == -1)
+	{
+		print_error("Failed in mlx_image_to_window() for floor-ceiling image\n");
+		exit(FAILURE);
+	}
+	find_player_position(data, data->map.map);
+	paint_floor_ceiling(data);
+}
+
 void	ft_game(t_data *data)
+{
+	map_size(&data->map);
+	game_init(data);
+	mlx_loop_hook(data->mlx, ft_hook, data);
+	mlx_loop(data->mlx);
+}
+
+/*	paint_floor_ceiling(&data);
+	painting_everything(&data);*/
+
+/*void	ft_game(t_data *data)
 {
 	map_size(&data->map);
 	find_player_position(data, data->map.map);
@@ -101,4 +133,4 @@ void	ft_game(t_data *data)
 		* 64) - 16, (data->player.pos_y * 64) - 16);
 	mlx_loop_hook(data->mlx, ft_hook, data);
 	mlx_loop(data->mlx);
-}
+}*/

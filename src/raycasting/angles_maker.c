@@ -6,7 +6,7 @@
 /*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 20:00:47 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/06 12:25:55 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/07 08:48:06 by saroca-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,15 +108,11 @@ void	print_ray(t_data *data, t_player *player)
 {
 	int	i;
 
-	data->board = mlx_new_image(data->mlx, data->map.map_size_x * 64, \
-		data->map.map_size_y * 64);
-	mlx_image_to_window(data->mlx, data->board, 0, 0);
 	ray_init(data);
 	i = 0;
 	while (i < WIDTH)
 	{
 		cell_impact(data, &player->ray[i]);
-		print_one_ray(data, &player->ray[i]);
 		i++;
 	}
 }

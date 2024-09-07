@@ -6,7 +6,7 @@
 /*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:26:26 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/06 17:39:56 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/07 08:55:05 by saroca-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@
 # define WIDTH 1920
 # define HEIGHT 1280
 # define FOV 60
+# define WALL_SIZE (HEIGHT / 2)
 
 typedef struct s_texture
 {
