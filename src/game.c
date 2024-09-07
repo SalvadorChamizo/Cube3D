@@ -6,7 +6,7 @@
 /*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 19:41:06 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/07 09:06:39 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/07 18:02:03 by saroca-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	ft_hook(void *param)
 	data = param;
 	if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(data->mlx);
-	/*if (mlx_is_key_down(data->mlx, MLX_KEY_W))
+	if (mlx_is_key_down(data->mlx, MLX_KEY_W))
 		angle_move(data, data->player.angle);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_S))
 		angle_move(data, data->player.angle + 180);
@@ -81,7 +81,7 @@ void	ft_hook(void *param)
 	if (mlx_is_key_down(data->mlx, MLX_KEY_LEFT))
 		angle_act(&data->player.angle, -3);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_RIGHT))
-		angle_act(&data->player.angle, 3);*/
+		angle_act(&data->player.angle, 3);
 	print_ray(data, &data->player);
 }
 
