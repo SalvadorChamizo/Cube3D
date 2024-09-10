@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
+/*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 17:38:05 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/06 17:56:42 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/10 11:53:10 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	check_map_is_valid(t_data *data)
 	int	flag;
 
 	flag = 0;
+	if (!data || !data->map.map)
+		return (FAILURE);
 	if (!data || !data->map.map)
 		return (FAILURE);
 	if (check_first_last_line(data, data->map.map))

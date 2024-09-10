@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
+/*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:26:26 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/09 17:52:13 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/10 11:54:01 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,16 @@ typedef struct s_point
 	int	x;
 	int	y;
 }	t_point;
+
+typedef  struct  s_line
+{
+	int  x; //the x coordinate of line relative to screen
+	int  y; //the current pixel index of the line (along y axis)
+	int  y0; //y start index of drawing texture
+	int  y1; //y end index of drawing texture
+	int  tex_x; //x coordinate of texture to draw
+	int  tex_y; //y coordinate of texture to draw
+} t_line;
 
 typedef struct s_ray
 {
@@ -136,6 +146,7 @@ typedef struct s_data
 	t_minimap	mini;
 	t_texture	textures;
 	t_player	player;
+	int			ray_number;
 }	t_data;
 
 //parser
