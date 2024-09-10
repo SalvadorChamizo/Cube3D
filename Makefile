@@ -35,6 +35,7 @@ FILES =	main \
 		game_move \
 		game_check_move \
 		print_ray \
+		print_wall \
 
 BNS_FILES = main_bonus \
 

@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:25:53 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/09 12:56:47 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/10 11:53:40 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,28 +48,9 @@ int	main(int argc, char **argv)
 		free_textures_memory(&data);
 		return (1);
 	}
-	data.mlx = mlx_init(WIDTH, HEIGHT, "cub3d", true);
-	if (!data.mlx)
-	{
-		print_error("Failed to initialiaze mlx.\n");
-		exit(1);
-	}
-	data.screen = mlx_new_image(data.mlx, WIDTH, HEIGHT);
-	if (!data.screen)
-	{
-		print_error("Failed creating floor-ceiling image\n");
-		exit(FAILURE);
-	}
-	if (mlx_image_to_window(data.mlx, data.screen, 0, 0) == -1)
-	{
-		print_error("Failed in mlx_image_to_window() for floor-ceiling image\n");
-		exit(FAILURE);
-	}
-	find_player_position(&data, data.map.map);
-	paint_floor_ceiling(&data);
+	//ft_load_textures(&data);
+	data.test = mlx_load_png("textures/metal_ea.png");
 	ft_game(&data);
-	mlx_loop(data.mlx);
-	mlx_terminate(data.mlx);
 	ft_free_split(data.map.map);
 	free_textures_memory(&data);
 }

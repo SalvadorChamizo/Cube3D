@@ -6,7 +6,7 @@
 /*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 14:38:50 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/05 16:54:17 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/07 18:04:05 by saroca-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,6 @@ bool    check_borders(mlx_image_t *image, t_data *data, double move_x, double mo
 
 bool	check_cell_move(mlx_image_t *image, t_data *data, double move_x, double move_y)
 {
-	int new_x;
-	int new_y;
-
-	new_x = (image->instances[0].x + move_x) / 64;
-	new_y = (image->instances[0].y + move_y) / 64;
     if (!check_borders(image, data, move_x, move_y))
 	{
 		return (false);

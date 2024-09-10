@@ -6,13 +6,13 @@
 /*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 11:25:57 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/06 12:50:59 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/08 14:00:35 by saroca-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-void	bucle_print_ray(t_data *data, t_ray *ray, float *x, float *y)
+/*void	bucle_print_ray(t_data *data, t_ray *ray, float *x, float *y)
 {
 	if (fabs(ray->xincrement) < (data->map.map_size_x * 64))
 	{
@@ -54,4 +54,4 @@ void	print_one_ray(t_data *data, t_ray *ray)
 		bucle_print_ray(data, ray, &x, &y);
 		i++;
 	}
-}
+}*/

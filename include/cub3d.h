@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:26:26 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/09 12:53:32 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/10 11:54:01 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@
 # define WIDTH 1920
 # define HEIGHT 1280
 # define FOV 60
+# define WALL_SIZE (HEIGHT / 2)
 
 typedef struct s_texture
 {
@@ -95,16 +96,15 @@ typedef struct s_ray
 	double		sideDistX;
 	double		sideDistY;
 	double		perpWallDist;
-	double 		pixel_impactX;
-	double 		pixel_impactY;
+	double		pixel_width_impact;
 	int			flag;
 	double 		hit;
 	double		distance;
 	int			pixel_distance;
-	int			difx;
-	int			dify;
-	double		xincrement;
-	double		yincrement;
+	int			difx; //minimapa
+	int			dify; //minimapa
+	double		xincrement; //minimapa
+	double		yincrement; //minimapa
 }	t_ray;
 
 typedef struct s_player
@@ -141,6 +141,7 @@ typedef struct s_data
 	mlx_t		*mlx;
 	mlx_image_t	*screen;
 	mlx_image_t	*board;
+	mlx_texture_t	*test; //solo es para testeos
 	t_map		map;
 	t_minimap	mini;
 	t_texture	textures;
@@ -172,6 +173,7 @@ int			get_wall_textures(t_data *data, int fd, int *error_flag);
 int			get_line_and_split(char ***split_line, int fd);
 int			check_texture(t_data *data, char **path, int *cont, int line);
 void		check_missing_identifier(t_data *data);
+void		ft_load_textures(t_data *data);
 
 //check_map_player
 
@@ -262,10 +264,13 @@ void	find_player_position(t_data *data, char **map);
 void	ray_init(t_data *data);
 void	ver_pixel_impact(t_ray *ray);
 void	hor_pixel_impact(t_ray *ray);
-void	print_one_ray(t_data *data, t_ray *ray);
 void	angle_move(t_data *data, double angle);
 void	angle_act(double *angle, double var);
 void	angle_select(t_data *data, char c);
 void	ray_init(t_data *data);
+
+//printer
+void	print_one_ray(t_data *data, t_ray *ray);
+void    print_wall(t_data *data, t_ray *ray, int x);
 
 #endif
