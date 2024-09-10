@@ -6,7 +6,7 @@
 /*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 19:41:06 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/07 18:02:03 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/09 12:41:58 by saroca-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	map_size(t_map *map)
 	{
 		if ((int)ft_strlen(map->map[i]) > j)
 			j = ft_strlen(map->map[i]);
+		//printf("map[%d] = %s\n", i, map->map[i]);
 		i++;
 	}
 	map->map_size_x = j;
@@ -63,11 +64,28 @@ void	print_mini_map(t_data *data)
 	}
 }
 
+void	imagen_init(t_data *data, mlx_image_t **imagen)
+{
+	*imagen = mlx_new_image(data->mlx, WIDTH, HEIGHT);
+	if (!*imagen)
+	{
+		print_error("Failed creating floor-ceiling image\n");
+		exit(FAILURE);
+	}
+	if (mlx_image_to_window(data->mlx, *imagen, 0, 0) == -1)
+	{
+		print_error("Failed in mlx_image_to_window() for floor-ceiling image\n");
+		exit(FAILURE);
+	}
+}
+
 void	ft_hook(void *param)
 {
 	t_data		*data;
 
 	data = param;
+	if (data->player.ray[0].DeltaDistY)
+		mlx_delete_image(data->mlx, data->board);	
 	if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(data->mlx);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_W))
@@ -79,9 +97,10 @@ void	ft_hook(void *param)
 	if (mlx_is_key_down(data->mlx, MLX_KEY_D))
 		angle_move(data, data->player.angle + 90);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_LEFT))
-		angle_act(&data->player.angle, -3);
+		angle_act(&data->player.angle, -1);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_RIGHT))
-		angle_act(&data->player.angle, 3);
+		angle_act(&data->player.angle, 1);
+	imagen_init(data, &data->board); //paredes
 	print_ray(data, &data->player);
 }
 
@@ -93,17 +112,8 @@ void	game_init(t_data *data)
 		print_error("Failed to initialiaze mlx.\n");
 		exit(1);
 	}
-	data->screen = mlx_new_image(data->mlx, WIDTH, HEIGHT);
-	if (!data->screen)
-	{
-		print_error("Failed creating floor-ceiling image\n");
-		exit(FAILURE);
-	}
-	if (mlx_image_to_window(data->mlx, data->screen, 0, 0) == -1)
-	{
-		print_error("Failed in mlx_image_to_window() for floor-ceiling image\n");
-		exit(FAILURE);
-	}
+	imagen_init(data, &data->screen); //cielo y suelo
+	imagen_init(data, &data->board); //paredes
 	find_player_position(data, data->map.map);
 	paint_floor_ceiling(data);
 }

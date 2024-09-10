@@ -6,7 +6,7 @@
 /*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:25:53 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/07 08:45:55 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/09 09:58:03 by saroca-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ int	main(int argc, char **argv)
 		free_textures_memory(&data);
 		return (1);
 	}
+	//ft_load_textures(&data);
+	data.test = mlx_load_png("textures/metal_ea.png");
 	ft_game(&data);
 	ft_free_split(data.map.map);
 	free_textures_memory(&data);

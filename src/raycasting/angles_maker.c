@@ -6,7 +6,7 @@
 /*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 20:00:47 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/07 08:48:06 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/10 10:16:03 by saroca-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,13 @@ void	ray_var_init(t_data *data, t_ray *ray)
 void	sidedist(t_data *data, t_ray *ray)
 {
 	if (ray->rayDirX > 0)
-		ray->sideDistX = (data->player.map_x + ray->stepX \
-			- data->player.pos_x) * ray->DeltaDistX;
+		ray->sideDistX = (data->player.map_x + ray->stepX - data->player.pos_x) * ray->DeltaDistX;
 	else
-		ray->sideDistX = (data->player.pos_x - data->player.map_x) \
-			* ray->DeltaDistX;
+		ray->sideDistX = (data->player.pos_x - data->player.map_x) * ray->DeltaDistX;
 	if (ray->rayDirY > 0)
-		ray->sideDistY = (data->player.map_y + ray->stepY \
-			- data->player.pos_y) * ray->DeltaDistY;
+		ray->sideDistY = (data->player.map_y + ray->stepY - data->player.pos_y) * ray->DeltaDistY;
 	else
-		ray->sideDistY = (data->player.pos_y - data->player.map_y) \
-			* ray->DeltaDistY;
+		ray->sideDistY = (data->player.pos_y - data->player.map_y) * ray->DeltaDistY;
 }
 
 void	dda_bucle(t_data *data, t_ray *ray)
@@ -86,21 +82,19 @@ void	cell_impact(t_data *data, t_ray *ray)
 	dda_bucle(data, ray);
 	screen_desplace = 0.5;
 	if (ray->flag == 0)
-		ray->hit = ray->posY + ray->perpWallDist * ray->rayDirY;
+		ray->hit = ray->posY + (ray->perpWallDist * ray->rayDirY);
 	else
-		ray->hit = ray->posX + ray->perpWallDist * ray->rayDirX;
+		ray->hit = ray->posX + (ray->perpWallDist * ray->rayDirX);
 	if (ray->flag == 0)
 		ver_pixel_impact(ray);
 	else
 		hor_pixel_impact(ray);
 	if (ray->flag == 0)
-		ray->distance = sqrt(pow((ray->posX - ray->mapX), 2) \
-			+ pow((ray->posY - ray->hit), 2));
+		ray->distance = sqrt(pow((ray->posX - ray->mapX), 2) + pow((ray->posY - ray->hit), 2));
 	else
-		ray->distance = sqrt(pow((ray->posX - ray->hit), 2) \
-			+ pow((ray->posY - ray->mapY), 2));
-	screen_distance = screen_desplace / (cos(ray->angle - data->player.angle));
-	ray->distance = ray->distance - screen_distance;
+		ray->distance = sqrt(pow((ray->posX - ray->hit), 2) + pow((ray->posY - ray->mapY), 2));
+	//screen_distance = screen_desplace / (cos(ray->angle - data->player.angle));
+	//ray->distance = fabs(ray->distance - screen_distance);
 	ray->pixel_distance = ray->distance * 64;
 }
 
@@ -113,6 +107,7 @@ void	print_ray(t_data *data, t_player *player)
 	while (i < WIDTH)
 	{
 		cell_impact(data, &player->ray[i]);
+		print_wall(data, &player->ray[i], i);
 		i++;
 	}
 }
