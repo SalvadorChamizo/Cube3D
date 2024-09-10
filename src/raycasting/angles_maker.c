@@ -6,7 +6,7 @@
 /*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 20:00:47 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/10 11:56:18 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/10 15:36:12 by saroca-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,9 @@ void	cell_impact(t_data *data, t_ray *ray)
 		ray->distance = sqrt(pow((ray->hit - ray->posX), 2) + pow((ray->mapY - ray->posY), 2));
 	else
 		ray->distance = sqrt(pow((ray->hit - ray->posX), 2) + pow(((ray->mapY + 1) - ray->posY), 2));
-	ray->pixel_distance = ray->distance * 64;
+	
+	//curar hojos de pez
+	//ray->distance = ray->distance / cos(ray->angle - data->player.angle);
 }
 
 void	print_ray(t_data *data, t_player *player)

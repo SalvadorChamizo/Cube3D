@@ -6,7 +6,7 @@
 /*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 10:48:12 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/10 10:39:25 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/10 12:07:38 by saroca-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,7 @@ void    print_wall(t_data *data, t_ray *ray, int x)
 
 	(void)color;
 	i = 0;
-	wall_size = (WALL_SIZE /ray->distance);
-	//wall_size = (HEIGHT / ray->distance);
+	wall_size = (HEIGHT / ray->distance);
 	first_pixel = ((HEIGHT / 2) - (wall_size / 2));
 	if (first_pixel < 0)
 		first_pixel = 0;
@@ -66,12 +65,12 @@ void    print_wall(t_data *data, t_ray *ray, int x)
 				printf(GREEN);
 			else if (x == 1919)
 				printf(BLUE);
-			printf("posX = %f\tposY = %f\n",ray->posX, ray->posY);
-			printf("mapX = %d\tmapY = %d\n", ray->mapX, ray->mapY);
-			printf("hit = %f\n", ray->hit);
+			//printf("posX = %f\tposY = %f\n",ray->posX, ray->posY);
+			//printf("mapX = %d\tmapY = %d\n", ray->mapX, ray->mapY);
+			//printf("hit = %f\n", ray->hit);
 			//printf("x = %f\ty = %f\n", data->player.pos_x, data->player.pos_y);
-			printf("ray->angle = %f\n", ray->angle);
-			printf("ray->distance = %f\n", ray->distance);
+			//printf("ray->angle = %f\n", ray->angle);
+			//printf("ray->distance = %f\n", ray->distance);
 			//printf("ray_pixel_distance = %d\n", ray->pixel_distance);
 			//printf("wall_size = %f\n", wall_size);
 			//printf("first_pixel = %d\n", first_pixel);
