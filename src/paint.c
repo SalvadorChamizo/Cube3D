@@ -6,11 +6,12 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 17:35:37 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/06 12:59:17 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/09 12:54:30 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
+
 
 int paint_floor_ceiling(t_data *data)
 {

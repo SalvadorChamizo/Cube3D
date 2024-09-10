@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
+/*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:25:53 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/06 17:42:52 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/09 12:56:47 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	main(int argc, char **argv)
 	}
 	find_player_position(&data, data.map.map);
 	paint_floor_ceiling(&data);
-	painting_everything(&data);
+	ft_game(&data);
 	mlx_loop(data.mlx);
 	mlx_terminate(data.mlx);
 	ft_free_split(data.map.map);
