@@ -6,7 +6,7 @@
 /*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 20:00:47 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/10 10:16:03 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/10 11:56:18 by saroca-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,13 +74,9 @@ void	dda_bucle(t_data *data, t_ray *ray)
 
 void	cell_impact(t_data *data, t_ray *ray)
 {
-	double	screen_desplace;
-	int		screen_distance;
-
 	ray_var_init(data, ray);
 	sidedist(data, ray);
 	dda_bucle(data, ray);
-	screen_desplace = 0.5;
 	if (ray->flag == 0)
 		ray->hit = ray->posY + (ray->perpWallDist * ray->rayDirY);
 	else
@@ -89,12 +85,14 @@ void	cell_impact(t_data *data, t_ray *ray)
 		ver_pixel_impact(ray);
 	else
 		hor_pixel_impact(ray);
-	if (ray->flag == 0)
-		ray->distance = sqrt(pow((ray->posX - ray->mapX), 2) + pow((ray->posY - ray->hit), 2));
+	if (ray->flag == 0 && ray->rayDirX > 0)
+		ray->distance = sqrt(pow((ray->mapX - ray->posX), 2) + pow((ray->hit - ray->posY), 2));
+	else if (ray->flag == 0 && ray->rayDirX < 0)
+		ray->distance = sqrt(pow(((ray->mapX + 1) - ray->posX), 2) + pow((ray->hit - ray->posY), 2));
+	else if ( ray->flag == 1 && ray->rayDirY > 0)
+		ray->distance = sqrt(pow((ray->hit - ray->posX), 2) + pow((ray->mapY - ray->posY), 2));
 	else
-		ray->distance = sqrt(pow((ray->posX - ray->hit), 2) + pow((ray->posY - ray->mapY), 2));
-	//screen_distance = screen_desplace / (cos(ray->angle - data->player.angle));
-	//ray->distance = fabs(ray->distance - screen_distance);
+		ray->distance = sqrt(pow((ray->hit - ray->posX), 2) + pow(((ray->mapY + 1) - ray->posY), 2));
 	ray->pixel_distance = ray->distance * 64;
 }
 
