@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 17:35:37 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/09 12:54:30 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/10 12:05:07 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int paint_floor_ceiling(t_data *data)
     return (SUCCESS);
 }
 
-uint32_t	get_wall_color(t_data *data, double wall_pos_x, double wall_pos_y)
+/*uint32_t	get_wall_color(t_data *data, double wall_pos_x, double wall_pos_y)
 {
 	//North wall
 	if (wall_pos_y > data->player.pos_y)
@@ -50,9 +50,9 @@ uint32_t	get_wall_color(t_data *data, double wall_pos_x, double wall_pos_y)
 		return (119999);
 	else
 		return (0x33333388);
-}
+}*/
 
-void	paint_column(t_data *data, int j)
+/*void	paint_column(t_data *data, int j)
 {
 	uint32_t	wall_color;
 	int	i;
@@ -78,4 +78,4 @@ int	painting_everything(t_data *data)
 		i++;
 	}
 	return (SUCCESS);
-}
+}*/

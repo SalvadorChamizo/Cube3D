@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_wall.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
+/*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 10:48:12 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/10 10:39:25 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/10 12:18:22 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,31 @@ uint32_t	get_pixel_color(t_data *data, t_ray *ray, int z)
 	return (pack_rgba(rgba));
 }
 
+uint32_t	get_wall_color(t_data *data, t_ray *ray)
+{
+	//North wall
+	(void)data;
+	if (ray->flag == 0)
+	{
+		if (ray->rayDirX > 0)
+		{
+			return (0x772233FF);
+		}
+		if (ray->rayDirX < 0)
+			return (0x461713FF);
+	}
+	else if (ray->flag == 1)
+	{
+		if (ray->rayDirY > 0)
+			return (0x114356FF);
+		if (ray->rayDirY < 0)
+		return (0x119999FF);
+	}
+	else
+		return (0x33333388);
+	return (0x33333388);
+}
+
 void    print_wall(t_data *data, t_ray *ray, int x)
 {
 	double 		wall_size;
@@ -48,9 +73,8 @@ void    print_wall(t_data *data, t_ray *ray, int x)
 	int 		i;
 	int			first_pixel;
 
-	(void)color;
 	i = 0;
-	wall_size = (WALL_SIZE /ray->distance);
+	wall_size = (WIDTH / ray->distance);
 	//wall_size = (HEIGHT / ray->distance);
 	first_pixel = ((HEIGHT / 2) - (wall_size / 2));
 	if (first_pixel < 0)
@@ -58,7 +82,7 @@ void    print_wall(t_data *data, t_ray *ray, int x)
 	while(i < HEIGHT)
 	{
 		//color = get_pixel_color(data, ray, (WALL_SIZE / wall_size) * i);
-		if (i == 640 && (x == 0 || x == 960 || x == 1919))
+		/*if (i == 640 && (x == 0 || x == 960 || x == 1919))
 		{
 			if (x == 0)
 				printf(RED);
@@ -75,13 +99,14 @@ void    print_wall(t_data *data, t_ray *ray, int x)
 			//printf("ray_pixel_distance = %d\n", ray->pixel_distance);
 			//printf("wall_size = %f\n", wall_size);
 			//printf("first_pixel = %d\n", first_pixel);
-		}
+		}*/
+		color = get_wall_color(data, ray);
 		if (i >= first_pixel && i < first_pixel + wall_size)
 		{
 			if (x >= 950  && x <= 970)
 				mlx_put_pixel(data->board, x,  i, 255);
 			else
-				mlx_put_pixel(data->board, x,  i, 1077690623);
+				mlx_put_pixel(data->board, x,  i, color);
 		}
 		i++;
 	}
