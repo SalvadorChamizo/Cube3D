@@ -6,7 +6,7 @@
 /*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 19:41:06 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/09 12:41:58 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/12 09:43:04 by saroca-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	map_size(t_map *map)
 	{
 		if ((int)ft_strlen(map->map[i]) > j)
 			j = ft_strlen(map->map[i]);
-		//printf("map[%d] = %s\n", i, map->map[i]);
 		i++;
 	}
 	map->map_size_x = j;
@@ -125,22 +124,3 @@ void	ft_game(t_data *data)
 	mlx_loop_hook(data->mlx, ft_hook, data);
 	mlx_loop(data->mlx);
 }
-
-/*	paint_floor_ceiling(&data);
-	painting_everything(&data);*/
-
-/*void	ft_game(t_data *data)
-{
-	map_size(&data->map);
-	find_player_position(data, data->map.map);
-	data->mlx = mlx_init(WIDTH, HEIGHT, "Cube3d", true);
-	mini_imagen_init(&data->mini, data);
-	print_mini_map(data);
-	data->board = mlx_new_image(data->mlx, data->map.map_size_x * 64, \
-		data->map.map_size_y * 64);
-	mlx_image_to_window(data->mlx, data->board, 0, 0);
-	mlx_image_to_window(data->mlx, data->mini.minipoint, (data->player.pos_x \
-		* 64) - 16, (data->player.pos_y * 64) - 16);
-	mlx_loop_hook(data->mlx, ft_hook, data);
-	mlx_loop(data->mlx);
-}*/

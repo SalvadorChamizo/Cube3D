@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:26:26 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/10 11:54:01 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/11 12:42:32 by saroca-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ typedef  struct  s_line
 typedef struct s_ray
 {
 	double 		angle;
+	double		angle_ret;
 	int			mapX;
 	int			mapY;
 	double 		posX;
@@ -99,8 +100,8 @@ typedef struct s_ray
 	double		pixel_width_impact;
 	int			flag;
 	double 		hit;
-	double		distance;
-	int			pixel_distance;
+	double		hip_distance;
+	double		ver_distance;
 	int			difx; //minimapa
 	int			dify; //minimapa
 	double		xincrement; //minimapa

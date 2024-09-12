@@ -6,7 +6,7 @@
 /*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 10:48:12 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/10 15:40:34 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/12 11:50:35 by saroca-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,38 +74,36 @@ void    print_wall(t_data *data, t_ray *ray, int x)
 	int			first_pixel;
 
 	i = 0;
-	wall_size = (HEIGHT / ray->distance);
+	if (ray->hip_distance < ray->ver_distance)
+		wall_size = (HEIGHT / ray->hip_distance);
+	else
+		wall_size = (HEIGHT / ray->ver_distance); 
 	first_pixel = ((HEIGHT / 2) - (wall_size / 2));
 	if (first_pixel < 0)
 		first_pixel = 0;
 	while(i < HEIGHT)
 	{
-		//color = get_pixel_color(data, ray, (WALL_SIZE / wall_size) * i);
-		/*if (i == 640 && (x == 0 || x == 960 || x == 1919))
+		if (i == 640 && (x == 490 || x == 960 || x == 1350))
 		{
-			if (x == 0)
-				printf(RED);
+			if (x == 490)
+				printf(RED"Izquierda\n");
 			else if (x == 960)
-				printf(GREEN);
-			else if (x == 1919)
-				printf(BLUE);
-			//printf("posX = %f\tposY = %f\n",ray->posX, ray->posY);
-			//printf("mapX = %d\tmapY = %d\n", ray->mapX, ray->mapY);
-			//printf("hit = %f\n", ray->hit);
-			//printf("x = %f\ty = %f\n", data->player.pos_x, data->player.pos_y);
-			//printf("ray->angle = %f\n", ray->angle);
-			//printf("ray->distance = %f\n", ray->distance);
-			//printf("ray_pixel_distance = %d\n", ray->pixel_distance);
-			//printf("wall_size = %f\n", wall_size);
-			//printf("first_pixel = %d\n", first_pixel);
-		}*/
+				printf(GREEN"Centro\n");
+			else if (x == 1350)
+				printf(BLUE"Derecha\n");
+			printf("ray->angle = %f\n", ray->angle);
+			printf("data->player.angle = %f\n", data->player.angle * (M_PI / 180));
+			printf("ray->hip_distance = %f\n", ray->hip_distance);
+			printf("ray->ver_distance = %f\n", ray->ver_distance);
+			printf("wall_size = %f\n", wall_size);
+			printf("first_pixel = %d\n", first_pixel);
+		}
 		color = get_wall_color(data, ray);
 		if (i >= first_pixel && i < first_pixel + wall_size)
 		{
-			if (x >= 950  && x <= 970)
-				mlx_put_pixel(data->board, x,  i, 255);
-			else
-				mlx_put_pixel(data->board, x,  i, color);
+			//if (x >= 950  && x <= 970)
+			//	mlx_put_pixel(data->board, x,  i, 255);
+			mlx_put_pixel(data->board, x,  i, color);
 		}
 		i++;
 	}

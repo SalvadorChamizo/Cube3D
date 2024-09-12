@@ -6,7 +6,7 @@
 /*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 14:57:27 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/06 17:40:11 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/11 12:43:24 by saroca-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	ray_init(t_data *data)
 	while (i < WIDTH)
 	{
 		data->player.ray[i].angle = angle_rad - (fov_rad / 2) + ((fov_rad / WIDTH) * i);
+		data->player.ray[i].angle_ret = data->player.ray[i].angle;
 		if (data->player.ray[i].angle < 0)
 			data->player.ray[i].angle += 2 * M_PI;
 		i++;
