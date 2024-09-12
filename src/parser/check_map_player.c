@@ -6,7 +6,7 @@
 /*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 16:03:54 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/06 17:37:29 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/12 18:01:06 by saroca-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ int	check_players_in_map(char **map)
 
 void	find_player_position(t_data *data, char **map)
 {
-	int	i;
-	int	j;
-	char c;
+	int		i;
+	int		j;
+	char	c;
 
 	i = 0;
 	while (map[i])

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_wall.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 10:48:12 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/12 15:59:19 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/12 19:11:37 by saroca-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,21 @@ uint32_t	pack_rgba(uint8_t pixels[4])
 	return (color);
 }
 
-uint32_t	get_pixel_color(double ratio_x, double wall_size, mlx_texture_t *texture)
+uint32_t	get_pixel_color(double ratio_x, \
+	double wall_size, mlx_texture_t *texture)
 {
 	uint32_t		index;
 	uint8_t			rgba[4];
 	unsigned int	i;
 
-	//printf("%f\n%f\n", ratio_x, wall_size);
 	if (!texture || !texture->pixels || ratio_x >= 1 || wall_size >= 1)
 		return (0);
 	index = ((uint32_t)(texture->height * wall_size) * texture->width
 			+ (uint32_t)(texture->width * ratio_x)) * texture->bytes_per_pixel;
-    if (index + 3 >= texture->width * texture->height * texture->bytes_per_pixel)
+	if (index + 3 >= texture->width * texture->height \
+		* texture->bytes_per_pixel)
 	{
-        return 0; // Ensure the index is within bounds
+		return (0);
 	}
 	i = 0;
 	while (i < 4)
@@ -50,38 +51,36 @@ uint32_t	get_pixel_color(double ratio_x, double wall_size, mlx_texture_t *textur
 
 uint32_t	get_wall_color(t_data *data, t_ray *ray, double wall_size)
 {
-	//North wall
-	(void)data;
 	uint32_t	color;
-	//printf("%f\n", wall_size);
+
 	if (ray->flag == 0)
 	{
 		if (ray->rayDirX > 0)
 		{
-			color = get_pixel_color(ray->hit - (int)ray->hit, wall_size, data->textures.no_texture);
+			color = get_pixel_color(ray->hit - \
+				(int)ray->hit, wall_size, data->textures.no_texture);
 			return (color);
-			//return (0x772233FF);
 		}
 		if (ray->rayDirX < 0)
 		{
-			color = get_pixel_color(ray->hit - (int)ray->hit, wall_size, data->textures.so_texture);
+			color = get_pixel_color(ray->hit - \
+				(int)ray->hit, wall_size, data->textures.so_texture);
 			return (color);
-			//return (0x461713FF);
 		}
 	}
 	else if (ray->flag == 1)
 	{
 		if (ray->rayDirY > 0)
 		{
-			color = get_pixel_color(ray->hit - (int)ray->hit, wall_size, data->textures.we_texture);
+			color = get_pixel_color(ray->hit - \
+				(int)ray->hit, wall_size, data->textures.we_texture);
 			return (color);
-			//return (0x114356FF);
 		}
 		if (ray->rayDirY < 0)
 		{
-			color = get_pixel_color(ray->hit - (int)ray->hit, wall_size, data->textures.ea_texture);
+			color = get_pixel_color(ray->hit - \
+				(int)ray->hit, wall_size, data->textures.ea_texture);
 			return (color);
-			//return (0x119999FF);
 		}
 	}
 	else
@@ -89,31 +88,33 @@ uint32_t	get_wall_color(t_data *data, t_ray *ray, double wall_size)
 	return (0x33333388);
 }
 
-void    print_wall(t_data *data, t_ray *ray, int x)
+void	print_wall(t_data *data, t_ray *ray, int x)
 {
-	double 		wall_size;
+	double		wall_size;
 	uint32_t	color;
-	int 		i;
+	int			i;
 	int			first_pixel;
-	int			save_pixel = 0;
+	int			save_pixel;
 
 	i = 0;
+	save_pixel = 0;
 	if (ray->hip_distance < ray->ver_distance)
 		wall_size = (WIDTH / ray->hip_distance);
 	else
-		wall_size = (WIDTH / ray->ver_distance); 
+		wall_size = (WIDTH / ray->ver_distance);
 	first_pixel = ((HEIGHT / 2) - (wall_size / 2));
 	if (first_pixel < 0)
 	{
 		save_pixel = -first_pixel;
 		first_pixel = 0;
 	}
-	while(i < HEIGHT)
+	while (i < HEIGHT)
 	{
 		if (i > first_pixel && i < HEIGHT - 1)
 		{
-			color = get_wall_color(data, ray, (i - first_pixel + save_pixel) / wall_size);
-			mlx_put_pixel(data->board, x,  i, color);
+			color = get_wall_color(data, ray, \
+				(i - first_pixel + save_pixel) / wall_size);
+			mlx_put_pixel(data->board, x, i, color);
 		}
 		i++;
 	}

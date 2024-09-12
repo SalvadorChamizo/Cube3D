@@ -6,7 +6,7 @@
 /*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:26:26 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/11 12:42:32 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/12 17:58:45 by saroca-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,7 @@ typedef struct s_data
 	t_texture	textures;
 	t_player	player;
 	int			ray_number;
+	int			move;
 }	t_data;
 
 //parser
@@ -262,6 +263,7 @@ void	print_ray(t_data *data, t_player *player);
 //game_utils
 
 void	find_player_position(t_data *data, char **map);
+void	ray_var_init(t_data *data, t_ray *ray);
 void	ray_init(t_data *data);
 void	ver_pixel_impact(t_ray *ray);
 void	hor_pixel_impact(t_ray *ray);
