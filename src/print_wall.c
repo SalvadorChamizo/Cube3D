@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 10:48:12 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/12 12:24:41 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/12 15:59:19 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,11 @@ uint32_t	get_pixel_color(double ratio_x, double wall_size, mlx_texture_t *textur
 	if (!texture || !texture->pixels || ratio_x >= 1 || wall_size >= 1)
 		return (0);
 	index = ((uint32_t)(texture->height * wall_size) * texture->width
-			+ (uint32_t)(texture->width * ratio_x))
-		* texture->bytes_per_pixel;
+			+ (uint32_t)(texture->width * ratio_x)) * texture->bytes_per_pixel;
+    if (index + 3 >= texture->width * texture->height * texture->bytes_per_pixel)
+	{
+        return 0; // Ensure the index is within bounds
+	}
 	i = 0;
 	while (i < 4)
 	{
@@ -92,21 +95,24 @@ void    print_wall(t_data *data, t_ray *ray, int x)
 	uint32_t	color;
 	int 		i;
 	int			first_pixel;
+	int			save_pixel = 0;
 
 	i = 0;
 	if (ray->hip_distance < ray->ver_distance)
-		wall_size = (HEIGHT / ray->hip_distance);
+		wall_size = (WIDTH / ray->hip_distance);
 	else
-		wall_size = (HEIGHT / ray->ver_distance); 
+		wall_size = (WIDTH / ray->ver_distance); 
 	first_pixel = ((HEIGHT / 2) - (wall_size / 2));
 	if (first_pixel < 0)
+	{
+		save_pixel = -first_pixel;
 		first_pixel = 0;
+	}
 	while(i < HEIGHT)
 	{
-		if (i > first_pixel && i < first_pixel + wall_size)
+		if (i > first_pixel && i < HEIGHT - 1)
 		{
-			//printf("%f\n", wall_size);
-			color = get_wall_color(data, ray, (i - first_pixel) / wall_size);
+			color = get_wall_color(data, ray, (i - first_pixel + save_pixel) / wall_size);
 			mlx_put_pixel(data->board, x,  i, color);
 		}
 		i++;

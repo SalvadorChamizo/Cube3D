@@ -1,6 +1,6 @@
-NO ./textures/concrete_no.png
-SO ./textures/concrete_so.png
-WE ./textures/metal_we.png
+NO ./textures/castle-wall.png
+SO ./textures/castle-poland.png
+WE ./textures/castle-poland-squares.png
 EA ./textures/metal_ea.png
 
 F 0, 51, 99

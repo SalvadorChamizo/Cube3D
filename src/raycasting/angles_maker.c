@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 20:00:47 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/12 12:27:35 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/12 12:29:06 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ void   get_ver_distance(t_data *data, t_ray *ray, int i)
 		dif_angle = 2 * M_PI - dif_angle;
 	//double adjusted_angle = fabs(M_PI / 2 - dif_angle);
 	if (i == 490 || i == 960 || i == 1350)
-		printf("dif_angle = %f\n", dif_angle);
 	ray->ver_distance = ray->hip_distance * cos(dif_angle);
     if (ray->ver_distance < 0.0001)
         ray->ver_distance = 9999999999999.0;
