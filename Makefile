@@ -29,13 +29,13 @@ FILES =	main \
 		raycasting/angles_maker \
 		raycasting/angles_maker_utils \
 		raycasting/ray \
-		textures \
-		paint \
-		game \
-		game_move \
-		game_check_move \
-		print_ray \
-		print_wall \
+		game/game \
+		game/game_move \
+		game/game_check_move \
+		print_and_textures/textures \
+		print_and_textures/paint \
+		print_and_textures/print_ray \
+		print_and_textures/print_wall \
 
 BNS_FILES = main_bonus \
 
@@ -43,6 +43,7 @@ $(shell mkdir -p ./src/obj)
 $(shell mkdir -p ./src/obj/parser)
 $(shell mkdir -p ./src/obj/raycasting)
 $(shell mkdir -p ./src/obj/game)
+$(shell mkdir -p ./src/obj/print_and_textures)
 $(shell mkdir -p ./src/obj/charge_flag_makefile)
 $(shell mkdir -p ./bonus/src_bonus/obj)
 
