@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 20:00:47 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/11 16:28:35 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/12 12:27:35 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,26 @@ void	dda_bucle(t_data *data, t_ray *ray)
 			(1 - ray->stepY) / 2) / ray->rayDirY;
 }
 
-void	cell_impact(t_data *data, t_ray *ray)
+void   get_ver_distance(t_data *data, t_ray *ray, int i)
+{
+	double	player_angle;	
+	double	dif_angle;
+
+	player_angle = data->player.angle * (M_PI / 180);
+	dif_angle = fabs(ray->angle_ret - player_angle);
+	if (dif_angle > M_PI)
+		dif_angle = 2 * M_PI - dif_angle;
+	//double adjusted_angle = fabs(M_PI / 2 - dif_angle);
+	if (i == 490 || i == 960 || i == 1350)
+		printf("dif_angle = %f\n", dif_angle);
+	ray->ver_distance = ray->hip_distance * cos(dif_angle);
+    if (ray->ver_distance < 0.0001)
+        ray->ver_distance = 9999999999999.0;
+}
+
+//jesumore  meter en slack
+
+void	cell_impact(t_data *data, t_ray *ray, int i)
 {
 	ray_var_init(data, ray);
 	sidedist(data, ray);
@@ -88,14 +107,14 @@ void	cell_impact(t_data *data, t_ray *ray)
 	else
 		hor_pixel_impact(ray);
 	if (ray->flag == 0 && ray->rayDirX > 0)
-		ray->distance = sqrt(pow((ray->mapX - ray->posX), 2) + pow((ray->hit - ray->posY), 2));
+		ray->hip_distance = sqrt(pow((ray->mapX - ray->posX), 2) + pow((ray->hit - ray->posY), 2));
 	else if (ray->flag == 0 && ray->rayDirX < 0)
-		ray->distance = sqrt(pow(((ray->mapX + 1) - ray->posX), 2) + pow((ray->hit - ray->posY), 2));
+		ray->hip_distance = sqrt(pow(((ray->mapX + 1) - ray->posX), 2) + pow((ray->hit - ray->posY), 2));
 	else if ( ray->flag == 1 && ray->rayDirY > 0)
-		ray->distance = sqrt(pow((ray->hit - ray->posX), 2) + pow((ray->mapY - ray->posY), 2));
+		ray->hip_distance = sqrt(pow((ray->hit - ray->posX), 2) + pow((ray->mapY - ray->posY), 2));
 	else
-		ray->distance = sqrt(pow((ray->hit - ray->posX), 2) + pow(((ray->mapY + 1) - ray->posY), 2));
-	ray->pixel_distance = ray->distance * 64;
+		ray->hip_distance = sqrt(pow((ray->hit - ray->posX), 2) + pow(((ray->mapY + 1) - ray->posY), 2));
+	get_ver_distance(data, ray, i);
 }
 
 void	print_ray(t_data *data, t_player *player)
@@ -106,8 +125,7 @@ void	print_ray(t_data *data, t_player *player)
 	i = 0;
 	while (i < WIDTH)
 	{
-		cell_impact(data, &player->ray[i]);
-		//get_wall_color(data, &player->ray[i], i);
+		cell_impact(data, &player->ray[i], i);
 		print_wall(data, &player->ray[i], i);
 		i++;
 	}

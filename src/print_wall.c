@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 10:48:12 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/12 12:13:17 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/12 12:24:41 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,10 @@ void    print_wall(t_data *data, t_ray *ray, int x)
 	int			first_pixel;
 
 	i = 0;
-	wall_size = (WIDTH / ray->distance);
-	//wall_size = (HEIGHT / ray->distance);
+	if (ray->hip_distance < ray->ver_distance)
+		wall_size = (HEIGHT / ray->hip_distance);
+	else
+		wall_size = (HEIGHT / ray->ver_distance); 
 	first_pixel = ((HEIGHT / 2) - (wall_size / 2));
 	if (first_pixel < 0)
 		first_pixel = 0;
