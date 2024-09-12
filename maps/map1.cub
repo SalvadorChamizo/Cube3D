@@ -1,10 +1,10 @@
 NO ./textures/castle-wall.png
-SO ./textures/castle-poland.png
+SO ./textures/sergio_foto.png
 WE ./textures/castle-poland-squares.png
-EA ./textures/metal_ea.png
+EA ./textures/ivan_foto.png
 
-F 0, 51, 99
-C 180, 127, 127
+C 0, 80, 120
+F 150, 180, 127
 
 111111111111
 100000000001
