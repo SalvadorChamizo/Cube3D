@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   angles_maker.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
+/*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 20:00:47 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/10 11:56:18 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/11 16:28:35 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	get_wall_color(t_data *data, t_ray *ray, int x);
 
 void	ray_var_init(t_data *data, t_ray *ray)
 {
@@ -105,6 +107,7 @@ void	print_ray(t_data *data, t_player *player)
 	while (i < WIDTH)
 	{
 		cell_impact(data, &player->ray[i]);
+		//get_wall_color(data, &player->ray[i], i);
 		print_wall(data, &player->ray[i], i);
 		i++;
 	}
