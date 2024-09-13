@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 16:03:54 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/13 11:31:45 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/13 19:35:30 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,6 @@ void	find_player_position(t_data *data, char **map)
 		}
 		i++;
 	}
-	angle_select(data, c);
+	set_player_angle(data, c);
 	ray_init(data);
 }

@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:26:26 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/13 16:19:18 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/13 19:52:08 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@
 # define WIDTH 1920
 # define HEIGHT 1280
 # define FOV 60
-# define WALL_SIZE (HEIGHT / 2)
+# define WALL_SIZE 640
 
 typedef struct s_texture
 {
@@ -70,37 +70,37 @@ typedef struct s_point
 	int	y;
 }	t_point;
 
-typedef  struct  s_line
+typedef struct s_line
 {
-	int  x; //the x coordinate of line relative to screen
-	int  y; //the current pixel index of the line (along y axis)
-	int  y0; //y start index of drawing texture
-	int  y1; //y end index of drawing texture
-	int  tex_x; //x coordinate of texture to draw
-	int  tex_y; //y coordinate of texture to draw
-} t_line;
+	int	x; //the x coordinate of line relative to screen
+	int	y; //the current pixel index of the line (along y axis)
+	int	y0; //y start index of drawing texture
+	int	y1; //y end index of drawing texture
+	int	tex_x; //x coordinate of texture to draw
+	int	tex_y; //y coordinate of texture to draw
+}	t_line;
 
 typedef struct s_ray
 {
-	double 		angle;
+	double		angle;
 	double		angle_ret;
-	int			mapX;
-	int			mapY;
-	double 		posX;
-	double 		posY;
-	double		rayDirX;
-	double		rayDirY;
-	double		DeltaDistX;
-	double		DeltaDistY;
-	double		stepX;
-	double		stepY;
-	double		sideDistX;
-	double		sideDistY;
-	double		perpWallDist;
+	int			map_x;
+	int			map_y;
+	double		pos_x;
+	double		pos_y;
+	double		ray_dir_x;
+	double		ray_dir_y;
+	double		delta_dist_x;
+	double		delta_dist_y;
+	double		step_x;
+	double		step_y;
+	double		side_dist_x;
+	double		side_dist_y;
+	double		perp_wall_dist;
 	double		pixel_width_impact;
 	int			flag;
-	double 		hit;
-	double		hip_distance;
+	double		hit;
+	double		hyp_distance;
 	double		ver_distance;
 }	t_ray;
 
@@ -114,7 +114,6 @@ typedef struct s_player
 	t_ray	ray[WIDTH];
 }	t_player;
 
-
 typedef struct s_map
 {
 	char	**map;
@@ -125,41 +124,52 @@ typedef struct s_map
 
 typedef struct s_data
 {
-	mlx_t		*mlx;
-	mlx_image_t	*screen;
-	mlx_image_t	*board;
-	mlx_texture_t	*test;
-	t_map		map;
-	t_texture	textures;
-	t_player	player;
-	int			ray_number;
-	int			move;
-	char		*file;
+	char			*file;
+	mlx_t			*mlx;
+	mlx_image_t		*background;
+	mlx_image_t		*board;
+	t_map			map;
+	t_texture		textures;
+	t_player		player;
+	int				ray_number;
+	int				move;
 }	t_data;
+
+/* --------------------------GAME------------------------------- */
+
+//game
+
+void		image_init(t_data *data, mlx_image_t **image);
+void		ft_hook(void *param);
+void		game_init(t_data *data);
+void		ft_game(t_data *data);
+
+//game_move
+
+void		handle_player_movement(t_data *data);
+void		handle_player_rotation(t_data *data);
+void		move_player_by_angle(t_data *data, double angle);
+void		adjust_angle(double *angle, double var);
+
+//game_check_move
+
+bool		check_borders(t_data *data, double move_x, double move_y);
+bool		check_cell_move(t_data *data, double move_x, double move_y);
 
 /* --------------------------PARSER------------------------------- */
 
 //parser
 
 int			parse_map(char *file, t_data *data);
+int			check_map_is_valid(t_data *data);
 
-//get_texture_utils
+//parser_errors
 
-int		count_missing_identifier(t_data *data);
-void	set_new_fd(t_data *data, int cont, int *fd);
-
-//get_map
-
-int			get_map(t_data *data, int fd);
-char		*get_map_loop(char *line, int fd);
-int			get_map_error_and_split(t_data *data, char *map);
-int			check_extra_line(char *map);
-int			check_invalid_character(char c);
-
-//get_map_utils
-
-char		*ft_strjoin_safe(char *s1, char *s2);
-char		*ft_strtrim_safe(char *s1, char *s2);
+void		print_error(char *str);
+void		error_invalid_char(char **map, int line, int pos);
+void		print_border_error(int line, int flag);
+void		print_invalid_space_error(int line, int pos);
+void		rgb_error_not_number(char **color, int i, int j, int line);
 
 //get_texture
 
@@ -167,42 +177,25 @@ int			get_texture_data(t_data *data, int *error_flag, int *fd);
 int			get_wall_textures(t_data *data, int *fd, int *error_flag);
 int			get_line_and_split(char ***split_line, int fd);
 int			check_texture(t_data *data, char **path, int *cont, int line);
-int			check_missing_identifier(t_data *data, int *fd, int cont);
-void		ft_load_textures(t_data *data);
+void		check_missing_identifier(t_data *data, int *fd, int cont);
 
-//check_map_player
+//get_texture_utils
 
-int			count_players_in_map(char **map);
-int			check_players_in_map(char **map);
-void		find_player_position(t_data *data, char **map);
+int			count_missing_identifier(t_data *data);
+void		set_new_fd(t_data *data, int cont, int *fd);
 
-//check_map_borders
+//get_map
 
-int			check_side_walls(char **map);
-int			check_left_wall(char *line);
-int			check_right_wall(char *line);
-int			check_first_line(char **map);
-int			check_last_line(char **map, int last_line);
+int			get_map(t_data *data, int fd);
+char		*get_map_loop(char *line, int fd);
+int			get_map_error_and_split(t_data *data, char *map);
+int			check_extra_line(char *map);
 
-//check_map_spaces
+//get_map_utils
 
-int			check_if_valid_spaces(char **map);
-int			check_up_down_space(char **map, int i, int j, int flag);
-int			check_left_right_space(char **map, int i, int j, int flag);
-
-int			check_map_is_valid(t_data *data);
-int			check_map_is_closed(t_data *data);
-int			check_middle_lines(char **map);
-int			check_invalid_character(char c);
-int			check_first_last_line(t_data *data, char **map);
-
-//check_map
-
-int			check_map_extension(char *file, int *error_flag);
-int			check_first_last_line(t_data *data, char **map);
-int			check_invalid_character(char c);
-int			check_middle_lines(char **map);
-int			check_map_is_closed(t_data *data);
+char		*ft_strjoin_safe(char *s1, char *s2);
+char		*ft_strtrim_safe(char *s1, char *s2);
+void		map_size(t_map *map);
 
 //check_utils
 
@@ -227,10 +220,58 @@ uint32_t	get_color_rgb_four_args(char **path);
 void		error_rgb_value(char **path, int r, int g, int b);
 int			check_rgb_are_numbers(char **color, int line);
 
-//paint
+//check_map
 
-int			paint_floor_ceiling(t_data *data);
-int			painting_everything(t_data *data);
+int			check_map_extension(char *file, int *error_flag);
+int			check_first_last_line(t_data *data, char **map);
+int			check_invalid_character(char c);
+int			check_middle_lines(char **map);
+int			check_map_is_closed(t_data *data);
+
+//check_map_spaces
+
+int			check_if_valid_spaces(char **map);
+int			check_up_down_space(char **map, int i, int j, int flag);
+int			check_left_right_space(char **map, int i, int j, int flag);
+
+//check_map_player
+
+int			count_players_in_map(char **map);
+int			check_players_in_map(char **map);
+void		find_player_position(t_data *data, char **map);
+
+//check_map_borders
+
+int			check_side_walls(char **map);
+int			check_left_wall(char *line);
+int			check_right_wall(char *line);
+int			check_first_line(char **map);
+int			check_last_line(char **map, int last_line);
+
+/* --------------------------RAYCASTING--------------------------- */
+
+//ray
+
+void		set_player_angle(t_data *data, char c);
+void		ray_init(t_data *data);
+
+//angles_maker
+
+void		calculate_side_distance(t_data *data, t_ray *ray);
+void		calculate_vertical_distance(t_data *data, t_ray *ray);
+void		dda_loop(t_data *data, t_ray *ray);
+void		find_ray_hit_point(t_data *data, t_ray *ray);
+void		print_ray(t_data *data, t_player *player);
+
+//angles_maker_utils
+
+void		ver_pixel_impact(t_ray *ray);
+void		hor_pixel_impact(t_ray *ray);
+void		init_ray_variables(t_data *data, t_ray *ray);
+void		calculate_hypotenuse_distance(t_ray *ray);
+
+
+/* ------------------------PRINT_AND_TEXTURES------------------------ */
 
 //textures
 
@@ -239,31 +280,20 @@ void		add_path_to_texture_2(t_data *data, char **path);
 void		ft_load_textures(t_data *data);
 void		free_textures_memory(t_data *data);
 
-//errors
+//print_wall
 
-void		print_error(char *str);
-void		error_invalid_char(char **map, int line, int pos);
-void		print_border_error(int line, int flag);
-void		print_invalid_space_error(int line, int pos);
-void		rgb_error_not_number(char **color, int i, int j, int line);
+uint32_t	get_pixel_color(double ratio_x, double wall_size, mlx_texture_t *texture);
+uint32_t	get_wall_color(t_data *data, t_ray *ray, double wall_size);
+void		print_wall_column(t_data *data, t_ray *ray, int x);
 
-//game
+//print_wall_utils
 
-bool	check_cell_move(t_data *data, double move_x, double move_y);
-void	ft_game(t_data *data);
-void	print_ray(t_data *data, t_player *player);
+double		get_wall_size(t_ray *ray);
+uint32_t	pack_rgba(uint8_t pixels[4]);
 
-//game_utils
+//print_floor_ceiling
 
-void	find_player_position(t_data *data, char **map);
-void	ray_var_init(t_data *data, t_ray *ray);
-void	ray_init(t_data *data);
-void	ver_pixel_impact(t_ray *ray);
-void	hor_pixel_impact(t_ray *ray);
-void	angle_move(t_data *data, double angle);
-void	angle_act(double *angle, double var);
-void	angle_select(t_data *data, char c);
-void	ray_init(t_data *data);
+int			paint_floor_ceiling(t_data *data);
 
 //printer
 void		print_one_ray(t_data *data, t_ray *ray);

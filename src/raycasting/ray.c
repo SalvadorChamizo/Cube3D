@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
+/*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 14:57:27 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/12 17:59:39 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/13 19:28:24 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-void	angle_select(t_data *data, char c)
+void	set_player_angle(t_data *data, char c)
 {
 	if (c == 'N')
 		data->player.angle = 270;

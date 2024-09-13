@@ -3,29 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   print_wall.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
+/*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 10:48:12 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/13 12:36:42 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/13 19:32:21 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-uint32_t	pack_rgba(uint8_t pixels[4])
-{
-	uint32_t	color;
-
-	color = 0;
-	color |= ((uint32_t)pixels[0] << 24);
-	color |= ((uint32_t)pixels[1] << 16);
-	color |= ((uint32_t)pixels[2] << 8);
-	color |= pixels[3];
-	return (color);
-}
-
 uint32_t	get_pixel_color(double ratio_x, \
-	double wall_size, mlx_texture_t *texture)
+double wall_size, mlx_texture_t *texture)
 {
 	uint32_t		index;
 	uint8_t			rgba[4];
@@ -50,20 +38,20 @@ uint32_t	get_wall_color(t_data *data, t_ray *ray, double wall_size)
 
 	if (ray->flag == 0)
 	{
-		if (ray->rayDirX > 0)
+		if (ray->ray_dir_x > 0)
 			color = get_pixel_color(ray->hit \
 				- (int)ray->hit, wall_size, data->textures.ea_texture);
-		if (ray->rayDirX < 0)
+		if (ray->ray_dir_x < 0)
 			color = get_pixel_color(ray->hit \
 				- (int)ray->hit, wall_size, data->textures.we_texture);
 		return (color);
 	}
 	else if (ray->flag == 1)
 	{
-		if (ray->rayDirY > 0)
+		if (ray->ray_dir_y > 0)
 			color = get_pixel_color(ray->hit \
 				- (int)ray->hit, wall_size, data->textures.so_texture);
-		if (ray->rayDirY < 0)
+		if (ray->ray_dir_y < 0)
 			color = get_pixel_color(ray->hit \
 				- (int)ray->hit, wall_size, data->textures.no_texture);
 		return (color);
@@ -71,7 +59,7 @@ uint32_t	get_wall_color(t_data *data, t_ray *ray, double wall_size)
 	return (0x33333388);
 }
 
-void	print_wall(t_data *data, t_ray *ray, int x)
+void	print_wall_column(t_data *data, t_ray *ray, int x)
 {
 	double		wall_size;
 	uint32_t	color;

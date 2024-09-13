@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 15:15:26 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/13 15:24:45 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/13 17:38:42 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	set_new_fd(t_data *data, int cont, int *fd)
 			print_error("Failed to open the map file. ");
 			ft_putstr_fd(strerror(errno), 2);
 			ft_putstr_fd("\n", 2);
-			return (FAILURE);
+			return ;
 		}
 		while (i <= cont - missing)
 		{

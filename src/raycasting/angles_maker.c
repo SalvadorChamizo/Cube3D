@@ -3,59 +3,57 @@
 /*                                                        :::      ::::::::   */
 /*   angles_maker.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
+/*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 20:00:47 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/12 20:09:55 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/13 19:35:13 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	get_wall_color(t_data *data, t_ray *ray, int x);
-
-void	sidedist(t_data *data, t_ray *ray)
+void	calculate_side_distance(t_data *data, t_ray *ray)
 {
-	if (ray->rayDirX > 0)
-		ray->sideDistX = (data->player.map_x + \
-			ray->stepX - data->player.pos_x) * ray->DeltaDistX;
+	if (ray->ray_dir_x > 0)
+		ray->side_dist_x = (data->player.map_x + \
+			ray->step_x - data->player.pos_x) * ray->delta_dist_x;
 	else
-		ray->sideDistX = (data->player.pos_x - \
-			data->player.map_x) * ray->DeltaDistX;
-	if (ray->rayDirY > 0)
-		ray->sideDistY = (data->player.map_y + \
-			ray->stepY - data->player.pos_y) * ray->DeltaDistY;
+		ray->side_dist_x = (data->player.pos_x - \
+			data->player.map_x) * ray->delta_dist_x;
+	if (ray->ray_dir_y > 0)
+		ray->side_dist_y = (data->player.map_y + \
+			ray->step_y - data->player.pos_y) * ray->delta_dist_y;
 	else
-		ray->sideDistY = (data->player.pos_y - \
-			data->player.map_y) * ray->DeltaDistY;
+		ray->side_dist_y = (data->player.pos_y - \
+			data->player.map_y) * ray->delta_dist_y;
 }
 
-void	dda_bucle(t_data *data, t_ray *ray)
+void	dda_loop(t_data *data, t_ray *ray)
 {
-	while (data->map.map[ray->mapY][ray->mapX] != '1')
+	while (data->map.map[ray->map_y][ray->map_x] != '1')
 	{
-		if (ray->sideDistX < ray->sideDistY)
+		if (ray->side_dist_x < ray->side_dist_y)
 		{
-			ray->sideDistX += ray->DeltaDistX;
-			ray->mapX += ray->stepX;
+			ray->side_dist_x += ray->delta_dist_x;
+			ray->map_x += ray->step_x;
 			ray->flag = 0;
 		}
 		else
 		{
-			ray->sideDistY += ray->DeltaDistY;
-			ray->mapY += ray->stepY;
+			ray->side_dist_y += ray->delta_dist_y;
+			ray->map_y += ray->step_y;
 			ray->flag = 1;
 		}
 	}
 	if (ray->flag == 0)
-		ray->perpWallDist = (ray->mapX - ray->posX + \
-			(1 - ray->stepX) / 2) / ray->rayDirX;
+		ray->perp_wall_dist = (ray->map_x - ray->pos_x + \
+			(1 - ray->step_x) / 2) / ray->ray_dir_x;
 	else
-		ray->perpWallDist = (ray->mapY - ray->posY + \
-			(1 - ray->stepY) / 2) / ray->rayDirY;
+		ray->perp_wall_dist = (ray->map_y - ray->pos_y + \
+			(1 - ray->step_y) / 2) / ray->ray_dir_y;
 }
 
-void	get_ver_distance(t_data *data, t_ray *ray)
+void	calculate_vertical_distance(t_data *data, t_ray *ray)
 {
 	double	player_angle;	
 	double	dif_angle;
@@ -64,37 +62,26 @@ void	get_ver_distance(t_data *data, t_ray *ray)
 	dif_angle = fabs(ray->angle_ret - player_angle);
 	if (dif_angle > M_PI)
 		dif_angle = 2 * M_PI - dif_angle;
-	ray->ver_distance = ray->hip_distance * cos(dif_angle);
+	ray->ver_distance = ray->hyp_distance * cos(dif_angle);
 	if (ray->ver_distance < 0.0001)
 		ray->ver_distance = 9999999999999.0;
 }
 
-void	cell_impact(t_data *data, t_ray *ray)
+void	find_ray_hit_point(t_data *data, t_ray *ray)
 {
-	ray_var_init(data, ray);
-	sidedist(data, ray);
-	dda_bucle(data, ray);
+	init_ray_variables(data, ray);
+	calculate_side_distance(data, ray);
+	dda_loop(data, ray);
 	if (ray->flag == 0)
-		ray->hit = ray->posY + (ray->perpWallDist * ray->rayDirY);
+		ray->hit = ray->pos_y + (ray->perp_wall_dist * ray->ray_dir_y);
 	else
-		ray->hit = ray->posX + (ray->perpWallDist * ray->rayDirX);
+		ray->hit = ray->pos_x + (ray->perp_wall_dist * ray->ray_dir_x);
 	if (ray->flag == 0)
 		ver_pixel_impact(ray);
 	else
 		hor_pixel_impact(ray);
-	if (ray->flag == 0 && ray->rayDirX > 0)
-		ray->hip_distance = sqrt(pow((ray->mapX - \
-			ray->posX), 2) + pow((ray->hit - ray->posY), 2));
-	else if (ray->flag == 0 && ray->rayDirX < 0)
-		ray->hip_distance = sqrt(pow(((ray->mapX + 1) - \
-			ray->posX), 2) + pow((ray->hit - ray->posY), 2));
-	else if (ray->flag == 1 && ray->rayDirY > 0)
-		ray->hip_distance = sqrt(pow((ray->hit - \
-			ray->posX), 2) + pow((ray->mapY - ray->posY), 2));
-	else
-		ray->hip_distance = sqrt(pow((ray->hit - \
-			ray->posX), 2) + pow(((ray->mapY + 1) - ray->posY), 2));
-	get_ver_distance(data, ray);
+	calculate_hypotenuse_distance(ray);
+	calculate_vertical_distance(data, ray);
 }
 
 void	print_ray(t_data *data, t_player *player)
@@ -105,8 +92,8 @@ void	print_ray(t_data *data, t_player *player)
 	i = 0;
 	while (i < WIDTH)
 	{
-		cell_impact(data, &player->ray[i]);
-		print_wall(data, &player->ray[i], i);
+		find_ray_hit_point(data, &player->ray[i]);
+		print_wall_column(data, &player->ray[i], i);
 		i++;
 	}
 }

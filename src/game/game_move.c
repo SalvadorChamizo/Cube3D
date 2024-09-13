@@ -3,16 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   game_move.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
+/*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 13:00:56 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/13 10:01:51 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/13 19:55:15 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	angle_move(t_data *data, double angle)
+void	handle_player_movement(t_data *data)
+{
+	if (mlx_is_key_down(data->mlx, MLX_KEY_W))
+		move_player_by_angle(data, data->player.angle);
+	if (mlx_is_key_down(data->mlx, MLX_KEY_S))
+		move_player_by_angle(data, data->player.angle + 180);
+	if (mlx_is_key_down(data->mlx, MLX_KEY_A))
+		move_player_by_angle(data, data->player.angle - 90);
+	if (mlx_is_key_down(data->mlx, MLX_KEY_D))
+		move_player_by_angle(data, data->player.angle + 90);
+	if (mlx_is_key_down(data->mlx, MLX_KEY_E))
+		data->move = 12;
+	if (!mlx_is_key_down(data->mlx, MLX_KEY_E))
+		data->move = 4;
+}
+
+void	handle_player_rotation(t_data *data)
+{
+	if (mlx_is_key_down(data->mlx, MLX_KEY_LEFT))
+		adjust_angle(&data->player.angle, -3);
+	if (mlx_is_key_down(data->mlx, MLX_KEY_RIGHT))
+		adjust_angle(&data->player.angle, 3);
+}
+
+void	move_player_by_angle(t_data *data, double angle)
 {
 	double			move_x;
 	double			move_y;
@@ -29,7 +53,7 @@ void	angle_move(t_data *data, double angle)
 	}
 }
 
-void	angle_act(double *angle, double var)
+void	adjust_angle(double *angle, double var)
 {
 	*angle += var;
 	if (*angle > 359)

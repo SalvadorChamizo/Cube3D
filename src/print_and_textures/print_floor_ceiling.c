@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   paint.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
+/*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 17:35:37 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/13 09:58:59 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/13 19:23:19 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ int	paint_floor_ceiling(t_data *data)
 		while (h < HEIGHT)
 		{
 			if (h < HEIGHT / 2)
-				mlx_put_pixel(data->screen, w, h++, data->textures.c_color);
+				mlx_put_pixel(data->background, w, h++, data->textures.c_color);
 			else
-				mlx_put_pixel(data->screen, w, h++, data->textures.f_color);
+				mlx_put_pixel(data->background, w, h++, data->textures.f_color);
 		}
 		w++;
 	}

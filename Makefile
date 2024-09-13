@@ -34,8 +34,7 @@ FILES =	main \
 		game/game_move \
 		game/game_check_move \
 		print_and_textures/textures \
-		print_and_textures/paint \
-		print_and_textures/print_ray \
+		print_and_textures/print_floor_ceiling \
 		print_and_textures/print_wall \
 		print_and_textures/print_wall_utils \
 
