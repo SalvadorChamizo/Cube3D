@@ -6,13 +6,13 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 17:27:13 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/03 18:00:20 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/13 15:48:13 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-int	get_texture_data(t_data *data, int *error_flag, int fd)
+int	get_texture_data(t_data *data, int *error_flag, int *fd)
 {
 	if (fd < 0)
 	{
@@ -30,7 +30,7 @@ int	get_texture_data(t_data *data, int *error_flag, int fd)
 	return (SUCCESS);
 }
 
-int	get_wall_textures(t_data *data, int fd, int *error_flag)
+int	get_wall_textures(t_data *data, int *fd, int *error_flag)
 {
 	char	**split_line;
 	int		cont;
@@ -41,13 +41,13 @@ int	get_wall_textures(t_data *data, int fd, int *error_flag)
 	line_num = 0;
 	while (cont < 6)
 	{
-		if (get_line_and_split(&split_line, fd))
+		if (get_line_and_split(&split_line, *fd))
 			return (FAILURE);
 		line_num++;
 		if (check_texture(data, split_line, &cont, line_num))
 			*error_flag = 1;
 	}
-	check_missing_identifier(data);
+	check_missing_identifier(data, fd, cont);
 	return (SUCCESS);
 }
 
@@ -93,8 +93,9 @@ int	check_texture(t_data *data, char **path, int *cont, int line)
 	return (SUCCESS);
 }
 
-void	check_missing_identifier(t_data *data)
+void	check_missing_identifier(t_data *data, int *fd, int cont)
 {
+	set_new_fd(data, cont, fd);
 	if (data->textures.no_flag != 1)
 		print_error("\"NO\" identifier is missing\n");
 	if (data->textures.so_flag != 1)

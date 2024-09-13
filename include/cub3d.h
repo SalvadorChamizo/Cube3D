@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
+/*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:26:26 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/13 11:20:47 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/13 15:50:11 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,11 +149,19 @@ typedef struct s_data
 	t_player	player;
 	int			ray_number;
 	int			move;
+	char		*file;
 }	t_data;
+
+/* --------------------------PARSER------------------------------- */
 
 //parser
 
 int			parse_map(char *file, t_data *data);
+
+//get_texture_utils
+
+int		count_missing_identifier(t_data *data);
+void	set_new_fd(t_data *data, int cont, int *fd);
 
 //get_map
 
@@ -170,11 +178,11 @@ char		*ft_strtrim_safe(char *s1, char *s2);
 
 //get_texture
 
-int			get_texture_data(t_data *data, int *error_flag, int fd);
-int			get_wall_textures(t_data *data, int fd, int *error_flag);
+int			get_texture_data(t_data *data, int *error_flag, int *fd);
+int			get_wall_textures(t_data *data, int *fd, int *error_flag);
 int			get_line_and_split(char ***split_line, int fd);
 int			check_texture(t_data *data, char **path, int *cont, int line);
-void		check_missing_identifier(t_data *data);
+int			check_missing_identifier(t_data *data, int *fd, int cont);
 void		ft_load_textures(t_data *data);
 
 //check_map_player

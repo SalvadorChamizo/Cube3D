@@ -25,6 +25,7 @@ FILES =	main \
 		parser/get_map_utils \
 		parser/get_map \
 		parser/get_texture \
+		parser/get_texture_utils \
 		parser/parser \
 		raycasting/angles_maker \
 		raycasting/angles_maker_utils \

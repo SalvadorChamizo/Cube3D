@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 17:38:05 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/12 19:35:29 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/13 12:23:48 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	parse_map(char *file, t_data *data)
 	error_flag = 0;
 	if (check_map_extension(file, &error_flag))
 		return (FAILURE);
+	data->file = file;
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 	{
@@ -52,7 +53,7 @@ int	parse_map(char *file, t_data *data)
 		ft_putstr_fd("\n", 2);
 		return (FAILURE);
 	}
-	if (get_texture_data(data, &error_flag, fd))
+	if (get_texture_data(data, &error_flag, &fd))
 		error_flag = 1;
 	if (get_map(data, fd))
 		error_flag = 1;
