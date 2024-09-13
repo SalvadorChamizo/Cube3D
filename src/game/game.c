@@ -6,7 +6,7 @@
 /*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 19:41:06 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/12 17:46:22 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/13 15:12:17 by saroca-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,40 +29,6 @@ void	map_size(t_map *map)
 	map->map_size_y = i;
 }
 
-void	mini_imagen_init(t_minimap *mini, t_data *data)
-{
-	mini->wall_texture = mlx_load_png("./miniwall.png");
-	mini->minipoint_texture = mlx_load_png("./miniplayer.png");
-	mini->floor_texture = mlx_load_png("./minifloor.png");
-	mini->wall = mlx_texture_to_image(data->mlx, mini->wall_texture);
-	mini->floor = mlx_texture_to_image(data->mlx, mini->floor_texture);
-	mini->minipoint = mlx_texture_to_image(data->mlx, mini->minipoint_texture);
-}
-
-void	print_mini_map(t_data *data)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < data->map.map_size_y)
-	{
-		j = 0;
-		while (j < data->map.map_size_x)
-		{
-			if (data->map.map[i][j] == '1')
-				mlx_image_to_window(data->mlx, data->mini.wall, j * 64, i * 64);
-			else if (data->map.map[i][j] == '0' || \
-				data->map.map[i][j] == 'N' || data->map.map[i][j] == 'S' || \
-				data->map.map[i][j] == 'W' || data->map.map[i][j] == 'E')
-				mlx_image_to_window(data->mlx, data->mini.floor, j * \
-					64, i * 64);
-			j++;
-		}
-		i++;
-	}
-}
-
 void	imagen_init(t_data *data, mlx_image_t **imagen)
 {
 	*imagen = mlx_new_image(data->mlx, WIDTH, HEIGHT);
@@ -73,7 +39,8 @@ void	imagen_init(t_data *data, mlx_image_t **imagen)
 	}
 	if (mlx_image_to_window(data->mlx, *imagen, 0, 0) == -1)
 	{
-		print_error("Failed in mlx_image_to_window() for floor-ceiling image\n");
+		print_error("Failed in mlx_image_to_window() for \
+			floor-ceiling image\n");
 		exit(FAILURE);
 	}
 }
@@ -84,7 +51,7 @@ void	ft_hook(void *param)
 
 	data = param;
 	if (data->player.ray[0].DeltaDistY)
-		mlx_delete_image(data->mlx, data->board);	
+		mlx_delete_image(data->mlx, data->board);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(data->mlx);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_W))
@@ -103,7 +70,7 @@ void	ft_hook(void *param)
 		data->move = 12;
 	if (!mlx_is_key_down(data->mlx, MLX_KEY_E))
 		data->move = 4;
-	imagen_init(data, &data->board); //paredes
+	imagen_init(data, &data->board);
 	print_ray(data, &data->player);
 }
 
@@ -115,8 +82,8 @@ void	game_init(t_data *data)
 		print_error("Failed to initialiaze mlx.\n");
 		exit(1);
 	}
-	imagen_init(data, &data->screen); //cielo y suelo
-	imagen_init(data, &data->board); //paredes
+	imagen_init(data, &data->screen);
+	imagen_init(data, &data->board);
 	data->move = 4;
 	find_player_position(data, data->map.map);
 	paint_floor_ceiling(data);
