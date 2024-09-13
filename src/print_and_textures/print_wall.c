@@ -6,7 +6,7 @@
 /*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 10:48:12 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/13 11:23:41 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/13 12:36:42 by saroca-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,21 +58,15 @@ uint32_t	get_wall_color(t_data *data, t_ray *ray, double wall_size)
 				- (int)ray->hit, wall_size, data->textures.we_texture);
 		return (color);
 	}
-	//color = vert_wall(data, ray, wall_size);
 	else if (ray->flag == 1)
 	{
 		if (ray->rayDirY > 0)
-		{
 			color = get_pixel_color(ray->hit \
 				- (int)ray->hit, wall_size, data->textures.so_texture);
-			return (color);
-		}
 		if (ray->rayDirY < 0)
-		{
 			color = get_pixel_color(ray->hit \
 				- (int)ray->hit, wall_size, data->textures.no_texture);
-			return (color);
-		}
+		return (color);
 	}
 	return (0x33333388);
 }

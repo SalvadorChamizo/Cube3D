@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:26:26 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/13 15:50:11 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/13 16:19:18 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,10 +102,6 @@ typedef struct s_ray
 	double 		hit;
 	double		hip_distance;
 	double		ver_distance;
-	int			difx; //minimapa
-	int			dify; //minimapa
-	double		xincrement; //minimapa
-	double		yincrement; //minimapa
 }	t_ray;
 
 typedef struct s_player
@@ -127,24 +123,13 @@ typedef struct s_map
 	int		map_line;
 }	t_map;
 
-typedef struct s_minimap
-{
-	mlx_texture_t	*wall_texture;
-	mlx_texture_t	*floor_texture;
-	mlx_texture_t	*minipoint_texture;
-	mlx_image_t		*wall;
-	mlx_image_t		*floor;
-	mlx_image_t		*minipoint;
-}	t_minimap;
-
 typedef struct s_data
 {
 	mlx_t		*mlx;
 	mlx_image_t	*screen;
 	mlx_image_t	*board;
-	mlx_texture_t	*test; //solo es para testeos
+	mlx_texture_t	*test;
 	t_map		map;
-	t_minimap	mini;
 	t_texture	textures;
 	t_player	player;
 	int			ray_number;
@@ -286,6 +271,6 @@ void		print_wall(t_data *data, t_ray *ray, int x);
 double		get_wall_size(t_ray *ray);
 uint32_t	vert_wall(t_data *data, t_ray *ray, double wall_size);
 uint32_t	get_pixel_color(double ratio_x, \
-	double wall_size, mlx_texture_t *texture);
+				double wall_size, mlx_texture_t *texture);
 
 #endif
