@@ -6,7 +6,7 @@
 /*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 20:00:47 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/12 19:12:57 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/12 20:09:55 by saroca-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	get_ver_distance(t_data *data, t_ray *ray)
 		ray->ver_distance = 9999999999999.0;
 }
 
-void	cell_impact(t_data *data, t_ray *ray, int i)
+void	cell_impact(t_data *data, t_ray *ray)
 {
 	ray_var_init(data, ray);
 	sidedist(data, ray);
@@ -105,7 +105,7 @@ void	print_ray(t_data *data, t_player *player)
 	i = 0;
 	while (i < WIDTH)
 	{
-		cell_impact(data, &player->ray[i], i);
+		cell_impact(data, &player->ray[i]);
 		print_wall(data, &player->ray[i], i);
 		i++;
 	}

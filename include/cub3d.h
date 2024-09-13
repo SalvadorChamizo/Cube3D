@@ -6,7 +6,7 @@
 /*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:26:26 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/12 17:58:45 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/13 11:20:47 by saroca-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -256,7 +256,7 @@ void		rgb_error_not_number(char **color, int i, int j, int line);
 
 //game
 
-bool	check_cell_move(mlx_image_t *image, t_data *data, double move_x, double move_y);
+bool	check_cell_move(t_data *data, double move_x, double move_y);
 void	ft_game(t_data *data);
 void	print_ray(t_data *data, t_player *player);
 
@@ -273,7 +273,11 @@ void	angle_select(t_data *data, char c);
 void	ray_init(t_data *data);
 
 //printer
-void	print_one_ray(t_data *data, t_ray *ray);
-void    print_wall(t_data *data, t_ray *ray, int x);
+void		print_one_ray(t_data *data, t_ray *ray);
+void		print_wall(t_data *data, t_ray *ray, int x);
+double		get_wall_size(t_ray *ray);
+uint32_t	vert_wall(t_data *data, t_ray *ray, double wall_size);
+uint32_t	get_pixel_color(double ratio_x, \
+	double wall_size, mlx_texture_t *texture);
 
 #endif
