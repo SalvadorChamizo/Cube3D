@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
+/*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 12:21:22 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/06 17:37:52 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/12 19:34:57 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	check_map_extension(char *file, int *error_flag)
 	{
 		print_error("Wrong map extension \"");
 		ft_putstr_fd(extension, 2);
-		ft_putstr_fd("\"\n", 2);
+		ft_putstr_fd("\". The extension must be \".cub\"\n", 2);
 		*error_flag = 1;
 	}
 	return (*error_flag);

@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 17:38:05 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/10 11:53:10 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/12 19:35:29 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ int	parse_map(char *file, t_data *data)
 	int	error_flag;
 
 	error_flag = 0;
-	check_map_extension(file, &error_flag);
+	if (check_map_extension(file, &error_flag))
+		return (FAILURE);
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 	{
