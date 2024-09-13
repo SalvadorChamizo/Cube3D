@@ -6,7 +6,7 @@
 /*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 19:41:06 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/12 16:03:44 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/12 17:46:22 by saroca-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,10 @@ void	ft_hook(void *param)
 		angle_act(&data->player.angle, -3);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_RIGHT))
 		angle_act(&data->player.angle, 3);
+	if (mlx_is_key_down(data->mlx, MLX_KEY_E))
+		data->move = 12;
+	if (!mlx_is_key_down(data->mlx, MLX_KEY_E))
+		data->move = 4;
 	imagen_init(data, &data->board); //paredes
 	print_ray(data, &data->player);
 }
@@ -113,6 +117,7 @@ void	game_init(t_data *data)
 	}
 	imagen_init(data, &data->screen); //cielo y suelo
 	imagen_init(data, &data->board); //paredes
+	data->move = 4;
 	find_player_position(data, data->map.map);
 	paint_floor_ceiling(data);
 }

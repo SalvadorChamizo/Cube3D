@@ -6,19 +6,18 @@
 /*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 14:38:50 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/07 18:04:05 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/13 10:04:16 by saroca-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-bool    check_borders(mlx_image_t *image, t_data *data, double move_x, double move_y)
+bool	check_borders(t_data *data, double move_x, double move_y)
 {
-    int check_x;
-	int check_x2;
-    int check_y;
-	int check_y2;
-	(void)image;
+	int	check_x;
+	int	check_x2;
+	int	check_y;
+	int	check_y2;
 
 	if (isnan(move_x))
 	{
@@ -51,12 +50,10 @@ bool    check_borders(mlx_image_t *image, t_data *data, double move_x, double mo
 	return (true);
 }
 
-bool	check_cell_move(mlx_image_t *image, t_data *data, double move_x, double move_y)
+bool	check_cell_move(t_data *data, double move_x, double move_y)
 {
-    if (!check_borders(image, data, move_x, move_y))
-	{
+	if	(!check_borders(data, move_x, move_y))
 		return (false);
-	}
 	data->player.map_x = data->player.pos_x + move_x / 64;
 	data->player.map_y = data->player.pos_y + move_y / 64; 
 	return (true);

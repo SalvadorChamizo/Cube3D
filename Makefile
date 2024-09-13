@@ -36,6 +36,7 @@ FILES =	main \
 		print_and_textures/paint \
 		print_and_textures/print_ray \
 		print_and_textures/print_wall \
+		print_and_textures/print_wall_utils \
 
 BNS_FILES = main_bonus \
 
@@ -111,6 +112,7 @@ setup:
 	$(shell mkdir -p ./src/obj/parser)
 	$(shell mkdir -p ./src/obj/raycasting)
 	$(shell mkdir -p ./src/obj/game)
+	$(shell mkdir -p ./src/obj/print_and_textures)
 	$(shell mkdir -p ./bonus/src_bonus/obj)
 
 .PHONY: clean fclean re all bonus setup
