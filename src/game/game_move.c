@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 13:00:56 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/13 19:55:15 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/14 18:37:58 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ void	move_player_by_angle(t_data *data, double angle)
 
 	move_x = (cos(angle * M_PI / 180) * data->move);
 	move_y = (sin(angle * M_PI / 180) * data->move);
-	if (check_cell_move(data, 0, move_y))
+	if (update_move(data, 0, move_y))
 	{
 		data->player.pos_y += move_y / 64;
 	}
-	if (check_cell_move(data, move_x, 0))
+	if (update_move(data, move_x, 0))
 	{
 		data->player.pos_x += move_x / 64;
 	}

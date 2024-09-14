@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 12:34:44 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/04 15:51:51 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/14 18:45:19 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,4 +92,12 @@ void	free_textures_memory(t_data *data)
 		free(t.we_path);
 	if (t.ea_flag)
 		free(t.ea_path);
+}
+
+void	ft_delete_textures(t_data *data)
+{
+	mlx_delete_texture(data->textures.no_texture);
+	mlx_delete_texture(data->textures.so_texture);
+	mlx_delete_texture(data->textures.we_texture);
+	mlx_delete_texture(data->textures.ea_texture);
 }

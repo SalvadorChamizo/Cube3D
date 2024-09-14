@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:26:26 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/13 19:52:08 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/14 18:46:03 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ typedef struct s_data
 	char			*file;
 	mlx_t			*mlx;
 	mlx_image_t		*background;
-	mlx_image_t		*board;
+	mlx_image_t		*walls;
 	t_map			map;
 	t_texture		textures;
 	t_player		player;
@@ -153,8 +153,8 @@ void		adjust_angle(double *angle, double var);
 
 //game_check_move
 
-bool		check_borders(t_data *data, double move_x, double move_y);
-bool		check_cell_move(t_data *data, double move_x, double move_y);
+bool		check_move_is_valid(t_data *data, double move_x, double move_y);
+bool		update_move(t_data *data, double move_x, double move_y);
 
 /* --------------------------PARSER------------------------------- */
 
@@ -270,7 +270,6 @@ void		hor_pixel_impact(t_ray *ray);
 void		init_ray_variables(t_data *data, t_ray *ray);
 void		calculate_hypotenuse_distance(t_ray *ray);
 
-
 /* ------------------------PRINT_AND_TEXTURES------------------------ */
 
 //textures
@@ -279,10 +278,12 @@ void		add_path_to_texture(t_data *data, char **path);
 void		add_path_to_texture_2(t_data *data, char **path);
 void		ft_load_textures(t_data *data);
 void		free_textures_memory(t_data *data);
+void		ft_delete_textures(t_data *data);
 
 //print_wall
 
-uint32_t	get_pixel_color(double ratio_x, double wall_size, mlx_texture_t *texture);
+uint32_t	get_pixel_color(double ratio_x, double wall_size, \
+	mlx_texture_t *texture);
 uint32_t	get_wall_color(t_data *data, t_ray *ray, double wall_size);
 void		print_wall_column(t_data *data, t_ray *ray, int x);
 

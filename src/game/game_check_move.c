@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   game_check_move.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
+/*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 14:38:50 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/13 13:15:41 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/14 18:37:03 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-bool	check_borders(t_data *data, double move_x, double move_y)
+bool	check_move_is_valid(t_data *data, double move_x, double move_y)
 {
 	int	check_x;
 	int	check_x2;
@@ -34,9 +34,9 @@ bool	check_borders(t_data *data, double move_x, double move_y)
 	return (true);
 }
 
-bool	check_cell_move(t_data *data, double move_x, double move_y)
+bool	update_move(t_data *data, double move_x, double move_y)
 {
-	if (!check_borders(data, move_x, move_y))
+	if (!check_move_is_valid(data, move_x, move_y))
 		return (false);
 	data->player.map_x = data->player.pos_x + move_x / 64;
 	data->player.map_y = data->player.pos_y + move_y / 64;

@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 10:48:12 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/13 19:32:21 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/14 18:31:44 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,9 @@ void	print_wall_column(t_data *data, t_ray *ray, int x)
 	{
 		if (i > first_pixel && i < HEIGHT - 1)
 		{
-			color = get_wall_color(data, ray, (i \
-				- first_pixel + save_pixel) / wall_size);
-			mlx_put_pixel(data->board, x, i, color);
+			color = get_wall_color(data, ray, \
+				(i - first_pixel + save_pixel) / wall_size);
+			mlx_put_pixel(data->walls, x, i, color);
 		}
 		i++;
 	}
