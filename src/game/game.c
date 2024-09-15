@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 19:41:06 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/14 18:25:36 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/15 15:13:58 by saroca-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	ft_hook(void *param)
 void	game_init(t_data *data)
 {
 	data->mlx = mlx_init(WIDTH, HEIGHT, "cub3d", true);
+	mlx_set_cursor_mode(data->mlx, MLX_MOUSE_DISABLED);
 	if (!data->mlx)
 	{
 		print_error("Failed to initialiaze mlx.\n");
