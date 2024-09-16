@@ -1,9 +1,8 @@
-
 SO ./textures/sergio_foto.png
 WE ./textures/castle-poland-squares.png
 EA ./textures/ivan_foto.png
 NO ./textures/metal_we.png
-
+a
 C 0, 80, 120
 F 150, 180, 127
 

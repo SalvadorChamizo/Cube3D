@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:48:15 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/13 18:59:47 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/16 12:01:08 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void	map_size(t_map *map)
 
 	i = 0;
 	j = 0;
+	if (!map->map)
+		return ;
 	while (map->map[i])
 	{
 		if ((int)ft_strlen(map->map[i]) > j)
