@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 19:41:06 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/16 11:04:02 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/16 11:20:14 by saroca-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,35 @@ void	game_init(t_data *data)
 	paint_floor_ceiling(data);
 }
 
+void	mouse_move(double xpos, double ypos, void *param)
+{
+	t_data	*data;
+	double	diff_mouse_x;
+
+	data = (t_data *)param;
+	(void)ypos;
+	if (data->prev_mouse_x == -1)
+		data->prev_mouse_x = xpos;
+	diff_mouse_x = data->prev_mouse_x - xpos;
+	data->prev_mouse_x = xpos;
+	if (diff_mouse_x < 0)
+	{
+		data->player.angle = data->player.angle + 0.3;
+		if (data->player.angle > 359)
+			data->player.angle = 0;
+	}
+	else if (diff_mouse_x > 0)
+	{
+		data->player.angle = data->player.angle - 0.3;
+		if (data->player.angle < 0)
+			data->player.angle = 359;
+	}
+}
+
 void	ft_game(t_data *data)
 {
 	game_init(data);
 	mlx_loop_hook(data->mlx, ft_hook, data);
+	mlx_cursor_hook(data->mlx, &mouse_move, data);
 	mlx_loop(data->mlx);
 }
