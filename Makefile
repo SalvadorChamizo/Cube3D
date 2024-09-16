@@ -39,6 +39,29 @@ FILES =	main \
 		print_and_textures/print_wall_utils \
 
 BNS_FILES = main_bonus \
+			parser/check_map_borders_bonus \
+			parser/check_map_player_bonus \
+			parser/check_map_spaces_bonus \
+			parser/check_map_bonus \
+			parser/check_textures_rgb_bonus \
+			parser/check_textures_bonus \
+			parser/check_utils_bonus \
+			parser/parser_errors_bonus \
+			parser/get_map_utils_bonus \
+			parser/get_map_bonus \
+			parser/get_texture_bonus \
+			parser/get_texture_utils_bonus \
+			parser/parser_bonus \
+			raycasting/angles_maker_bonus \
+			raycasting/angles_maker_utils_bonus \
+			raycasting/ray_bonus \
+			game/game_bonus \
+			game/game_move_bonus \
+			game/game_check_move_bonus \
+			print_and_textures/textures_bonus \
+			print_and_textures/print_floor_ceiling_bonus \
+			print_and_textures/print_wall_bonus \
+			print_and_textures/print_wall_utils_bonus \
 
 $(shell mkdir -p ./src/obj)
 $(shell mkdir -p ./src/obj/parser)
@@ -46,7 +69,12 @@ $(shell mkdir -p ./src/obj/raycasting)
 $(shell mkdir -p ./src/obj/game)
 $(shell mkdir -p ./src/obj/print_and_textures)
 $(shell mkdir -p ./src/obj/charge_flag_makefile)
-$(shell mkdir -p ./bonus/src_bonus/obj)
+$(shell mkdir -p ./bonus/src/obj)
+$(shell mkdir -p ./bonus/src/obj/parser)
+$(shell mkdir -p ./bonus/src/obj/raycasting)
+$(shell mkdir -p ./bonus/src/obj/game)
+$(shell mkdir -p ./bonus/src/obj/print_and_textures)
+$(shell mkdir -p ./bonus/src/obj/charge_flag_makefile)
 
 SRCS_DIR = ./src/
 
@@ -55,8 +83,8 @@ OBJS_DIR = ./src/obj/
 SRCS = $(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES)))
 OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
 
-BNS_SRC_DIR = ./bonus/src_bonus/
-BNS_OBJ_DIR = ./bonus/src_bonus/obj/
+BNS_SRC_DIR = ./bonus/src/
+BNS_OBJ_DIR = ./bonus/src/obj/
 BNS_SRCS = $(addprefix $(BNS_SRC_DIR), $(addsuffix .c, $(BNS_FILES)))
 BNS_OBJS = $(addprefix $(BNS_OBJ_DIR), $(addsuffix .o, $(BNS_FILES)))
 
@@ -76,8 +104,8 @@ $(NAME): $(MLX) $(LIBFT) $(OBJS) $(OBJS_DIR)/charge_flag_makefile/charge.flag
 
 bonus: $(NAME_BNS)
 
-$(NAME_BNS): $(BNS_OBJS) $(OBJS_DIR)/charge_flag_makefile/bonus.flag
-	@$(CC) $(BNS_OBJS) $(MLX) $(FLAGS) -lpthread -o $(NAME_BNS)
+$(NAME_BNS): $(MLX) $(LIBFT) $(BNS_OBJS) $(OBJS_DIR)/charge_flag_makefile/bonus.flag
+	@$(CC) $(BNS_OBJS) $(MLX) $(LIBFT) $(FLAGS) $(MLX_FLAGS) -o $(NAME_BNS)
 	@echo
 	@echo "$(BLUE)Cub3D bonus compiled!$(RESET)"
 	@echo
@@ -96,7 +124,7 @@ clean:
 	@echo
 	@echo "$(RED)Cleaning Cub3D objects. $(RESET)"
 	$(shell rm -rf ./src/obj)
-	$(shell rm -rf ./bonus/src_bonus/obj)
+	$(shell rm -rf ./bonus/src/obj)
 
 fclean: clean
 	@$(RM) $(NAME) $(NAME_BNS) $(MLX)
