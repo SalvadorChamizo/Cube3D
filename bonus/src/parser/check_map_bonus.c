@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 12:21:22 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/16 11:04:11 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/17 15:19:53 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,23 +45,27 @@ int	check_first_last_line(t_data *data, char **map)
 	return (SUCCESS);
 }
 
-int	check_invalid_character(char c)
+int	check_invalid_character(t_data *data, char c)
 {
 	int	i;
 	int	flag;
 
 	i = 0;
 	flag = 0;
+	if (c == 'D')
+	{
+		manage_door_case(data);
+	}
 	if (c != 'N' && c != 'S' && c != 'W'
 		&& c != 'E' && c != ' ' && c != '1'
-		&& c != '0' && c != '\n')
+		&& c != '0' && c != '\n' && c != 'D')
 	{
 		return (1);
 	}
 	return (0);
 }
 
-int	check_middle_lines(char **map)
+int	check_middle_lines(t_data *data, char **map)
 {
 	int	i;
 	int	j;
@@ -74,7 +78,7 @@ int	check_middle_lines(char **map)
 		j = 0;
 		while (map[i][j])
 		{
-			if (check_invalid_character(map[i][j]))
+			if (check_invalid_character(data, map[i][j]))
 			{
 				error_invalid_char(map, i, j);
 				flag = 1;

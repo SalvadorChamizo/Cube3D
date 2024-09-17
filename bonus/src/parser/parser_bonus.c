@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 17:38:05 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/16 11:59:04 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/17 12:09:32 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,15 @@ int	check_map_is_valid(t_data *data)
 		return (FAILURE);
 	if (check_first_last_line(data, data->map.map))
 		flag = 1;
-	if (check_middle_lines(data->map.map))
+	if (check_middle_lines(data, data->map.map))
 		flag = 1;
 	if (check_map_is_closed(data))
 		flag = 1;
 	if (check_players_in_map(data->map.map))
 		flag = 1;
 	if (check_if_valid_spaces(data->map.map))
+		flag = 1;
+	if (data->textures.do_error == 1)
 		flag = 1;
 	if (flag == 1)
 		return (FAILURE);

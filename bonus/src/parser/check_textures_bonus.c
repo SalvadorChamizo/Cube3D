@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 12:50:11 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/16 11:04:28 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/16 12:39:47 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ int	check_identifier_error(char **path, int line)
 {
 	if (ft_strcmp(path[0], "NO") && ft_strcmp(path[0], "SO")
 		&& ft_strcmp(path[0], "WE") && ft_strcmp(path[0], "EA")
-		&& ft_strcmp(path[0], "F") && ft_strcmp(path[0], "C"))
+		&& ft_strcmp(path[0], "F") && ft_strcmp(path[0], "C")
+		&& ft_strcmp(path[0], "DO"))
 	{
 		print_error("Not valid identifier in line ");
 		ft_putnbr_fd(line, 2);

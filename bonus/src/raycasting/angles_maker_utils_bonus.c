@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 12:25:07 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/16 11:05:21 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/17 15:53:47 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void	init_ray_variables(t_data *data, t_ray *ray)
 	else
 		ray->step_y = 1;
 	ray->flag = 0;
+	ray->door_flag = 0;
 }
 
 void	calculate_hypotenuse_distance(t_ray *ray)

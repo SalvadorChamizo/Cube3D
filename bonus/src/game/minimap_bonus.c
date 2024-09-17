@@ -6,7 +6,7 @@
 /*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 12:15:57 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/17 18:28:43 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/17 18:39:23 by saroca-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void    make_minimap(t_data *data)
 	while (y < 320)
 	{
 		x = 0;
-		while(x < 320)
+		while(x < 420)
 		{
 			if (check_wall(data, x, y))
 				mlx_put_pixel(data->walls, x, y, 0xFF00FF88);
