@@ -6,7 +6,7 @@
 /*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 19:41:06 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/16 11:20:14 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/16 18:16:53 by saroca-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,18 @@ void	ft_hook(void *param)
 
 	data = param;
 	if (data->player.ray[0].delta_dist_y)
+	{
 		mlx_delete_image(data->mlx, data->walls);
+		mlx_delete_image(data->mlx, data->bonus);
+	}
 	if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(data->mlx);
 	handle_player_movement(data);
 	handle_player_rotation(data);
 	image_init(data, &data->walls);
+	image_init(data, &data->bonus);
 	print_ray(data, &data->player);
+	make_minimap(data);
 }
 
 void	game_init(t_data *data)
@@ -54,6 +59,7 @@ void	game_init(t_data *data)
 	}
 	image_init(data, &data->background);
 	image_init(data, &data->walls);
+	image_init(data, &data->bonus);
 	data->move = 4;
 	find_player_position(data, data->map.map);
 	paint_floor_ceiling(data);

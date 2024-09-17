@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:26:26 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/16 14:40:14 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/17 11:19:22 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,7 @@ typedef struct s_data
 	mlx_t			*mlx;
 	mlx_image_t		*background;
 	mlx_image_t		*walls;
+	mlx_image_t		*bonus;
 	t_map			map;
 	t_texture		textures;
 	t_player		player;
@@ -307,5 +308,8 @@ double		get_wall_size(t_ray *ray);
 uint32_t	vert_wall(t_data *data, t_ray *ray, double wall_size);
 uint32_t	get_pixel_color(double ratio_x, \
 				double wall_size, mlx_texture_t *texture);
+
+//minimap
+void		make_minimap(t_data *data);
 
 #endif
