@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
+/*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:26:26 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/16 11:21:15 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/16 14:40:14 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,19 @@ typedef struct s_texture
 	mlx_texture_t	*so_texture;
 	mlx_texture_t	*we_texture;
 	mlx_texture_t	*ea_texture;
+	mlx_texture_t	*do_texture;
 	char			*no_path;
 	char			*so_path;
 	char			*we_path;
 	char			*ea_path;
+	char			*do_path;
 	unsigned int	c_color;
 	unsigned int	f_color;
 	int				no_flag;
 	int				so_flag;
 	int				we_flag;
 	int				ea_flag;
+	int				do_flag;
 	int				c_flag;
 	int				f_flag;
 }	t_texture;

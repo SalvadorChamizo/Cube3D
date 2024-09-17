@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 12:34:44 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/16 11:05:13 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/17 11:17:20 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,11 @@ void	add_path_to_texture_2(t_data *data, char **path)
 	{
 		data->textures.f_color = get_color_rgb(path);
 		data->textures.f_flag = 1;
+	}
+	else if (path[0] && path[1] && !ft_strcmp(path[0], "DO"))
+	{
+		data->textures.do_path = ft_strdup(path[1]);
+		data->textures.do_flag = 1;
 	}
 }
 

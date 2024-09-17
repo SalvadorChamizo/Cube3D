@@ -2,14 +2,14 @@ SO ./textures/sergio_foto.png
 WE ./textures/castle-poland-squares.png
 EA ./textures/ivan_foto.png
 NO ./textures/metal_we.png
-a
+DO ./textures/metal_we.png
 C 0, 80, 120
 F 150, 180, 127
 
 111111111111
 100000000001
 100010011101
-100100010101
+1001000D0101
 1010000S1101
 100000000001
 111111111111
