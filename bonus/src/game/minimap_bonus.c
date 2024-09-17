@@ -6,7 +6,7 @@
 /*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 12:15:57 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/16 19:32:15 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/17 11:22:12 by saroca-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,11 @@ bool	check_wall(t_data *data, int x, int y)
 
 bool	check_point(int x, int y)
 {
-	if (x > 160 - 4 && x < 160 + 4 && y > 160 - 4 && y < 160 + 4)
+	int cx = 160;
+    int cy = 160;
+    int r = 16;
+
+	if ((x - cx) * (x - cx) + (y - cy) * (y - cy) <= r * r)
 		return (true);
 	return (false);
 }
@@ -39,7 +43,6 @@ void    make_minimap(t_data *data)
 {
 	int x = 0;
 	int y = 0;
-	//uint32_t color = 0xFF0000FF;
 
 	while (y < 320)
 	{
@@ -50,6 +53,8 @@ void    make_minimap(t_data *data)
 				mlx_put_pixel(data->walls, x, y, 0xFF000088);
 			else if (check_point(x, y))
 				mlx_put_pixel(data->walls, x, y, 0x00FF0088);
+			//else if (cone_check(data, x, y))
+			//	mlx_put_pixel(data->walls, x, y, 0x0000FF88);
 			x++;
 		}
 		y++;
