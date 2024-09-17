@@ -1,10 +1,10 @@
 SO ./textures/sergio_foto.png
-WE ./textures/castle-poland-squares.png
-EA ./textures/ivan_foto.png
-NO ./textures/metal_we.png
-DO ./textures/metal_we.png
-C 0, 80, 120
-F 150, 180, 127
+WE ./textures/neon_wall1.png
+EA ./textures/neon_wall2.png
+NO ./textures/neon_wall3.png
+DO ./textures/neon_broken_wall3.png
+C 9, 24, 51
+F 48, 27, 104
 
 111111111111
 100000000001

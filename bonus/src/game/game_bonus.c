@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
+/*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 19:41:06 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/16 18:16:53 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/17 17:57:13 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	game_init(t_data *data)
 	mlx_set_cursor_mode(data->mlx, MLX_MOUSE_DISABLED);
 	if (!data->mlx)
 	{
-		print_error("Failed to initialiaze mlx.\n");
+		print_error("Failed to disable the mouse.\n");
 		exit(1);
 	}
 	image_init(data, &data->background);

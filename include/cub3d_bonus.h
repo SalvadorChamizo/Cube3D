@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:26:26 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/17 11:19:22 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/17 15:26:34 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ typedef struct s_texture
 	int				do_flag;
 	int				c_flag;
 	int				f_flag;
+	int				do_error;
 }	t_texture;
 
 typedef struct s_point
@@ -102,6 +103,7 @@ typedef struct s_ray
 	double		perp_wall_dist;
 	double		pixel_width_impact;
 	int			flag;
+	int			door_flag;
 	double		hit;
 	double		hyp_distance;
 	double		ver_distance;
@@ -163,6 +165,10 @@ bool		update_move(t_data *data, double move_x, double move_y);
 
 /* --------------------------PARSER------------------------------- */
 
+//parser_door_bonus
+
+void		manage_door_case(t_data *data);
+
 //parser
 
 int			parse_map(char *file, t_data *data);
@@ -186,6 +192,7 @@ void		check_missing_identifier(t_data *data, int *fd, int cont);
 
 //get_texture_utils
 
+void		init_texture_flags(t_data *data);
 int			count_missing_identifier(t_data *data);
 void		set_new_fd(t_data *data, int cont, int *fd);
 
@@ -229,8 +236,8 @@ int			check_rgb_are_numbers(char **color, int line);
 
 int			check_map_extension(char *file, int *error_flag);
 int			check_first_last_line(t_data *data, char **map);
-int			check_invalid_character(char c);
-int			check_middle_lines(char **map);
+int			check_invalid_character(t_data *data, char c);
+int			check_middle_lines(t_data *data, char **map);
 int			check_map_is_closed(t_data *data);
 
 //check_map_spaces

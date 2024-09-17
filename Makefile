@@ -52,6 +52,7 @@ BNS_FILES = main_bonus \
 			parser/get_texture_bonus \
 			parser/get_texture_utils_bonus \
 			parser/parser_bonus \
+			parser/parser_door_bonus \
 			raycasting/angles_maker_bonus \
 			raycasting/angles_maker_utils_bonus \
 			raycasting/ray_bonus \

@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 17:27:13 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/17 11:17:42 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/17 15:31:17 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,6 @@ int	check_texture(t_data *data, char **path, int *cont, int line)
 	add_path_to_texture(data, path);
 	if (ft_strcmp(path[0], "DO"))
 		*cont += 1;
-	//else
-	//	data->textures.do_flag = 1;
 	ft_free_split(path);
 	return (SUCCESS);
 }

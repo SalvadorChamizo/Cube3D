@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 10:48:12 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/16 11:05:06 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/17 18:08:59 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,33 @@ double wall_size, mlx_texture_t *texture)
 		i++;
 	}
 	return (pack_rgba(rgba));
+}
+
+uint32_t	get_door_color(t_data *data, t_ray *ray, double wall_size)
+{
+	uint32_t	color;
+
+	if (ray->flag == 0)
+	{
+		if (ray->ray_dir_x > 0)
+			color = get_pixel_color(ray->hit \
+				- (int)ray->hit, wall_size, data->textures.do_texture);
+		if (ray->ray_dir_x < 0)
+			color = get_pixel_color(ray->hit \
+				- (int)ray->hit, wall_size, data->textures.do_texture);
+		return (color);
+	}
+	else if (ray->flag == 1)
+	{
+		if (ray->ray_dir_y > 0)
+			color = get_pixel_color(ray->hit \
+				- (int)ray->hit, wall_size, data->textures.do_texture);
+		if (ray->ray_dir_y < 0)
+			color = get_pixel_color(ray->hit \
+				- (int)ray->hit, wall_size, data->textures.do_texture);
+		return (color);
+	}
+	return (0x33333388);
 }
 
 uint32_t	get_wall_color(t_data *data, t_ray *ray, double wall_size)
@@ -59,6 +86,13 @@ uint32_t	get_wall_color(t_data *data, t_ray *ray, double wall_size)
 	return (0x33333388);
 }
 
+void	remove_door(t_data *data, t_ray *ray)
+{
+	if (ray->door_flag != 1 || 	data->map.map[ray->map_y][ray->map_x] != 'D')
+		return ;
+	data->map.map[ray->map_y][ray->map_x] = 'C';
+}
+
 void	print_wall_column(t_data *data, t_ray *ray, int x)
 {
 	double		wall_size;
@@ -78,10 +112,16 @@ void	print_wall_column(t_data *data, t_ray *ray, int x)
 	}
 	while (i < HEIGHT)
 	{
+		if (mlx_is_key_down(data->mlx, MLX_KEY_F))
+			remove_door(data, ray);
 		if (i > first_pixel && i < HEIGHT - 1)
 		{
-			color = get_wall_color(data, ray, \
-				(i - first_pixel + save_pixel) / wall_size);
+			if (ray->door_flag != 1)
+				color = get_wall_color(data, ray, \
+					(i - first_pixel + save_pixel) / wall_size);
+			else
+				color = get_door_color(data, ray, \
+					(i - first_pixel + save_pixel) / wall_size);
 			mlx_put_pixel(data->walls, x, i, color);
 		}
 		i++;
