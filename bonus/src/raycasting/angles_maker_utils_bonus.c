@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 12:25:07 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/18 12:53:35 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/18 17:43:13 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,42 +14,12 @@
 
 void	ver_pixel_impact(t_ray *ray)
 {
-	if (ray->ray_dir_x > 0 && ray->ray_dir_y >= 0)
-	{
 		ray->pixel_width_impact = (ray->hit - ray->map_y) * 1920;
-	}
-	else if (ray->ray_dir_x <= 0 && ray->ray_dir_y > 0)
-	{
-		ray->pixel_width_impact = (ray->hit - ray->map_y) * 1920;
-	}
-	else if (ray->ray_dir_x >= 0 && ray->ray_dir_y < 0)
-	{
-		ray->pixel_width_impact = (ray->hit - ray->map_y) * 1920;
-	}
-	else if (ray->ray_dir_x < 0 && ray->ray_dir_y <= 0)
-	{
-		ray->pixel_width_impact = (ray->hit - ray->map_y) * 1920;
-	}
 }
 
 void	hor_pixel_impact(t_ray *ray)
 {
-	if (ray->ray_dir_x > 0 && ray->ray_dir_y >= 0)
-	{
 		ray->pixel_width_impact = (ray->hit - ray->map_x) * 1920;
-	}
-	else if (ray->ray_dir_x <= 0 && ray->ray_dir_y > 0)
-	{
-		ray->pixel_width_impact = (ray->hit - ray->map_x) * 1920;
-	}
-	else if (ray->ray_dir_x >= 0 && ray->ray_dir_y < 0)
-	{
-		ray->pixel_width_impact = (ray->hit - ray->map_x) * 1920;
-	}
-	else if (ray->ray_dir_x < 0 && ray->ray_dir_y <= 0)
-	{
-		ray->pixel_width_impact = (ray->hit - ray->map_x) * 1920;
-	}
 }
 
 void	init_ray_variables(t_data *data, t_ray *ray)
