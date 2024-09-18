@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 10:48:12 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/18 17:25:29 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/18 20:44:14 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,8 @@ void	remove_door(t_data *data, t_ray *ray)
 	//	return ;
 	//if (data->open_flag != 1)
 	//{
-	if (data->map.map[data->prev_map_y][data->prev_map_x] == 'C' && data->map.map[data->player.map_y][data->player.map_x] != 'C')
+	if (data->map.map[data->prev_map_y][data->prev_map_x] == 'C' && data->map.map[data->player.map_y][data->player.map_x] != 'C'
+	&& ray->ver_distance * 64 >= 75 && ray->ver_distance * 64 <= 90)
 	{
 		data->map.map[data->prev_map_y][data->prev_map_x] = 'D';
 		data->open_flag = 0;

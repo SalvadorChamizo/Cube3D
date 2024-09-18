@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:26:26 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/18 12:55:53 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/18 18:15:26 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,15 @@ typedef struct s_texture
 	int				f_flag;
 	int				do_error;
 }	t_texture;
+
+typedef struct s_animation
+{
+	mlx_texture_t	*animation_1;
+	mlx_texture_t	*animation_2;
+	mlx_texture_t	*animation_3;
+	mlx_texture_t	*animation_4;
+	mlx_texture_t	*animation_5;
+}	t_animation;
 
 typedef struct s_point
 {
@@ -136,6 +145,7 @@ typedef struct s_data
 	mlx_image_t		*bonus;
 	t_map			map;
 	t_texture		textures;
+	t_animation		animation;
 	t_player		player;
 	int				ray_number;
 	int				move;
@@ -143,6 +153,7 @@ typedef struct s_data
 	int				prev_map_x;
 	int				prev_map_y;
 	int				open_flag;
+	int				animation_loop;
 }	t_data;
 
 /* --------------------------GAME------------------------------- */

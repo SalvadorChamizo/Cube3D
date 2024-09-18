@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 19:41:06 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/18 16:54:11 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/18 20:32:31 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,73 @@ void	image_init(t_data *data, mlx_image_t **image)
 	}
 }
 
+uint32_t get_plane_pixel_color(double x, double y, mlx_texture_t *texture)
+{
+    uint32_t index;
+    uint8_t rgba[4];
+    unsigned int i;
+
+    i = 0;
+    if (!texture || !texture->pixels || x >= texture->width || y >= texture->height)
+        return 0;
+
+    index = ((uint32_t)y * texture->width + (uint32_t)x) * texture->bytes_per_pixel;
+    while (i < 4)
+    {
+        rgba[i] = texture->pixels[index + i];
+        i++;
+    }
+    return pack_rgba(rgba);
+}
+
+void	draw_animation(t_data *data, mlx_texture_t *texture)
+{
+	uint32_t color;
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < WIDTH)
+	{
+		j = 0;
+		while (j < HEIGHT)
+		{
+			color = get_plane_pixel_color(i, j, texture);
+			mlx_put_pixel(data->background, i, j, color);
+			j++;
+		}
+		i++;
+	}
+}
+
+void	charge_animation_textures(t_data *data)
+{
+	data->animation.animation_1 = mlx_load_png("./textures/tile000.png");
+	if (!data->animation.animation_1)
+		printf("Falla aquí\n");
+	data->animation.animation_2 = mlx_load_png("./textures/tile001.png");
+	data->animation.animation_3 = mlx_load_png("./textures/tile002.png");
+	data->animation.animation_4 = mlx_load_png("./textures/tile003.png");
+	data->animation.animation_5 = mlx_load_png("./textures/tile004.png");
+}
+
+void	loop_animation_texture(t_data *data)
+{
+	data->animation_loop++;
+	if (data->animation_loop == 5)
+		data->animation_loop = 0;
+	if (data->animation_loop == 0)
+		draw_animation(data, data->animation.animation_1);
+	if (data->animation_loop == 1)
+		draw_animation(data, data->animation.animation_2);
+	if (data->animation_loop == 2)
+		draw_animation(data, data->animation.animation_3);
+	if (data->animation_loop == 3)
+		draw_animation(data, data->animation.animation_4);
+	if (data->animation_loop == 4)
+		draw_animation(data, data->animation.animation_5);
+}
+
 void	ft_hook(void *param)
 {
 	t_data		*data;
@@ -46,6 +113,7 @@ void	ft_hook(void *param)
 	image_init(data, &data->bonus);
 	print_ray(data, &data->player);
 	make_minimap(data);
+	//loop_animation_texture(data);
 }
 
 void	game_init(t_data *data)
@@ -95,6 +163,8 @@ void	mouse_move(double xpos, double ypos, void *param)
 void	ft_game(t_data *data)
 {
 	game_init(data);
+	//charge_animation_textures(data);
+	data->animation_loop = 0;
 	mlx_loop_hook(data->mlx, ft_hook, data);
 	mlx_cursor_hook(data->mlx, &mouse_move, data);
 	mlx_loop(data->mlx);
