@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 19:41:06 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/17 17:57:13 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/18 16:54:11 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ void	game_init(t_data *data)
 	image_init(data, &data->bonus);
 	data->move = 4;
 	find_player_position(data, data->map.map);
+	data->prev_map_x = 0;
+	data->prev_map_y = 0;
 	paint_floor_ceiling(data);
 }
 

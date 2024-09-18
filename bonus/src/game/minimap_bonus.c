@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
+/*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 12:15:57 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/17 19:56:17 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/18 17:15:50 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ bool	check_wall(t_data *data, int x, int y, char c)
 bool	check_point(int x, int y)
 {
 	int cx = 160;
-    int cy = 160;
-    int r = 16;
+	int cy = 160;
+	int r = 16;
 
 	if ((x - cx) * (x - cx) + (y - cy) * (y - cy) <= r * r)
 		return (true);

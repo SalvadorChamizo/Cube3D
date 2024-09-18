@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 20:00:47 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/17 15:55:31 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/18 16:52:12 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,23 @@ void	dda_loop(t_data *data, t_ray *ray)
 		if (ray->side_dist_x < ray->side_dist_y)
 		{
 			ray->side_dist_x += ray->delta_dist_x;
+			if (data->map.map[ray->map_y][ray->map_x] == 'C')
+				data->prev_map_x = ray->map_x;
 			ray->map_x += ray->step_x;
 			ray->flag = 0;
 		}
 		else
 		{
 			ray->side_dist_y += ray->delta_dist_y;
+			if (data->map.map[ray->map_y][ray->map_x] == 'C')
+				data->prev_map_y = ray->map_y;
 			ray->map_y += ray->step_y;
 			ray->flag = 1;
 		}
 		if (data->map.map[ray->map_y][ray->map_x] == 'D')
+		{
 			ray->door_flag = 1;
+		}
 	}
 	if (ray->flag == 0)
 		ray->perp_wall_dist = (ray->map_x - ray->pos_x + \

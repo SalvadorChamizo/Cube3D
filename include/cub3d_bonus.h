@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:26:26 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/17 15:26:34 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/18 12:55:53 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,9 @@ typedef struct s_data
 	int				ray_number;
 	int				move;
 	double			prev_mouse_x;
+	int				prev_map_x;
+	int				prev_map_y;
+	int				open_flag;
 }	t_data;
 
 /* --------------------------GAME------------------------------- */

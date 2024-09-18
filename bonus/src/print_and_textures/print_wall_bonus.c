@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 10:48:12 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/17 19:59:40 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/18 17:25:29 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,10 +88,26 @@ uint32_t	get_wall_color(t_data *data, t_ray *ray, double wall_size)
 
 void	remove_door(t_data *data, t_ray *ray)
 {
-	if (ray->door_flag != 1 || 	data->map.map[ray->map_y][ray->map_x] != 'D')
-		return ;
+	//if (data->map.map[data->player.map_y][data->player.map_x] == 'C' || data->map.map[data->player.map_y][data->player.map_x] == 'D')
+	//	return ;
+	//if (data->open_flag != 1)
+	//{
+	if (data->map.map[data->prev_map_y][data->prev_map_x] == 'C' && data->map.map[data->player.map_y][data->player.map_x] != 'C')
+	{
+		data->map.map[data->prev_map_y][data->prev_map_x] = 'D';
+		data->open_flag = 0;
+	}
+	if (ray->door_flag != 1 || 	data->map.map[ray->map_y][ray->map_x] != 'D' || data->map.map[data->prev_map_y][data->prev_map_x] == 'C' ||
+			data->map.map[data->player.map_y][data->player.map_x] == 'C')
+			return ;
+	//}
+	//printf("ray_prev_x: %d\nray_prev_y: %d\n", data->prev_map_x, data->prev_map_y);
 	if (ray->ver_distance * 64 <= 75)
-	data->map.map[ray->map_y][ray->map_x] = 'C';
+	{
+		data->map.map[ray->map_y][ray->map_x] = 'C';
+		data->open_flag = 1;
+	}
+	//printf("%c\n",	data->map.map[ray->prev_map_y][ray->prev_map_x]);
 }
 
 void	print_wall_column(t_data *data, t_ray *ray, int x)
@@ -113,8 +129,11 @@ void	print_wall_column(t_data *data, t_ray *ray, int x)
 	}
 	while (i < HEIGHT)
 	{
-		if (mlx_is_key_down(data->mlx, MLX_KEY_F))
-			remove_door(data, ray);
+		if (i == 640 && x == 810)
+		{
+			if (mlx_is_key_down(data->mlx, MLX_KEY_F))
+				remove_door(data, ray);
+		}
 		if (i > first_pixel && i < HEIGHT - 1)
 		{
 			if (ray->door_flag != 1)

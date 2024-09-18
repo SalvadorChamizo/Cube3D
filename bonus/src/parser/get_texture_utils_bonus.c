@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 15:15:26 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/17 12:08:11 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/18 12:57:17 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	init_texture_flags(t_data *data)
 	data->textures.f_flag = 0;
 	data->textures.do_flag = 0;
 	data->textures.do_error = 0;
+	data->open_flag = 0;
 }
 
 int	count_missing_identifier(t_data *data)
