@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 19:41:06 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/18 20:32:31 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/19 12:29:35 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,55 @@ uint32_t get_plane_pixel_color(double x, double y, mlx_texture_t *texture)
     return pack_rgba(rgba);
 }
 
-void	draw_animation(t_data *data, mlx_texture_t *texture)
+/*uint32_t get_plane_pixel_color(double x, double y, mlx_texture_t *texture)
+{
+    uint32_t index;
+    uint8_t rgba[4];
+    unsigned int i;
+
+    i = 0;
+    if (!texture || !texture->pixels || x >= texture->width || y >= texture->height)
+        return 0;
+
+    index = ((uint32_t)y * texture->width + (uint32_t)x) * texture->bytes_per_pixel;
+    while (i < 4)
+    {
+        rgba[i] = texture->pixels[index + i];
+        i++;
+    }
+    return pack_rgba(rgba);
+}*/
+
+#define ANIMATION_WIDTH 750
+#define ANIMATION_HEIGHT 500
+
+void draw_animation(t_data *data, mlx_texture_t *texture)
+{
+    uint32_t color;
+    int i, j;
+    double scale_x, scale_y;
+    int target_x, target_y;
+
+    // Calculate the scaling factors
+    scale_x = (double)texture->width / (ANIMATION_WIDTH);
+    scale_y = (double)texture->height / (ANIMATION_HEIGHT);
+
+    // Calculate the starting position for the animation (bottom center)
+    target_x = (WIDTH - ANIMATION_WIDTH);
+    target_y = HEIGHT - ANIMATION_HEIGHT; // 10 pixels from the bottom
+
+    for (i = 0; i < ANIMATION_WIDTH; i++)
+    {
+        for (j = 0; j < ANIMATION_HEIGHT; j++)
+        {
+            color = get_plane_pixel_color(i * scale_x, j * scale_y, texture);
+			if (color != 0)
+           		mlx_put_pixel(data->walls, target_x + i, target_y + j, color);
+        }
+    }
+}
+
+/*void	draw_animation(t_data *data, mlx_texture_t *texture)
 {
 	uint32_t color;
 	int	i;
@@ -60,12 +108,12 @@ void	draw_animation(t_data *data, mlx_texture_t *texture)
 		while (j < HEIGHT)
 		{
 			color = get_plane_pixel_color(i, j, texture);
-			mlx_put_pixel(data->background, i, j, color);
+			mlx_put_pixel(data->walls, i, j, color);
 			j++;
 		}
 		i++;
 	}
-}
+}*/
 
 void	charge_animation_textures(t_data *data)
 {
@@ -80,11 +128,28 @@ void	charge_animation_textures(t_data *data)
 
 void	loop_animation_texture(t_data *data)
 {
-	data->animation_loop++;
-	if (data->animation_loop == 5)
+	if (mlx_is_key_down(data->mlx, MLX_KEY_SPACE) || mlx_is_mouse_down(data->mlx, MLX_MOUSE_BUTTON_LEFT))
+	{
+		if (data->animation_loop == 0)
+			draw_animation(data, data->animation.animation_1);
+		if (data->animation_loop == 1)
+			draw_animation(data, data->animation.animation_2);
+		if (data->animation_loop == 2)
+			draw_animation(data, data->animation.animation_3);
+		if (data->animation_loop == 3)
+			draw_animation(data, data->animation.animation_4);
+		if (data->animation_loop == 4)
+			draw_animation(data, data->animation.animation_5);
+		data->animation_loop++;
+		if (data->animation_loop == 5)
+			data->animation_loop = 0;
+	}
+	else
 		data->animation_loop = 0;
 	if (data->animation_loop == 0)
 		draw_animation(data, data->animation.animation_1);
+	/*if (data->animation_loop == 5)
+		data->animation_loop = 0;
 	if (data->animation_loop == 1)
 		draw_animation(data, data->animation.animation_2);
 	if (data->animation_loop == 2)
@@ -92,7 +157,7 @@ void	loop_animation_texture(t_data *data)
 	if (data->animation_loop == 3)
 		draw_animation(data, data->animation.animation_4);
 	if (data->animation_loop == 4)
-		draw_animation(data, data->animation.animation_5);
+		draw_animation(data, data->animation.animation_5);*/
 }
 
 void	ft_hook(void *param)
@@ -113,7 +178,7 @@ void	ft_hook(void *param)
 	image_init(data, &data->bonus);
 	print_ray(data, &data->player);
 	make_minimap(data);
-	//loop_animation_texture(data);
+	loop_animation_texture(data);
 }
 
 void	game_init(t_data *data)
@@ -163,7 +228,7 @@ void	mouse_move(double xpos, double ypos, void *param)
 void	ft_game(t_data *data)
 {
 	game_init(data);
-	//charge_animation_textures(data);
+	charge_animation_textures(data);
 	data->animation_loop = 0;
 	mlx_loop_hook(data->mlx, ft_hook, data);
 	mlx_cursor_hook(data->mlx, &mouse_move, data);
