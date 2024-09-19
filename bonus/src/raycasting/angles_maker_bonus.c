@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   angles_maker_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
+/*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 20:00:47 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/18 18:04:39 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/19 15:10:17 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ void	dda_loop(t_data *data, t_ray *ray)
 			ray->map_y += ray->step_y;
 			ray->flag = 1;
 		}
+		if (data->map.map[ray->map_y][ray->map_x] == 'D')
+			ray->door_flag = 1;
 	}
 	if (ray->flag == 0)
 		ray->perp_wall_dist = (ray->map_x - ray->pos_x + \
