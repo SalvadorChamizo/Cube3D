@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
+/*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:26:26 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/19 11:36:33 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/19 17:06:58 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@
 # define HEIGHT 1280
 # define FOV 60
 # define WALL_SIZE 640
+# define ANIMATION_WIDTH 750
+# define ANIMATION_HEIGHT 500
 
 typedef struct s_texture
 {
@@ -75,6 +77,11 @@ typedef struct s_animation
 	mlx_texture_t	*animation_3;
 	mlx_texture_t	*animation_4;
 	mlx_texture_t	*animation_5;
+	int				flag;
+	double			scale_x;
+	double			scale_y;
+	int				target_x;
+	int				target_y;
 }	t_animation;
 
 typedef struct s_point
@@ -176,6 +183,13 @@ void		adjust_angle(double *angle, double var);
 
 bool		check_move_is_valid(t_data *data, double move_x, double move_y);
 bool		update_move(t_data *data, double move_x, double move_y);
+
+//game_animation_bonus
+
+uint32_t 	get_plane_pixel_color(double x, double y, mlx_texture_t *texture);
+void		draw_animation(t_data *data, mlx_texture_t *texture);
+void		charge_animation_textures(t_data *data);
+void		loop_animation_texture(t_data *data);
 
 /* --------------------------PARSER------------------------------- */
 

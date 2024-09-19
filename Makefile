@@ -56,6 +56,7 @@ BNS_FILES = main_bonus \
 			raycasting/angles_maker_bonus \
 			raycasting/angles_maker_utils_bonus \
 			raycasting/ray_bonus \
+			game/game_animation_bonus \
 			game/game_bonus \
 			game/game_move_bonus \
 			game/game_check_move_bonus \

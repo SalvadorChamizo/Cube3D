@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 12:34:44 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/17 15:37:35 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/19 16:22:50 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,11 +82,14 @@ void	ft_load_textures(t_data *data)
 		print_error("Failed to load png for \"EA\"\n");
 		exit(FAILURE);
 	}
-	data->textures.do_texture = mlx_load_png(data->textures.do_path);
-	if (!data->textures.do_texture)
+	if (data->textures.do_flag == 1)
 	{
-		print_error("Failed to load png for \"DO\"\n");
-		exit(FAILURE);
+		data->textures.do_texture = mlx_load_png(data->textures.do_path);
+		if (!data->textures.do_texture)
+		{
+			print_error("Failed to load png for \"DO\"\n");
+			exit(FAILURE);
+		}
 	}
 }
 
@@ -113,5 +116,6 @@ void	ft_delete_textures(t_data *data)
 	mlx_delete_texture(data->textures.so_texture);
 	mlx_delete_texture(data->textures.we_texture);
 	mlx_delete_texture(data->textures.ea_texture);
-	mlx_delete_texture(data->textures.do_texture);
+	if (data->textures.do_flag == 1)
+		mlx_delete_texture(data->textures.do_texture);
 }
