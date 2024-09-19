@@ -6,7 +6,7 @@
 /*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 19:41:06 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/19 10:51:27 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/19 11:37:32 by saroca-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ void	ft_hook(void *param)
 	image_init(data, &data->bonus);
 	print_ray(data, &data->player);
 	make_minimap(data);
+	//loop_animation_texture(data);
 }
 
 void	game_init(t_data *data)
@@ -152,6 +153,8 @@ void	mouse_move(double xpos, double ypos, void *param)
 void	ft_game(t_data *data)
 {
 	game_init(data);
+	//charge_animation_textures(data);
+	data->animation_loop = 0;
 	mlx_loop_hook(data->mlx, ft_hook, data);
 	mlx_cursor_hook(data->mlx, &mouse_move, data);
 	mlx_loop(data->mlx);
