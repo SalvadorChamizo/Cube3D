@@ -60,6 +60,7 @@ BNS_FILES = main_bonus \
 			game/game_move_bonus \
 			game/game_check_move_bonus \
 			game/minimap_bonus \
+			game/game_door_manage_bonus \
 			print_and_textures/textures_bonus \
 			print_and_textures/print_floor_ceiling_bonus \
 			print_and_textures/print_wall_bonus \

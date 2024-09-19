@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 19:41:06 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/19 12:29:35 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/19 14:43:04 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,6 +172,8 @@ void	ft_hook(void *param)
 	}
 	if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(data->mlx);
+	if (mlx_is_key_down(data->mlx, MLX_KEY_F))
+		door_manage(data);
 	handle_player_movement(data);
 	handle_player_rotation(data);
 	image_init(data, &data->walls);

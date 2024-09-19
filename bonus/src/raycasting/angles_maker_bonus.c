@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   angles_maker_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 20:00:47 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/18 16:52:12 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/18 18:04:39 by saroca-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,6 @@ void	dda_loop(t_data *data, t_ray *ray)
 				data->prev_map_y = ray->map_y;
 			ray->map_y += ray->step_y;
 			ray->flag = 1;
-		}
-		if (data->map.map[ray->map_y][ray->map_x] == 'D')
-		{
-			ray->door_flag = 1;
 		}
 	}
 	if (ray->flag == 0)

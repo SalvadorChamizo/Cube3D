@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:26:26 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/18 18:15:26 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/19 11:36:33 by saroca-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -295,6 +295,9 @@ void		ver_pixel_impact(t_ray *ray);
 void		hor_pixel_impact(t_ray *ray);
 void		init_ray_variables(t_data *data, t_ray *ray);
 void		calculate_hypotenuse_distance(t_ray *ray);
+
+//door_manage
+void		door_manage(t_data *data);
 
 /* ------------------------PRINT_AND_TEXTURES------------------------ */
 

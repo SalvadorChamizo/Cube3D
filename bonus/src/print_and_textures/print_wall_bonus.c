@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_wall_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 10:48:12 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/18 20:44:14 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/19 11:36:45 by saroca-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,11 +130,11 @@ void	print_wall_column(t_data *data, t_ray *ray, int x)
 	}
 	while (i < HEIGHT)
 	{
-		if (i == 640 && x == 810)
+		/*if (i == 640 && x == 810)
 		{
 			if (mlx_is_key_down(data->mlx, MLX_KEY_F))
 				remove_door(data, ray);
-		}
+		}*/
 		if (i > first_pixel && i < HEIGHT - 1)
 		{
 			if (ray->door_flag != 1)
