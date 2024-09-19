@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 19:41:06 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/18 16:54:11 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/19 10:51:27 by saroca-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,61 @@ void	image_init(t_data *data, mlx_image_t **image)
 	}
 }
 
+/*void	door_open_close(char *door)
+{
+	if (*door == 'D')
+		*door = 'C';
+	else if (*door == 'C')
+		*door = 'D';
+}
+
+bool	check_door(t_data *data)
+{
+	int check_x;
+	int check_x2;
+	int check_y;
+	int check_y2;
+
+	check_x = (int)floor((data->player.pos_x + 0.25));
+	check_x2 = (int)floor((data->player.pos_x - 0.25));
+	check_y = (int)floor((data->player.pos_y + 0.25));
+	check_y2 = (int)floor((data->player.pos_y - 0.25));
+	if (data->map.map[check_y][check_x] == 'C')
+		return (false);
+	if (data->map.map[check_y2][check_x] == 'C')
+		return (false);
+	if (data->map.map[check_y][check_x2] == 'C')
+		return (false);
+	if (data->map.map[check_y2][check_x2] == 'C')
+		return (false);
+	return (true);
+}
+
+void	door_manage(t_data *data)
+{
+	double		ver_x;
+	double		ver_y;
+
+	if (!check_door(data))
+		return ;
+	ver_x = data->player.pos_x - data->player.map_x - 0.5;
+	ver_y = data->player.pos_y - data->player.map_y - 0.5;
+	if (fabs(ver_y) > fabs(ver_x))
+	{
+		if (ver_y > 0)
+			door_open_close(&data->map.map[data->player.map_y + 1][data->player.map_x]);
+		else
+			door_open_close(&data->map.map[data->player.map_y - 1][data->player.map_x]);
+	}
+	else
+	{
+		if (ver_x > 0)
+			door_open_close(&data->map.map[data->player.map_y][data->player.map_x + 1]);
+		else
+			door_open_close(&data->map.map[data->player.map_y][data->player.map_x - 1]);
+	}
+}*/
+
 void	ft_hook(void *param)
 {
 	t_data		*data;
@@ -40,6 +95,8 @@ void	ft_hook(void *param)
 	}
 	if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(data->mlx);
+	if (mlx_is_key_down(data->mlx, MLX_KEY_F))
+		door_manage(data);
 	handle_player_movement(data);
 	handle_player_rotation(data);
 	image_init(data, &data->walls);
