@@ -6,7 +6,7 @@
 /*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 19:41:06 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/19 14:55:57 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/19 15:22:14 by saroca-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void draw_animation(t_data *data, mlx_texture_t *texture)
 
     // Calculate the starting position for the animation (bottom center)
     target_x = (WIDTH - ANIMATION_WIDTH);
-    target_y = HEIGHT - ANIMATION_HEIGHT; // 10 pixels from the bottom
+    target_y = (HEIGHT - ANIMATION_HEIGHT) + 10; // 10 pixels from the bottom
 
     for (i = 0; i < ANIMATION_WIDTH; i++)
     {
@@ -132,16 +132,16 @@ void	loop_animation_texture(t_data *data)
 	{
 		if (data->animation_loop == 0)
 			draw_animation(data, data->animation.animation_1);
-		if (data->animation_loop == 1)
+		if (data->animation_loop == 1 || data->animation_loop == 2)
 			draw_animation(data, data->animation.animation_2);
-		if (data->animation_loop == 2)
+		if (data->animation_loop == 4 || data->animation_loop == 3)
 			draw_animation(data, data->animation.animation_3);
-		if (data->animation_loop == 3)
+		if (data->animation_loop == 6 || data->animation_loop == 5)
 			draw_animation(data, data->animation.animation_4);
-		if (data->animation_loop == 4)
+		if (data->animation_loop == 8 || data->animation_loop == 7)
 			draw_animation(data, data->animation.animation_5);
 		data->animation_loop++;
-		if (data->animation_loop == 5)
+		if (data->animation_loop == 9)
 			data->animation_loop = 0;
 	}
 	else
