@@ -6,7 +6,7 @@
 /*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 10:46:42 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/19 11:28:25 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/19 14:54:23 by saroca-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ void	door_manage(t_data *data)
 	else
 		hor_pixel_impact(&door_ray);
 	calculate_hypotenuse_distance(&door_ray);
-	printf("hyp_distance: %f\n", door_ray.hyp_distance);
 	if (data->map.map[door_ray.map_y][door_ray.map_x] == 'D' && door_ray.hyp_distance <= 1)
 		data->map.map[door_ray.map_y][door_ray.map_x] = 'C';
 	else if (data->map.map[door_ray.map_y][door_ray.map_x] == 'C' && door_ray.hyp_distance <= 1)

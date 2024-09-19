@@ -6,7 +6,7 @@
 /*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 19:41:06 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/19 11:50:50 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/19 14:54:10 by saroca-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ void	ft_hook(void *param)
 	}
 	if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(data->mlx);
-	if (mlx_is_key_down(data->mlx, MLX_KEY_F))
-		door_manage(data);
 	handle_player_movement(data);
 	handle_player_rotation(data);
 	image_init(data, &data->walls);
@@ -95,6 +93,15 @@ void	mouse_move(double xpos, double ypos, void *param)
 	}
 }
 
+void	key_press(struct mlx_key_data key_data, void *param)
+{
+	t_data	*data;
+	
+	data = (t_data *)param;
+	if (key_data.key == MLX_KEY_F && key_data.action == MLX_PRESS)
+		door_manage(data);
+}
+
 void	ft_game(t_data *data)
 {
 	game_init(data);
@@ -102,5 +109,6 @@ void	ft_game(t_data *data)
 	data->animation_loop = 0;
 	mlx_loop_hook(data->mlx, ft_hook, data);
 	mlx_cursor_hook(data->mlx, &mouse_move, data);
+	mlx_key_hook(data->mlx, key_press, data);
 	mlx_loop(data->mlx);
 }
