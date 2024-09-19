@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:26:26 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/19 17:06:58 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/19 17:22:29 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@
 # define HEIGHT 1280
 # define FOV 60
 # define WALL_SIZE 640
-# define ANIMATION_WIDTH 750
-# define ANIMATION_HEIGHT 500
+# define SPRITE_WIDTH 750
+# define SPRITE_HEIGHT 500
 
 typedef struct s_texture
 {
