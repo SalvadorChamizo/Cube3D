@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:26:26 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/19 17:22:29 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/20 14:30:45 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,22 +83,6 @@ typedef struct s_animation
 	int				target_x;
 	int				target_y;
 }	t_animation;
-
-typedef struct s_point
-{
-	int	x;
-	int	y;
-}	t_point;
-
-typedef struct s_line
-{
-	int	x; //the x coordinate of line relative to screen
-	int	y; //the current pixel index of the line (along y axis)
-	int	y0; //y start index of drawing texture
-	int	y1; //y end index of drawing texture
-	int	tex_x; //x coordinate of texture to draw
-	int	tex_y; //y coordinate of texture to draw
-}	t_line;
 
 typedef struct s_ray
 {
@@ -190,6 +174,12 @@ uint32_t 	get_plane_pixel_color(double x, double y, mlx_texture_t *texture);
 void		draw_animation(t_data *data, mlx_texture_t *texture);
 void		charge_animation_textures(t_data *data);
 void		loop_animation_texture(t_data *data);
+
+//init_variables_bonus
+
+int			init_data_variables(t_data *data);
+void		init_texture_variables(t_data *data);
+void		init_player_variables(t_data *data);
 
 /* --------------------------PARSER------------------------------- */
 
