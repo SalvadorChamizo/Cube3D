@@ -6,7 +6,7 @@
 /*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 10:46:42 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/19 14:54:23 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/20 15:04:10 by saroca-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ void	door_dda_loop(t_data *data, t_ray *ray)
 
 bool	check_door(t_data *data)
 {
-	int check_x;
-	int check_x2;
-	int check_y;
-	int check_y2;
+	int	check_x;
+	int	check_x2;
+	int	check_y;
+	int	check_y2;
 
 	check_x = (int)floor((data->player.pos_x + 0.25));
 	check_x2 = (int)floor((data->player.pos_x - 0.25));
@@ -72,16 +72,20 @@ void	door_manage(t_data *data)
 	calculate_side_distance(data, &door_ray);
 	door_dda_loop(data, &door_ray);
 	if (door_ray.flag == 0)
-		door_ray.hit = door_ray.pos_y + (door_ray.perp_wall_dist * door_ray.ray_dir_y);
+		door_ray.hit = door_ray.pos_y + \
+			(door_ray.perp_wall_dist * door_ray.ray_dir_y);
 	else
-		door_ray.hit = door_ray.pos_x + (door_ray.perp_wall_dist * door_ray.ray_dir_x);
+		door_ray.hit = door_ray.pos_x + \
+			(door_ray.perp_wall_dist * door_ray.ray_dir_x);
 	if (door_ray.flag == 0)
 		ver_pixel_impact(&door_ray);
 	else
 		hor_pixel_impact(&door_ray);
 	calculate_hypotenuse_distance(&door_ray);
-	if (data->map.map[door_ray.map_y][door_ray.map_x] == 'D' && door_ray.hyp_distance <= 1)
+	if (data->map.map[door_ray.map_y][door_ray.map_x] == 'D' \
+		&& door_ray.hyp_distance <= 1)
 		data->map.map[door_ray.map_y][door_ray.map_x] = 'C';
-	else if (data->map.map[door_ray.map_y][door_ray.map_x] == 'C' && door_ray.hyp_distance <= 1)
+	else if (data->map.map[door_ray.map_y][door_ray.map_x] \
+		== 'C' && door_ray.hyp_distance <= 1)
 		data->map.map[door_ray.map_y][door_ray.map_x] = 'D';
 }

@@ -6,7 +6,7 @@
 /*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 10:48:12 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/19 11:36:45 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/20 15:56:58 by saroca-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,29 +86,17 @@ uint32_t	get_wall_color(t_data *data, t_ray *ray, double wall_size)
 	return (0x33333388);
 }
 
-void	remove_door(t_data *data, t_ray *ray)
+int 	get_first_pixel(double wall_size, int *save_pixel)
 {
-	//if (data->map.map[data->player.map_y][data->player.map_x] == 'C' || data->map.map[data->player.map_y][data->player.map_x] == 'D')
-	//	return ;
-	//if (data->open_flag != 1)
-	//{
-	if (data->map.map[data->prev_map_y][data->prev_map_x] == 'C' && data->map.map[data->player.map_y][data->player.map_x] != 'C'
-	&& ray->ver_distance * 64 >= 75 && ray->ver_distance * 64 <= 90)
+	int	first_pixel;
+	
+	first_pixel = ((HEIGHT / 2) - (wall_size / 2));
+	if (first_pixel < 0)
 	{
-		data->map.map[data->prev_map_y][data->prev_map_x] = 'D';
-		data->open_flag = 0;
+		*save_pixel = -first_pixel;
+		first_pixel = 0;
 	}
-	if (ray->door_flag != 1 || 	data->map.map[ray->map_y][ray->map_x] != 'D' || data->map.map[data->prev_map_y][data->prev_map_x] == 'C' ||
-			data->map.map[data->player.map_y][data->player.map_x] == 'C')
-			return ;
-	//}
-	//printf("ray_prev_x: %d\nray_prev_y: %d\n", data->prev_map_x, data->prev_map_y);
-	if (ray->ver_distance * 64 <= 75)
-	{
-		data->map.map[ray->map_y][ray->map_x] = 'C';
-		data->open_flag = 1;
-	}
-	//printf("%c\n",	data->map.map[ray->prev_map_y][ray->prev_map_x]);
+	return (first_pixel);
 }
 
 void	print_wall_column(t_data *data, t_ray *ray, int x)
@@ -122,19 +110,9 @@ void	print_wall_column(t_data *data, t_ray *ray, int x)
 	i = 0;
 	save_pixel = 0;
 	wall_size = get_wall_size(ray);
-	first_pixel = ((HEIGHT / 2) - (wall_size / 2));
-	if (first_pixel < 0)
+	first_pixel = get_first_pixel(wall_size, &save_pixel);
+	while (i++ < HEIGHT)
 	{
-		save_pixel = -first_pixel;
-		first_pixel = 0;
-	}
-	while (i < HEIGHT)
-	{
-		/*if (i == 640 && x == 810)
-		{
-			if (mlx_is_key_down(data->mlx, MLX_KEY_F))
-				remove_door(data, ray);
-		}*/
 		if (i > first_pixel && i < HEIGHT - 1)
 		{
 			if (ray->door_flag != 1)
@@ -145,6 +123,5 @@ void	print_wall_column(t_data *data, t_ray *ray, int x)
 					(i - first_pixel + save_pixel) / wall_size);
 			mlx_put_pixel(data->walls, x, i, color);
 		}
-		i++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 13:01:04 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/20 15:56:52 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/20 16:12:07 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,3 +74,4 @@ int	init_data_variables(t_data *data)
 	data->prev_mouse_x = -1;
 	return (0);
 }
+
