@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
+/*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:26:26 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/20 16:05:44 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/20 16:19:31 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,7 +171,7 @@ bool		update_move(t_data *data, double move_x, double move_y);
 
 //game_animation_bonus
 
-uint32_t 	get_plane_pixel_color(double x, double y, mlx_texture_t *texture);
+uint32_t	get_plane_pixel_color(double x, double y, mlx_texture_t *texture);
 void		draw_animation(t_data *data, mlx_texture_t *texture);
 void		charge_animation_textures(t_data *data);
 void		loop_animation_texture(t_data *data);
