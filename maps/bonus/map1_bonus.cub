@@ -1,4 +1,4 @@
-SO ./textures/neon_wall1.png
+SO ./textures/kaos.png
 WE ./textures/neon_wall1.png
 EA ./textures/neon_wall2.png
 NO ./textures/neon_wall3.png
