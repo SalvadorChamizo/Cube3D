@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 12:34:44 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/20 12:31:12 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/20 16:07:30 by saroca-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,15 +82,7 @@ void	ft_load_textures(t_data *data)
 		print_error("Failed to load png for \"EA\"\n");
 		exit(FAILURE);
 	}
-	if (data->textures.do_flag == 1)
-	{
-		data->textures.do_texture = mlx_load_png(data->textures.do_path);
-		if (!data->textures.do_texture)
-		{
-			print_error("Failed to load png for \"DO\"\n");
-			exit(FAILURE);
-		}
-	}
+	ft_load_textures_door(data);
 }
 
 void	free_textures_memory(t_data *data)
@@ -118,8 +110,6 @@ void	ft_delete_textures(t_data *data)
 	mlx_delete_texture(data->textures.ea_texture);
 	if (data->textures.do_flag == 1)
 		mlx_delete_texture(data->textures.do_texture);
-	//if (data->animation.flag == 1)
-	//{
 	if (data->animation.animation_1)
 		mlx_delete_texture(data->animation.animation_1);
 	if (data->animation.animation_2)
@@ -130,5 +120,4 @@ void	ft_delete_textures(t_data *data)
 		mlx_delete_texture(data->animation.animation_4);
 	if (data->animation.animation_5)
 		mlx_delete_texture(data->animation.animation_5);
-	//}
 }

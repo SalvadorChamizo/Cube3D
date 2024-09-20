@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:26:26 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/20 14:36:07 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/20 16:05:44 by saroca-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -311,6 +311,7 @@ void		door_manage(t_data *data);
 void		add_path_to_texture(t_data *data, char **path);
 void		add_path_to_texture_2(t_data *data, char **path);
 void		ft_load_textures(t_data *data);
+void		ft_load_textures_door(t_data *data);
 void		free_textures_memory(t_data *data);
 void		ft_delete_textures(t_data *data);
 

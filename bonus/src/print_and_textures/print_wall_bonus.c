@@ -6,7 +6,7 @@
 /*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 10:48:12 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/20 15:56:58 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/20 16:00:38 by saroca-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,10 @@ uint32_t	get_wall_color(t_data *data, t_ray *ray, double wall_size)
 	return (0x33333388);
 }
 
-int 	get_first_pixel(double wall_size, int *save_pixel)
+int	get_first_pixel(double wall_size, int *save_pixel)
 {
 	int	first_pixel;
-	
+
 	first_pixel = ((HEIGHT / 2) - (wall_size / 2));
 	if (first_pixel < 0)
 	{
