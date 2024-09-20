@@ -1,7 +1,7 @@
-SO ./textures/wolf1.png
-WE ./textures/wolf2.png
-EA ./textures/wolf3.png
-NO ./textures/wolf4.png
+SO ./textures/sims1.png
+WE ./textures/sims2.png
+EA ./textures/sims3.png
+NO ./textures/sims4.png
 
 C 9, 24, 51
 F 48, 27, 104
