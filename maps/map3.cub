@@ -1,17 +1,17 @@
 SO ./textures/neon_wall1.png
-WE ./textures/neon_wall1.png
-EA ./textures/ivan_foto.png
-NO ./textures/sergio_foto.png
+WE ./textures/neon_broken_wall.png
+EA ./textures/neon_wall2.png
+NO ./textures/neon_wall3.png
 DO ./textures/neon_broken_wall3.png
 C 9, 24, 51
 F 48, 27, 104
 
 111111111111
 100000000001
-100000110001
-100010100001
+101000110111
+101001000001
 100011111001
-100000101001
-100001100001
+100000000001
+100111111001
 1000000000N1
 111111111111

@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 15:42:56 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/04 16:00:40 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/20 16:37:31 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,9 +100,9 @@ void	error_rgb_value(char **path, int r, int g, int b)
 	{
 		ft_putstr_fd("b = ", 2);
 		ft_putnbr_fd(b, 2);
-		ft_putstr_fd(". ", 2);
+		ft_putstr_fd(".", 2);
 	}
-	ft_putstr_fd("Using color black.\n", 2);
+	ft_putstr_fd("\n", 2);
 }
 
 int	check_rgb_are_numbers(char **color, int line)
