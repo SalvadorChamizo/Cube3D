@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:26:26 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/20 14:30:45 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/20 14:36:07 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,6 +162,7 @@ void		handle_player_movement(t_data *data);
 void		handle_player_rotation(t_data *data);
 void		move_player_by_angle(t_data *data, double angle);
 void		adjust_angle(double *angle, double var);
+void		mouse_move(double xpos, double ypos, void *param);
 
 //game_check_move
 
