@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 19:41:06 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/19 17:11:02 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/20 14:28:40 by saroca-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,35 +68,10 @@ void	game_init(t_data *data)
 	paint_floor_ceiling(data);
 }
 
-void	mouse_move(double xpos, double ypos, void *param)
-{
-	t_data	*data;
-	double	diff_mouse_x;
-
-	data = (t_data *)param;
-	(void)ypos;
-	if (data->prev_mouse_x == -1)
-		data->prev_mouse_x = xpos;
-	diff_mouse_x = data->prev_mouse_x - xpos;
-	data->prev_mouse_x = xpos;
-	if (diff_mouse_x < 0)
-	{
-		data->player.angle = data->player.angle + 0.3;
-		if (data->player.angle > 359)
-			data->player.angle = 0;
-	}
-	else if (diff_mouse_x > 0)
-	{
-		data->player.angle = data->player.angle - 0.3;
-		if (data->player.angle < 0)
-			data->player.angle = 359;
-	}
-}
-
 void	key_press(struct mlx_key_data key_data, void *param)
 {
 	t_data	*data;
-	
+
 	data = (t_data *)param;
 	if (key_data.key == MLX_KEY_F && key_data.action == MLX_PRESS)
 		door_manage(data);

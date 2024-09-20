@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:26:26 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/19 17:22:29 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/20 14:32:42 by saroca-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,6 +178,7 @@ void		handle_player_movement(t_data *data);
 void		handle_player_rotation(t_data *data);
 void		move_player_by_angle(t_data *data, double angle);
 void		adjust_angle(double *angle, double var);
+void		mouse_move(double xpos, double ypos, void *param);
 
 //game_check_move
 
