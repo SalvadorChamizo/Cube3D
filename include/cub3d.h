@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:26:26 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/14 18:46:03 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/20 16:00:22 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,13 @@ void		adjust_angle(double *angle, double var);
 
 bool		check_move_is_valid(t_data *data, double move_x, double move_y);
 bool		update_move(t_data *data, double move_x, double move_y);
+
+//init_variables
+
+void		init_texture_flags(t_data *data);
+void		init_player_variables(t_data *data);
+void		init_texture_variables(t_data *data);
+int			init_data_variables(t_data *data);
 
 /* --------------------------PARSER------------------------------- */
 

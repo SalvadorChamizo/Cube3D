@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saroca-f <saroca-f@student.42.fr>          +#+  +:+       +#+        */
+/*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 19:41:06 by saroca-f          #+#    #+#             */
-/*   Updated: 2024/09/20 14:28:40 by saroca-f         ###   ########.fr       */
+/*   Updated: 2024/09/20 15:44:39 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,4 +86,5 @@ void	ft_game(t_data *data)
 	mlx_cursor_hook(data->mlx, &mouse_move, data);
 	mlx_key_hook(data->mlx, key_press, data);
 	mlx_loop(data->mlx);
+	mlx_terminate(data->mlx);
 }

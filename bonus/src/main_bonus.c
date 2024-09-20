@@ -6,7 +6,7 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:25:53 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/20 13:16:06 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/20 15:45:03 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,12 @@
 int	main(int argc, char **argv)
 {
 	t_data	data;
-	int		h;
 
 	if (argc != 2)
 	{
 		print_error("Incorrect number of arguments\n");
 		return (1);
 	}
-	h = 0;
 	init_data_variables(&data);
 	if (parse_map(argv[1], &data))
 	{

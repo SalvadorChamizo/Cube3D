@@ -33,6 +33,7 @@ FILES =	main \
 		game/game \
 		game/game_move \
 		game/game_check_move \
+		game/init_variables \
 		print_and_textures/textures \
 		print_and_textures/print_floor_ceiling \
 		print_and_textures/print_wall \
@@ -147,7 +148,12 @@ setup:
 	$(shell mkdir -p ./src/obj/raycasting)
 	$(shell mkdir -p ./src/obj/game)
 	$(shell mkdir -p ./src/obj/print_and_textures)
-	$(shell mkdir -p ./bonus/src_bonus/obj)
+	$(shell mkdir -p ./bonus/src/obj)
+	$(shell mkdir -p ./bonus/src/obj/parser)
+	$(shell mkdir -p ./bonus/src/obj/raycasting)
+	$(shell mkdir -p ./bonus/src/obj/game)
+	$(shell mkdir -p ./bonus/src/obj/print_and_textures)
+	$(shell mkdir -p ./bonus/src/obj/charge_flag_makefile)
 
 .PHONY: clean fclean re all bonus setup
 
