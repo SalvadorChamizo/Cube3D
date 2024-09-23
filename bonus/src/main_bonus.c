@@ -6,39 +6,11 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:25:53 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/20 15:45:03 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/23 11:19:27 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d_bonus.h"
-#include "../MLX42/include/MLX42/MLX42.h"
-#include <stdbool.h>
-
-/*int	init_data_variables(t_data *data)
-{
-	data->file = NULL;
-	data->mlx = NULL;
-	data->background = NULL;
-	data->walls = NULL;
-	data->bonus = NULL;
-	data->ray_number = 0;
-	data->move = 0;
-	data->prev_mouse_x = 0;
-	data->prev_map_x = 0;
-	data->prev_map_y = 0;
-	data->open_flag = 0;
-	data->animation_loop = 0;
-	data->textures.no_flag = 0;
-	data->textures.so_flag = 0;
-	data->textures.we_flag = 0;
-	data->textures.ea_flag = 0;
-	data->textures.c_flag = 0;
-	data->textures.f_flag = 0;
-	data->map.map = NULL;
-	data->map.map_line = 0;
-	data->prev_mouse_x = -1;
-	return (0);
-}*/
 
 int	main(int argc, char **argv)
 {

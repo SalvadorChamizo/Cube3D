@@ -6,13 +6,11 @@
 /*   By: schamizo <schamizo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:25:53 by schamizo          #+#    #+#             */
-/*   Updated: 2024/09/20 16:03:30 by schamizo         ###   ########.fr       */
+/*   Updated: 2024/09/23 11:20:25 by schamizo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
-#include "../MLX42/include/MLX42/MLX42.h"
-#include <stdbool.h>
 
 int	main(int argc, char **argv)
 {
