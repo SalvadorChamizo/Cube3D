@@ -1,0 +1,15 @@
+SO ./textures/stone_wall.png
+WE ./textures/stone_wall.png
+EA ./textures/stone_wall.png
+NO ./textures/coal_ore.png
+
+C 105, 105, 105
+F 127, 127, 127
+
+111111111111
+100000000001
+100010011101
+100100000101
+1010000S1101
+100000000001
+111111111111
